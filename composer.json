@@ -1,0 +1,24 @@
+{
+    "name": "qobo/cakephp-translations",
+    "description": "Languages and translations plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "license": "GPL-2.0",
+    "require": {
+        "qobo/cakephp-utils": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.0",
+        "cakephp/cakephp-codesniffer": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Notes\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Translations\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
+    }
+}
