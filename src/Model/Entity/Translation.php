@@ -8,15 +8,14 @@ use Cake\ORM\Entity;
  *
  * @property string $id
  * @property string $language_id
- * @property string $object_id
- * @property string $object_name
+ * @property string $object_foreign_key
+ * @property string $object_model
  * @property string $object_field
  * @property string $translation
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *
  * @property \Translations\Model\Entity\Language $language
- * @property \Translations\Model\Entity\Object $object
  * @property \Translations\Model\Entity\Phinxlog[] $phinxlog
  */
 class Translation extends Entity

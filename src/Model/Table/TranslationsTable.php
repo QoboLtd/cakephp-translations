@@ -10,18 +10,8 @@ use Cake\Validation\Validator;
  * Translations Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Languages
- * @property \Cake\ORM\Association\BelongsTo $Objects
  * @property \Cake\ORM\Association\BelongsToMany $Phinxlog
  *
- * @method \Translations\Model\Entity\Translation get($primaryKey, $options = [])
- * @method \Translations\Model\Entity\Translation newEntity($data = null, array $options = [])
- * @method \Translations\Model\Entity\Translation[] newEntities(array $data, array $options = [])
- * @method \Translations\Model\Entity\Translation|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Translations\Model\Entity\Translation patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Translations\Model\Entity\Translation[] patchEntities($entities, array $data, array $options = [])
- * @method \Translations\Model\Entity\Translation findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class TranslationsTable extends Table
 {
@@ -47,11 +37,6 @@ class TranslationsTable extends Table
             'joinType' => 'INNER',
             'className' => 'Translations.Languages'
         ]);
-        $this->belongsTo('Objects', [
-            'foreignKey' => 'object_id',
-            'joinType' => 'INNER',
-            'className' => 'Translations.Objects'
-        ]);
         $this->belongsToMany('Phinxlog', [
             'foreignKey' => 'translation_id',
             'targetForeignKey' => 'phinxlog_id',
@@ -73,8 +58,12 @@ class TranslationsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('object_name', 'create')
-            ->notEmpty('object_name');
+            ->requirePresence('object_model', 'create')
+            ->notEmpty('object_model');
+        
+        $validator
+            ->requirePresence('object_foreign_key', 'create')
+            ->notEmpty('object_foreign_key');
 
         $validator
             ->requirePresence('object_field', 'create')
@@ -97,7 +86,6 @@ class TranslationsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['language_id'], 'Languages'));
-        $rules->add($rules->existsIn(['object_id'], 'Objects'));
 
         return $rules;
     }

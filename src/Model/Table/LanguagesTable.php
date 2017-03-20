@@ -11,15 +11,6 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\HasMany $Translations
  *
- * @method \Translations\Model\Entity\Language get($primaryKey, $options = [])
- * @method \Translations\Model\Entity\Language newEntity($data = null, array $options = [])
- * @method \Translations\Model\Entity\Language[] newEntities(array $data, array $options = [])
- * @method \Translations\Model\Entity\Language|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Translations\Model\Entity\Language patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Translations\Model\Entity\Language[] patchEntities($entities, array $data, array $options = [])
- * @method \Translations\Model\Entity\Language findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class LanguagesTable extends Table
 {
