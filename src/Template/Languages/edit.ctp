@@ -44,6 +44,8 @@ echo $this->Html->scriptBlock(
                 </div>
                 <div class="box-footer">
                     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                    &nbsp;
+                    <?= $this->Form->button(__('Cancel'), ['class' => 'btn remove-client-validation', 'name' => 'btn_operation', 'value' => 'cancel']); ?>
                 </div>
                 <?= $this->Form->end() ?>
             </div>
