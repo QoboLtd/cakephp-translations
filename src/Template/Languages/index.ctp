@@ -40,37 +40,37 @@ echo $this->Html->scriptBlock(
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($languages as $lang) : ?>
+                    <?php foreach ($languages as $language) : ?>
                     <tr>
                         <td>
-                            <?= h($lang->name) ?>
+                            <?= h($language->name) ?>
                         </td>
                         <td>
-                            <?= h($lang->short_code) ?>
+                            <?= h($language->short_code) ?>
                         </td>
                         <td>
-                            <?= h($lang->description) ?>
+                            <?= h($language->description) ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">
                             <?= $this->Html->link(
                                 '<i class="fa fa-eye"></i>',
-                                ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'view', $lang->id],
+                                ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'view', $language->id],
                                 ['title' => __('View'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
                             ); ?>
-                            <?php if (!$lang->deny_edit) : ?>
+                            <?php if (!$language->deny_edit) : ?>
                                 <?= $this->Html->link(
                                     '<i class="fa fa-pencil"></i>',
-                                    ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'edit', $lang->id],
+                                    ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'edit', $language->id],
                                     ['title' => __('Edit'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
                                 ); ?>
                             <?php endif; ?>
-                            <?php if (!$lang->deny_delete) : ?>
+                            <?php if (!$language->deny_delete) : ?>
                                 <?= $this->Form->postLink(
                                     '<i class="fa fa-trash"></i>',
-                                    ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'delete', $lang->id],
+                                    ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'delete', $language->id],
                                     [
-                                        'confirm' => __('Are you sure you want to delete # {0}?', $lang->id),
+                                        'confirm' => __('Are you sure you want to delete # {0}?', $language->id),
                                         'title' => __('Delete'),
                                         'class' => 'btn btn-default btn-sm',
                                         'escape' => false
