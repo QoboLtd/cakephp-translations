@@ -23,12 +23,12 @@ class CreateTranslations extends AbstractMigration
         $table->addColumn('language_id', 'char', [
             'default' => null,
             'null' => false,
-            'limit' => 32,
+            'limit' => 36,
         ]);
         $table->addColumn('object_foreign_key', 'char', [
             'default' => null,
             'null' => false,
-            'limit' => 32,
+            'limit' => 36,
         ]);
         $table->addColumn('object_model', 'string', [
             'default' => null,
