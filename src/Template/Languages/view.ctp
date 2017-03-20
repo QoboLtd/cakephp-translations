@@ -1,7 +1,7 @@
 <?php
 /**
-  * @var \App\View\AppView $this
-  */
+ * @var \App\View\AppView $this
+ */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
@@ -44,7 +44,7 @@
     </table>
     <div class="related">
         <h4><?= __('Related Translations') ?></h4>
-        <?php if (!empty($language->translations)): ?>
+        <?php if (!empty($language->translations)) : ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -57,7 +57,7 @@
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($language->translations as $translations): ?>
+            <?php foreach ($language->translations as $translations) : ?>
             <tr>
                 <td><?= h($translations->id) ?></td>
                 <td><?= h($translations->language_id) ?></td>

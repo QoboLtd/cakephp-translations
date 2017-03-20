@@ -60,7 +60,7 @@ class TranslationsTable extends Table
         $validator
             ->requirePresence('object_model', 'create')
             ->notEmpty('object_model');
-        
+
         $validator
             ->requirePresence('object_foreign_key', 'create')
             ->notEmpty('object_foreign_key');

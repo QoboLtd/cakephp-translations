@@ -1,7 +1,7 @@
 <?php
 /**
-  * @var \App\View\AppView $this
-  */
+ * @var \App\View\AppView $this
+ */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
@@ -54,7 +54,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Phinxlog') ?></h4>
-        <?php if (!empty($translation->phinxlog)): ?>
+        <?php if (!empty($translation->phinxlog)) : ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Version') ?></th>
@@ -63,7 +63,7 @@
                 <th scope="col"><?= __('End Time') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($translation->phinxlog as $phinxlog): ?>
+            <?php foreach ($translation->phinxlog as $phinxlog) : ?>
             <tr>
                 <td><?= h($phinxlog->version) ?></td>
                 <td><?= h($phinxlog->migration_name) ?></td>
