@@ -30,6 +30,10 @@ echo $this->Html->scriptBlock(
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-6">
+                            <?= $this->Form->input('translation'); ?>
+                            <?= $this->Form->input('is_active'); ?> 
+                        </div>
+                        <div class="col-md-6">
                             <div class="box-body">
                                 <dl class="dl-horizontal">
                                     <dt><?= __('Model') ?></dt>
@@ -40,10 +44,7 @@ echo $this->Html->scriptBlock(
                                     <dd><?= h($translation->translation) ?></dd>
                                 </dl>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <?= $this->Form->input('translation'); ?>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
                 <div class="box-footer">

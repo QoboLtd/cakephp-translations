@@ -23,6 +23,9 @@
                         <dd><?= h($translation->translation) ?></dd>
                         <dt><?= __('Translation') ?></dt>
                         <dd><?= h($translation->translation) ?></dd>
+                        <dt><?= __('Status') ?></dt>
+                        <dd><?= h($translation->is_active ? 'Active' : 'Disabled') ?></dd>
+
                     </dl>
                 </div>
             </div>

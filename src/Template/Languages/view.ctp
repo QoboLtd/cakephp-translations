@@ -21,6 +21,8 @@
                         <dd><?= h($language->short_code) ?></dd>
                         <dt><?= __('Description') ?></dt>
                         <dd><?= h($language->description) ?></dd>
+                        <dt><?= __('Status') ?></dt>
+                        <dd><?= h($language->is_active ? 'Active' : 'Disabled') ?></dd>
                     </dl>
                 </div>
             </div>
