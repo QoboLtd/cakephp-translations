@@ -37,7 +37,7 @@ class TranslationsController extends AppController
     public function view($id = null)
     {
         $translation = $this->Translations->get($id, [
-            'contain' => ['Languages', 'Phinxlog']
+            'contain' => ['Languages']
         ]);
 
         $this->set('translation', $translation);
@@ -77,7 +77,7 @@ class TranslationsController extends AppController
     public function edit($id = null)
     {
         $translation = $this->Translations->get($id, [
-            'contain' => ['Phinxlog']
+            'contain' => ['Languages']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $translation = $this->Translations->patchEntity($translation, $this->request->getData());
