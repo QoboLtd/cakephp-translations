@@ -15,17 +15,7 @@ echo $this->Html->scriptBlock(
 );
 ?>
 <section class="content-header">
-    <h1>Translations
-        <div class="pull-right">
-            <div class="btn-group btn-group-sm" role="group">
-            <?= $this->Html->link(
-                '<i class="fa fa-plus"></i> ' . __('Add'),
-                ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'add'],
-                ['escape' => false, 'title' => __('Add'), 'class' => 'btn btn-default']
-            ); ?>
-            </div>
-        </div>
-    </h1>
+    <h1>Translations</h1>
 </section>
 <section class="content">
     <div class="box">
@@ -33,9 +23,10 @@ echo $this->Html->scriptBlock(
             <table class="table table-hover table-condensed table-vertical-align table-datatable">
                 <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('name') ?></th>
-                        <th><?= h('Short Code'); ?></th>
-                        <th><?= h('Description'); ?></th>
+                        <th><?= h('Model') ?></th>
+                        <th><?= h('Language') ?></th>
+                        <th><?= h('Original Text'); ?></th>
+                        <th><?= h('Translation'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
@@ -43,13 +34,16 @@ echo $this->Html->scriptBlock(
                     <?php foreach ($translations as $translate) : ?>
                     <tr>
                         <td>
-                            <?= h($translate->name) ?>
+                            <?= h($translate->object_model) ?>
                         </td>
                         <td>
-                            <?= h($translate->short_code) ?>
+                            <?= h($translate->language->name) ?>
                         </td>
                         <td>
-                            <?= h($translate->description) ?>
+                            <?= h($translate->translation) ?>
+                        </td>
+                        <td>
+                            <?= h($translate->translation) ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">
