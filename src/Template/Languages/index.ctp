@@ -36,6 +36,7 @@ echo $this->Html->scriptBlock(
                         <th><?= $this->Paginator->sort('name') ?></th>
                         <th><?= h('Short Code'); ?></th>
                         <th><?= h('Description'); ?></th>
+                        <th><?= h('Status'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
@@ -50,6 +51,9 @@ echo $this->Html->scriptBlock(
                         </td>
                         <td>
                             <?= h($language->description) ?>
+                        </td>
+                        <td>
+                            <?= h($language->is_active ? 'Active' : 'Disabled') ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">
