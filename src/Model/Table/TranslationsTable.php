@@ -37,12 +37,6 @@ class TranslationsTable extends Table
             'joinType' => 'INNER',
             'className' => 'Translations.Languages'
         ]);
-        $this->belongsToMany('Phinxlog', [
-            'foreignKey' => 'translation_id',
-            'targetForeignKey' => 'phinxlog_id',
-            'joinTable' => 'translations_phinxlog',
-            'className' => 'Translations.Phinxlog'
-        ]);
     }
 
     /**
