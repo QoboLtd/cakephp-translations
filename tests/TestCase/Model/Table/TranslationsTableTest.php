@@ -26,9 +26,6 @@ class TranslationsTableTest extends TestCase
     public $fixtures = [
         'plugin.translations.translations',
         'plugin.translations.languages',
-        'plugin.translations.objects',
-        'plugin.translations.phinxlog',
-        'plugin.translations.translations_phinxlog'
     ];
 
     /**
