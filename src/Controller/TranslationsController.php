@@ -21,10 +21,28 @@ class TranslationsController extends AppController
         $this->paginate = [
             'contain' => ['Languages']
         ];
-        $translations = $this->paginate($this->Translations);
+        
+        $params = $this->request->getQueryParams();
 
-        $this->set(compact('translations'));
-        $this->set('_serialize', ['translations']);
+
+        if ($params['json']) {
+            $conditions = [
+                'Translations.object_model' => $params['object_model'],
+                'Translations.object_foreign_key' => $params['object_foreign_key'],
+                'Translations.object_field' => $params['object_field']
+            ];           
+            $query = $this->Translations->find('all', ['conditions' => $conditions])->contain(['Languages']);
+            $query->hydrate(false);
+            $translations = $query->toList();
+            $this->response->type('application/json');
+            $this->autoRender = false;
+            echo json_encode($translations);
+        } else {
+
+            $translations = $this->paginate($this->Translations);
+            $this->set(compact('translations'));
+            $this->set('_serialize', ['translations']);
+        }
     }
 
     /**
@@ -53,17 +71,19 @@ class TranslationsController extends AppController
     {
         $translation = $this->Translations->newEntity();
         if ($this->request->is('post')) {
+            debug($this->request->getData());
             $translation = $this->Translations->patchEntity($translation, $this->request->getData());
-            if ($this->Translations->save($translation)) {
+            $result = $this->Translations->save($translation);
+            debug($translation);
+            if ($result) {
                 $this->Flash->success(__('The translation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The translation could not be saved. Please, try again.'));
         }
-        $languages = $this->Translations->Languages->find('list', ['limit' => 200]);
-        $phinxlog = $this->Translations->Phinxlog->find('list', ['limit' => 200]);
-        $this->set(compact('translation', 'languages', 'objects', 'phinxlog'));
+        $languages = $this->Translations->Languages->find('all', ['limit' => 200]);
+        $this->set(compact('translation', 'languages'));
         $this->set('_serialize', ['translation']);
     }
 
@@ -89,8 +109,7 @@ class TranslationsController extends AppController
             $this->Flash->error(__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('list', ['limit' => 200]);
-        $phinxlog = $this->Translations->Phinxlog->find('list', ['limit' => 200]);
-        $this->set(compact('translation', 'languages', 'objects', 'phinxlog'));
+        $this->set(compact('translation', 'languages'));
         $this->set('_serialize', ['translation']);
     }
 

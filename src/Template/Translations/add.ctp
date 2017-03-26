@@ -19,18 +19,30 @@ echo $this->Html->scriptBlock(
     ['block' => 'scriptBotton']
 );
 ?>
-<section class="content-header">
-    <h1><?= $this->Html->link(
-        __('Translations'),
-        ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'index']
-    ) . ' &raquo; ' . h($translation->id) ?></h1>
-</section>
+
 <section class="content">
+   <?php foreach ($languages as $language) : ?>
     <div class="row">
+        <?php 
+            echo $this->Form->create($translation);
+
+            echo $this->Form->hidden('object_model');
+            echo $this->Form->hidden('object_field');
+            echo $this->Form->hidden('object_foreign_key');
+            echo $this->Form->hidden('language_id', ['value' => $language->id]);
+
+        ?>        
+
         <div class="col-xs-12 col-md-6">
-            <div class="box box-solid"> 
-                <h3><?= __('To add new translation please go to specific record and choose the field!') ?></h3>
-            </div>
+            <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->short_code]); ?>
         </div>
+        <div class="col-xs-12 col-md-3">
+            <?= $language->name ?>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <?= $this->Form->button(__('Save'), ['name' => 'translation_' . $language->short_code, 'value' => 'save', 'class' => 'btn btn-primary']); ?>
+        </div>
+        <?= $this->Form->end(); ?>
     </div>
-</section>   
+    <?php endforeach; ?>
+</section>
