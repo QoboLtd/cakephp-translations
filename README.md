@@ -23,6 +23,7 @@ Load plugin
 bin/cake plugin load --routes --bootstrap Translations
 ```
 
+
 To load the Translations component in your application just add behavior Translate into your table initialization method:
 
 ```
