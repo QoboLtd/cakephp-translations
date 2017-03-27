@@ -14,7 +14,6 @@ use Cake\Validation\Validator;
  */
 class LanguagesTable extends Table
 {
-
     /**
      * Initialize method
      *
