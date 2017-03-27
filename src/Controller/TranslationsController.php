@@ -10,7 +10,6 @@ use Translations\Controller\AppController;
  */
 class TranslationsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -21,16 +20,15 @@ class TranslationsController extends AppController
         $this->paginate = [
             'contain' => ['Languages']
         ];
-        
-        $params = $this->request->getQueryParams();
 
+        $params = $this->request->getQueryParams();
 
         if ($params['json']) {
             $conditions = [
                 'Translations.object_model' => $params['object_model'],
                 'Translations.object_foreign_key' => $params['object_foreign_key'],
                 'Translations.object_field' => $params['object_field']
-            ];           
+            ];
             $query = $this->Translations->find('all', ['conditions' => $conditions])->contain(['Languages']);
             $query->hydrate(false);
             $translations = $query->toList();
@@ -38,7 +36,6 @@ class TranslationsController extends AppController
             $this->autoRender = false;
             echo json_encode($translations);
         } else {
-
             $translations = $this->paginate($this->Translations);
             $this->set(compact('translations'));
             $this->set('_serialize', ['translations']);
@@ -85,6 +82,36 @@ class TranslationsController extends AppController
         $languages = $this->Translations->Languages->find('all', ['limit' => 200]);
         $this->set(compact('translation', 'languages'));
         $this->set('_serialize', ['translation']);
+    }
+
+    /**
+     *  Add or update method
+     *
+     *
+     */
+    public function addOrUpdate()
+    {
+        $params = $this->request->getData();
+        $query = $this->Translations->find('all', [
+            'conditions' => [
+                'Translations.object_model' => $params['object_model'],
+                'Translations.object_foreign_key' => $params['object_foreign_key'],
+                'Translations.object_field' => $params['object_field'],
+                'Translations.language_id' => $params['language_id'],
+            ]
+        ]);
+        $translation = $query->first();
+
+        if (empty($translation)) {
+            $translation = $this->Translations->newEntity();
+        }
+
+        $translation = $this->Translations->patchEntity($translation, $params);
+        $result = $this->Translations->save($translation);
+
+        $this->response->type('application/json');
+        $this->autoRender = false;
+        echo json_encode(!empty($result) ? true : false);
     }
 
     /**

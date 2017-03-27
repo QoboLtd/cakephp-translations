@@ -81,7 +81,7 @@ class TranslateBehavior extends Behavior
         $translationEntity->object_model = $this->getTable()->alias();
         $translationEntity->object_field = $fieldName;
         $translationEntity->object_foreign_key = $recordId;
-        $translationEntity->language_id = $this->_getLanguageId($language);
+        $translationEntity->language_id = $this->getLanguageId($language);
         $translationEntity->translation = $translatedText;
 
         $result = $this->_translationsTable->save($translationEntity);
@@ -115,7 +115,7 @@ class TranslateBehavior extends Behavior
      * @param string $shortCode     language short code i.e. ru, cn etc
      * @return string               language's uuid
      */
-    private function _getLanguageId($shortCode)
+    public function getLanguageId($shortCode)
     {
         $query = $this->_languagesTable->find('all', [
             'conditions' => ['Languages.short_code' => $shortCode]

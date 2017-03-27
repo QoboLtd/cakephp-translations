@@ -31,6 +31,7 @@ class TranslationsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Translations.Translate');
 
         $this->belongsTo('Languages', [
             'foreignKey' => 'language_id',

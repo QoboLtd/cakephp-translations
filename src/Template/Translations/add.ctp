@@ -19,20 +19,20 @@ echo $this->Html->scriptBlock(
     ['block' => 'scriptBotton']
 );
 ?>
+<div class="alert">
+    <h4 id="translate_result" ></h4>
+</div>
 
 <section class="content">
-   <?php foreach ($languages as $language) : ?>
+    <?php foreach ($languages as $language) : ?>
     <div class="row">
-        <?php 
+        <?php
             echo $this->Form->create($translation);
-
             echo $this->Form->hidden('object_model');
             echo $this->Form->hidden('object_field');
             echo $this->Form->hidden('object_foreign_key');
             echo $this->Form->hidden('language_id', ['value' => $language->id]);
-
         ?>        
-
         <div class="col-xs-12 col-md-6">
             <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->short_code]); ?>
         </div>
@@ -40,7 +40,7 @@ echo $this->Html->scriptBlock(
             <?= $language->name ?>
         </div>
         <div class="col-xs-12 col-md-3">
-            <?= $this->Form->button(__('Save'), ['name' => 'translation_' . $language->short_code, 'value' => 'save', 'class' => 'btn btn-primary']); ?>
+            <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
         </div>
         <?= $this->Form->end(); ?>
     </div>
