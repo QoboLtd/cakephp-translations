@@ -85,8 +85,7 @@ class TranslationsController extends AppController
 
     /**
      *  Add or update method
-     *
-     *
+     * @return bool     when successfully added or updated returns true, false otherwise
      */
     public function addOrUpdate()
     {
