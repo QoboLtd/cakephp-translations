@@ -93,7 +93,7 @@ class TranslationsTable extends Table
      * @param string $modelName     model name
      * @param string $recordId      uuid of record the translated field belogns to
      * @param string $fieldName     translated field name
-     * @param string $language      ID of the language used for translation
+     * @param string $options      ID of the language used for translation
      * @return array                list of saved translations
      */
     public function getTranslations($modelName, $recordId, $fieldName, $options = [])
@@ -115,18 +115,19 @@ class TranslationsTable extends Table
             return $query->first();
         } else {
             $query->hydrate(false);
+
             return $query->toList();
-        }    
+        }
     }
-    
+
     /**
      *  addTranslation
      *  adding a new translation for specified language and field
      *
-     * @param string $recordId          UUID record the translated field belongs to
-     * @param string $fieldName         translated field name
-     * @param string $language          language used for translation
-     * @param string $translatedText    Translated text
+     * @param string $modelName          UUID record the translated field belongs to
+     * @param string $recordId         translated field name
+     * @param string $fieldName          language used for translation
+     * @param string $language    Translated text
      * @return bool                     true in case of successfully saved translation and false otherwise
      */
     public function addTranslation($modelName, $recordId, $fieldName, $language, $translatedText)

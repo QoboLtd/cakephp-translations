@@ -22,16 +22,16 @@ class TranslationsController extends AppController
         ];
 
         $params = $this->request->getQueryParams();
-        $language_id = !empty($params['language']) ? $this->Translations->getLanguageId($params['language']) : null;
+        $languageId = !empty($params['language']) ? $this->Translations->getLanguageId($params['language']) : null;
 
         if (!empty($params['json']) && $params['json']) {
             $translations = $this->Translations->getTranslations(
-                $params['object_model'], 
-                $params['object_foreign_key'], 
+                $params['object_model'],
+                $params['object_foreign_key'],
                 $params['object_field'],
                 [
-                    'language' => $language_id
-                ]    
+                    'language' => $languageId
+                ]
             );
             $this->response->type('application/json');
             $this->autoRender = false;
@@ -98,8 +98,8 @@ class TranslationsController extends AppController
             [
                 'language' => $params['language_id'],
                 'toEntity' => true,
-            ]    
-        ); 
+            ]
+        );
         if (empty($translation)) {
             $translation = $this->Translations->newEntity();
         }

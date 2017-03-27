@@ -63,6 +63,7 @@ class TranslateBehavior extends Behavior
             //'contain' => ['Languages']
         ]);
         $query->hydrate(false);
+
         return $query->toList();
     }
 

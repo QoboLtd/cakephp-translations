@@ -9,7 +9,6 @@ var translation = translation || {};
         var field_name = button.data('field');
 
         $.get('/translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
-            console.log(data);
             if (data.length != 0) {
                 $.each(data, function (key, val) {
                     $('#translation_' + val['language']['short_code']).val(val['translation']);
