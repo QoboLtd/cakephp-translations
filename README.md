@@ -1,47 +1,35 @@
-CakePHP Plugin Template
-=======================
+# Translations plugin for CakePHP
 
-Template for CakePHP 3 plugins.
 
-Usage
------
+## Installation
 
-Pull the template code into your plugin:
+You can install this plugin into your CakePHP application using [composer](http://getcomposer.org).
 
-```
-cd my-plugin
-git pull https://github.com/QoboLtd/cakephp-plugin-template master
-```
-
-Make sure your `composer.json` has something like this:
+The recommended way to install composer packages is:
 
 ```
-"autoload": {
-    "psr-4": {
-        "Foobar\\": "src"
-    }
-},
-"autoload-dev": {
-    "psr-4": {
-        "Foobar\\Test\\": "tests",
-        "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
-    }
-}
+composer require qobo/cakephp-translations
 ```
 
-If you do change your `composer.json` file, don't forget to run
-either `composer update` or at least `composer dump-autoload`.
+Run plugin's migration task:
 
-Change the following:
+```
+bin/cake migrations migrate -p Translations
+```
 
-1. Uncomment the `$pluginName` line in `tests/bootstrap.php` and change `Foobar` to the name of your plugin.
-2. Change the `Foobar` namespace to your plugin's in the following files:
-  1. `tests/config/routes.php`
-  2. `tests/App/Controller/AppController.php`
-  3. `tests/App/Controller/UsersController.php`
-  4. `tests/Fixture/UsersFixture.php`
-3. Put your tests into `tests/TestCase`.
-4. Put your fixtures into `tests/Fixture`.
-5. Run `vendor/bin/phpunit`
+## Setup
+Load plugin
+```
+bin/cake plugin load --routes --bootstrap Translations
+```
 
-If you know of any better way to do this please open an issue on GitHub or, better even, send a pull request.
+
+To load the Translations component in your application just add behavior Translate into your table initialization method:
+
+```
+public function initialize(array $config)
+{
+    $this->addBehavior('Translate');
+}    
+
+```
