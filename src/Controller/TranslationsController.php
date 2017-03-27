@@ -68,10 +68,8 @@ class TranslationsController extends AppController
     {
         $translation = $this->Translations->newEntity();
         if ($this->request->is('post')) {
-            debug($this->request->getData());
             $translation = $this->Translations->patchEntity($translation, $this->request->getData());
             $result = $this->Translations->save($translation);
-            debug($translation);
             if ($result) {
                 $this->Flash->success(__('The translation has been saved.'));
 
