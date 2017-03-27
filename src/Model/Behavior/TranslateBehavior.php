@@ -40,28 +40,30 @@ class TranslateBehavior extends Behavior
      *  returns a list of translations existing for specified record and field. In case of passing
      * language the result will be filtered by it additionally
      *
+     * @param string $modelName     model name
      * @param string $recordId      uuid of record the translated field belogns to
      * @param string $fieldName     translated field name
-     * @param string $language      language used for translation
+     * @param string $language      ID of the language used for translation
      * @return array                list of saved translations
      */
-    public function getTranslations($recordId, $fieldName, $language = null)
+    public function getTranslations($modelName, $recordId, $fieldName, $language = null)
     {
         $conditions = [
-            'object_model' => $this->getTable()->alias(),
+            'object_model' => $modelName,
             'object_field' => $fieldName,
             'object_foreign_key' => $recordId
         ];
 
         if (!empty($language)) {
-            $conditions['language_id'] = $this->_getLanguageId($language);
+            $conditions['language_id'] = $language;
         }
-
+        debug($this->_translationsTable->associations());
         $query = $this->_translationsTable->find('all', [
-            'conditions' => $conditions
+            'conditions' => $conditions,
+            //'contain' => ['Languages']
         ]);
-
-        return $query->toArray();
+        $query->hydrate(false);
+        return $query->toList();
     }
 
     /**

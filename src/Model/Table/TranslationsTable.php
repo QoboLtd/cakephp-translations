@@ -31,7 +31,6 @@ class TranslationsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Translations.Translate');
 
         $this->belongsTo('Languages', [
             'foreignKey' => 'language_id',
@@ -83,5 +82,101 @@ class TranslationsTable extends Table
         $rules->add($rules->existsIn(['language_id'], 'Languages'));
 
         return $rules;
+    }
+
+    /**
+     *  getTranslations
+     *
+     *  returns a list of translations existing for specified record and field. In case of passing
+     * language the result will be filtered by it additionally
+     *
+     * @param string $modelName     model name
+     * @param string $recordId      uuid of record the translated field belogns to
+     * @param string $fieldName     translated field name
+     * @param string $language      ID of the language used for translation
+     * @return array                list of saved translations
+     */
+    public function getTranslations($modelName, $recordId, $fieldName, $options = [])
+    {
+        $conditions = [
+            'object_model' => $modelName,
+            'object_field' => $fieldName,
+            'object_foreign_key' => $recordId
+        ];
+
+        if (!empty($options['language'])) {
+            $conditions['language_id'] = $options['language'];
+        }
+        $query = $this->find('all', [
+            'conditions' => $conditions,
+            'contain' => ['Languages']
+        ]);
+        if (!empty($options['toEntity'])) {
+            return $query->first();
+        } else {
+            $query->hydrate(false);
+            return $query->toList();
+        }    
+    }
+    
+    /**
+     *  addTranslation
+     *  adding a new translation for specified language and field
+     *
+     * @param string $recordId          UUID record the translated field belongs to
+     * @param string $fieldName         translated field name
+     * @param string $language          language used for translation
+     * @param string $translatedText    Translated text
+     * @return bool                     true in case of successfully saved translation and false otherwise
+     */
+    public function addTranslation($modelName, $recordId, $fieldName, $language, $translatedText)
+    {
+        $translationEntity = $this->newEntity();
+
+        $translationEntity->object_model = $modelName;
+        $translationEntity->object_field = $fieldName;
+        $translationEntity->object_foreign_key = $recordId;
+        $translationEntity->language_id = $this->getLanguageId($language);
+        $translationEntity->translation = $translatedText;
+
+        $result = $this->save($translationEntity);
+
+        return !empty($result->id) ? true : false;
+    }
+
+    /**
+     *  updateTranslation
+     *
+     *  updates existing translation
+     *
+     * @param string $recordId          UUID translation
+     * @param string $fieldName         translated field name
+     * @param string $language          language used for translation
+     * @param string $translatedText    Translated text
+     * @return bool                     true in case of successfully saved translation and false otherwise
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function updateTranslation($recordId, $fieldName, $language, $translatedText)
+    {
+        $translation = $this->get($recordId);
+        $translation->translation = $translatedText;
+
+        return $this->save($translation);
+    }
+
+    /**
+     *  Retrive language ID by short code
+     *
+     * @param string $shortCode     language short code i.e. ru, cn etc
+     * @return string               language's uuid
+     */
+    public function getLanguageId($shortCode)
+    {
+        $query = $this->Languages->find('all', [
+            'conditions' => ['Languages.short_code' => $shortCode]
+        ]);
+        $language = $query->first();
+
+        return !empty($language->id) ? $language->id : null;
     }
 }

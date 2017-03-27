@@ -1,15 +1,15 @@
-var view_index = view_index || {};
+var translation = translation || {};
 
 (function ($) {
 
     $('#translations_translate_id_modal').on('show.bs.modal', function (event) {
-        $('#translate_result').html = '&nbsp;';
         var button = $(event.relatedTarget);
         var record_id = button.data('record');
         var model_name = button.data('model');
         var field_name = button.data('field');
 
         $.get('/translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
+            console.log(data);
             if (data.length != 0) {
                 $.each(data, function (key, val) {
                     $('#translation_' + val['language']['short_code']).val(val['translation']);
@@ -29,7 +29,6 @@ var view_index = view_index || {};
         $(this).removeData('bs.modal');
     });
     $('button[name=btn_translation]').click(function () {
-        $('#translate_result').html = '&nbsp;';
         form = $(this).closest("form");
         $.post('/translations/translations/addOrUpdate', form.serialize(), function (data) {
             $('#translate_result').attr('class', data ? 'alert-success' : 'alert-danger');
