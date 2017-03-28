@@ -42,9 +42,9 @@ class LanguagesFixture extends TestFixture
     public $records = [
         [
             'id' => 'ae51d185-253e-40a2-804c-c71399099fe5',
-            'name' => 'Lorem ipsum dolor ',
-            'short_code' => 'Lore',
-            'description' => 'Lorem ipsum dolor sit amet',
+            'name' => 'Russian',
+            'short_code' => 'ru',
+            'description' => 'Russian Language',
             'created' => '2017-03-20 12:55:32',
             'modified' => '2017-03-20 12:55:32'
         ],

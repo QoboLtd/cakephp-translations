@@ -155,26 +155,6 @@ class TranslationsTable extends Table
     }
 
     /**
-     *  updateTranslation
-     *
-     *  updates existing translation
-     *
-     * @param string $recordId          UUID translation
-     * @param string $fieldName         translated field name
-     * @param string $language          language used for translation
-     * @param string $translatedText    Translated text
-     * @return bool                     true in case of successfully saved translation and false otherwise
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function updateTranslation($recordId, $fieldName, $language, $translatedText)
-    {
-        $translation = $this->get($recordId);
-        $translation->translation = $translatedText;
-
-        return $this->save($translation);
-    }
-
-    /**
      *  Retrive language ID by short code
      *
      * @param string $shortCode     language short code i.e. ru, cn etc
