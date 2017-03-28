@@ -26,7 +26,16 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->get('/translations/languages');
+        $this->assertResponseOk();
     }
 
     /**

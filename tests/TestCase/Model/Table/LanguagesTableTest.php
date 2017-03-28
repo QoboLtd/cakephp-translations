@@ -59,7 +59,7 @@ class LanguagesTableTest extends TestCase
      */
     public function testInitialize()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->assertInstanceOf(LanguagesTable::class, $this->Languages);
     }
 
     /**
