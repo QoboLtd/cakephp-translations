@@ -89,6 +89,10 @@ class TranslationsController extends AppController
      */
     public function addOrUpdate()
     {
+        $this->request->allowMethod(['post']);
+        if (!$this->request->is('ajax')) {
+            throw new \RuntimeException('Wrong type of request!');
+        }
         $params = $this->request->getData();
         $translation = $this->Translations->getTranslations(
             $params['object_model'],
