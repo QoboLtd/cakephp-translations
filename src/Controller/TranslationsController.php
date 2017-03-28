@@ -28,9 +28,9 @@ class TranslationsController extends AppController
             $translations = $this->Translations->getTranslations(
                 $params['object_model'],
                 $params['object_foreign_key'],
-                $params['object_field'],
                 [
-                    'language' => $languageId
+                    'language' => $languageId,
+                    'field' => !empty($params['object_field']) ? $params['object_field'] : '',
                 ]
             );
             $this->response->type('application/json');
@@ -93,10 +93,10 @@ class TranslationsController extends AppController
         $translation = $this->Translations->getTranslations(
             $params['object_model'],
             $params['object_foreign_key'],
-            $params['object_field'],
             [
                 'language' => $params['language_id'],
                 'toEntity' => true,
+                'field' => $params['object_field'],
             ]
         );
         if (empty($translation)) {

@@ -92,24 +92,33 @@ class TranslationsTable extends Table
      *
      * @param string $modelName     model name
      * @param string $recordId      uuid of record the translated field belogns to
-     * @param string $fieldName     translated field name
-     * @param string $options      ID of the language used for translation
+     * @param string $options       ID of the language used for translation
      * @return array                list of saved translations
      */
-    public function getTranslations($modelName, $recordId, $fieldName, $options = [])
+    public function getTranslations($modelName, $recordId, $options = [])
     {
         $conditions = [
             'object_model' => $modelName,
-            'object_field' => $fieldName,
             'object_foreign_key' => $recordId
         ];
 
         if (!empty($options['language'])) {
             $conditions['language_id'] = $options['language'];
         }
+        if (!empty($options['field'])) {
+            $conditions['object_field'] = $options['field'];
+        }
         $query = $this->find('all', [
             'conditions' => $conditions,
-            'contain' => ['Languages']
+            'contain' => ['Languages'],
+            'fields' => [
+                'Translations.translation',
+                'Translations.object_model',
+                'Translations.object_field',
+                'Translations.object_foreign_key',
+                'Languages.short_code',
+                'Languages.description',
+            ],
         ]);
         if (!empty($options['toEntity'])) {
             return $query->first();
