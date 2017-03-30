@@ -42,12 +42,32 @@ class TranslationsFixture extends TestFixture
      */
     public $records = [
         [
-            'id' => 'fed52cb8-bdf6-43a0-804a-842fe677f362',
-            'language_id' => 'ae51d185-253e-40a2-804c-c71399099fe5',
-            'object_foreign_key' => '392f6284-2ae8-4667-9e70-40d012750161',
+            'id' => '00000000-0000-0000-0000-000000000001',
+            'language_id' => '00000000-0000-0000-0000-000000000001',
+            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
             'object_model' => 'Leads',
             'object_field' => 'description',
-            'translation' => 'Это тест!',
+            'translation' => 'This is a test.',
+            'created' => '2017-03-20 12:56:37',
+            'modified' => '2017-03-20 12:56:37'
+        ],
+        [
+            'id' => '00000000-0000-0000-0000-000000000002',
+            'language_id' => '00000000-0000-0000-0000-000000000001',
+            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
+            'object_model' => 'Leads',
+            'object_field' => 'name',
+            'translation' => 'This is a test.',
+            'created' => '2017-03-20 12:56:37',
+            'modified' => '2017-03-20 12:56:37'
+        ],
+        [
+            'id' => '00000000-0000-0000-0000-000000000003',
+            'language_id' => '00000000-0000-0000-0000-000000000002',
+            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
+            'object_model' => 'Leads',
+            'object_field' => 'description',
+            'translation' => 'This is a test.',
             'created' => '2017-03-20 12:56:37',
             'modified' => '2017-03-20 12:56:37'
         ],

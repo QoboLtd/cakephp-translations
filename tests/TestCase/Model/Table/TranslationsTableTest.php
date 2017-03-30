@@ -59,12 +59,12 @@ class TranslationsTableTest extends TestCase
     {
         $result = $this->Translations->getTranslations(
             'Leads',
-            '392f6284-2ae8-4667-9e70-40d012750161',
+            '00000000-0000-0000-0000-100000000001',
             [
-                'language_id' => 'ae51d185-253e-40a2-804c-c71399099fe5',
+                'language_id' => '00000000-0000-0000-0000-000000000001',
             ]
         );
-        $this->assertCount(1, $result);
+        $this->assertCount(3, $result);
         $this->assertEquals($result[0]['object_model'], 'Leads');
     }
 
@@ -77,9 +77,9 @@ class TranslationsTableTest extends TestCase
         $params = [
             'object_model' => 'Leads',
             'object_field' => 'name',
-            'object_foreign_key' => '133f6b2d-6129-4540-88ea-6130cad69d4f',
+            'object_foreign_key' => '00000000-0000-0000-1000-000000000001',
             'language' => 'ru',
-            'translation' => 'Привет!',
+            'translation' => 'Test',
         ];
 
         $result = $this->Translations->addTranslation(
@@ -99,7 +99,7 @@ class TranslationsTableTest extends TestCase
      */
     public function testGetLanguageId()
     {
-        $languageId = 'ae51d185-253e-40a2-804c-c71399099fe5';
+        $languageId = '00000000-0000-0000-0000-000000000001';
         $shortCode = 'ru';
         $this->assertEquals($this->Translations->getLanguageId($shortCode), $languageId);
     }

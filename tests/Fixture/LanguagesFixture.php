@@ -41,12 +41,28 @@ class LanguagesFixture extends TestFixture
      */
     public $records = [
         [
-            'id' => 'ae51d185-253e-40a2-804c-c71399099fe5',
+            'id' => '00000000-0000-0000-0000-000000000001',
             'name' => 'Russian',
             'short_code' => 'ru',
             'description' => 'Russian Language',
             'created' => '2017-03-20 12:55:32',
             'modified' => '2017-03-20 12:55:32'
+        ],
+        [
+            'id' => '00000000-0000-0000-0000-000000000002',
+            'name' => 'German',
+            'short_code' => 'de',
+            'description' => 'German Language',
+            'created' => '2017-03-30 12:55:32',
+            'modified' => '2017-03-30 12:55:32'
+        ],
+        [
+            'id' => '00000000-0000-0000-0000-000000000003',
+            'name' => 'Chinese',
+            'short_code' => 'cn',
+            'description' => 'Chinese Language',
+            'created' => '2017-03-30 12:55:32',
+            'modified' => '2017-03-30 12:55:32'
         ],
     ];
 }
