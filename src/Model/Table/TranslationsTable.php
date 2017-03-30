@@ -83,4 +83,90 @@ class TranslationsTable extends Table
 
         return $rules;
     }
+
+    /**
+     *  getTranslations
+     *
+     *  returns a list of translations existing for specified record and field. In case of passing
+     * language the result will be filtered by it additionally
+     *
+     * @param string $modelName     model name
+     * @param string $recordId      uuid of record the translated field belogns to
+     * @param string $options       ID of the language used for translation
+     * @return array                list of saved translations
+     */
+    public function getTranslations($modelName, $recordId, $options = [])
+    {
+        $conditions = [
+            'object_model' => $modelName,
+            'object_foreign_key' => $recordId
+        ];
+
+        if (!empty($options['language'])) {
+            $conditions['language_id'] = $options['language'];
+        }
+        if (!empty($options['field'])) {
+            $conditions['object_field'] = $options['field'];
+        }
+        $query = $this->find('all', [
+            'conditions' => $conditions,
+            'contain' => ['Languages'],
+            'fields' => [
+                'Translations.translation',
+                'Translations.object_model',
+                'Translations.object_field',
+                'Translations.object_foreign_key',
+                'Languages.short_code',
+                'Languages.description',
+            ],
+        ]);
+        if (!empty($options['toEntity'])) {
+            return $query->first();
+        } else {
+            $query->hydrate(false);
+
+            return $query->toList();
+        }
+    }
+
+    /**
+     *  addTranslation
+     *  adding a new translation for specified language and field
+     *
+     * @param string $modelName          UUID record the translated field belongs to
+     * @param string $recordId         translated field name
+     * @param string $fieldName          language used for translation
+     * @param string $language    Translated text
+     * @return bool                     true in case of successfully saved translation and false otherwise
+     */
+    public function addTranslation($modelName, $recordId, $fieldName, $language, $translatedText)
+    {
+        $translationEntity = $this->newEntity();
+
+        $translationEntity->object_model = $modelName;
+        $translationEntity->object_field = $fieldName;
+        $translationEntity->object_foreign_key = $recordId;
+        $translationEntity->language_id = $this->getLanguageId($language);
+        $translationEntity->translation = $translatedText;
+
+        $result = $this->save($translationEntity);
+
+        return !empty($result->id) ? true : false;
+    }
+
+    /**
+     *  Retrive language ID by short code
+     *
+     * @param string $shortCode     language short code i.e. ru, cn etc
+     * @return string               language's uuid
+     */
+    public function getLanguageId($shortCode)
+    {
+        $query = $this->Languages->find('all', [
+            'conditions' => ['Languages.short_code' => $shortCode]
+        ]);
+        $language = $query->first();
+
+        return !empty($language->id) ? $language->id : null;
+    }
 }

@@ -26,7 +26,16 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->get('/translations/languages');
+        $this->assertResponseOk();
     }
 
     /**
@@ -36,7 +45,17 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->markTestIncomplete('FIXME: modify me!');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->get('/translations/languages/view/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
     }
 
     /**
@@ -46,7 +65,16 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->get('/translations/languages/add');
+        $this->assertResponseOk();
     }
 
     /**
