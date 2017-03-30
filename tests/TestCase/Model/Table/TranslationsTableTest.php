@@ -57,7 +57,6 @@ class TranslationsTableTest extends TestCase
      */
     public function testGetTranslations()
     {
-        debug($this->fixtureManager->loaded());
         $result = $this->Translations->getTranslations(
             'Leads',
             '00000000-0000-0000-0000-100000000001',
@@ -65,7 +64,8 @@ class TranslationsTableTest extends TestCase
                 'language_id' => '00000000-0000-0000-0000-000000000001',
             ]
         );
-        $this->assertCount(3, $result);
+        debug($result);
+        $this->assertEquals(3, count($result));
         $this->assertEquals($result[0]['object_model'], 'Leads');
     }
 
