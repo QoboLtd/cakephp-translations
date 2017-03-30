@@ -45,6 +45,7 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
+        $this->markTestIncomplete('FIXME: modify me!');
         $this->session([
             'Auth' => [
                 'User' => [
@@ -52,10 +53,9 @@ class LanguagesControllerTest extends IntegrationTestCase
                 ],
             ],
         ]);
-        $this->markTestIncomplete('Not implemented yet.');
 
-        //$this->get('/translations/languages/view/00000000-0000-0000-0000-000000000001');
-        //$this->assertResponseOk();
+        $this->get('/translations/languages/view/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
     }
 
     /**
