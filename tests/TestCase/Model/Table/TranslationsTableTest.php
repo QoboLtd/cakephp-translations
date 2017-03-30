@@ -57,6 +57,7 @@ class TranslationsTableTest extends TestCase
      */
     public function testGetTranslations()
     {
+        debug($this->fixtureManager->loaded());
         $result = $this->Translations->getTranslations(
             'Leads',
             '00000000-0000-0000-0000-100000000001',
