@@ -113,15 +113,15 @@ class TranslateBehavior extends Behavior
     }
 
     /**
-     *  Retrive language ID by short code
+     *  Retrive language ID by code
      *
-     * @param string $shortCode     language short code i.e. ru, cn etc
-     * @return string               language's uuid
+     * @param string $code     language short code i.e. ru, cn etc
+     * @return string          language's uuid
      */
     public function getLanguageId($shortCode)
     {
         $query = $this->_languagesTable->find('all', [
-            'conditions' => ['Languages.short_code' => $shortCode]
+            'conditions' => ['Languages.code' => $shortCode]
         ]);
         $language = $query->first();
 

@@ -34,7 +34,7 @@ echo $this->Html->scriptBlock(
             echo $this->Form->hidden('language_id', ['value' => $language->id]);
         ?>        
         <div class="col-xs-12 col-md-6">
-            <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->short_code]); ?>
+            <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code]); ?>
         </div>
         <div class="col-xs-12 col-md-3">
             <?= $language->name ?>
