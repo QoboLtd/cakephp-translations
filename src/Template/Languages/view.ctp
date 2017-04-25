@@ -15,14 +15,14 @@
                 </div>
                 <div class="box-body">
                     <dl class="dl-horizontal">
+                        <dt><?= __('Code') ?></dt>
+                        <dd><?= h($language->code) ?></dd>
                         <dt><?= __('Name') ?></dt>
-                        <dd><?= h($language->name) ?></dd>
-                        <dt><?= __('Short code') ?></dt>
-                        <dd><?= h($language->short_code) ?></dd>
+                        <dd><?= h(!empty($langs[$language->code]) ? $langs[$language->code] : $language->code) ?></dd>
                         <dt><?= __('Description') ?></dt>
                         <dd><?= h($language->description) ?></dd>
-                        <dt><?= __('Status') ?></dt>
-                        <dd><?= h($language->is_active ? 'Active' : 'Disabled') ?></dd>
+                        <dt><?= __('Right to left') ?></dt>
+                        <dd><?= h($language->is_rtl ? 'Yes' : 'No') ?></dd>
                     </dl>
                 </div>
             </div>

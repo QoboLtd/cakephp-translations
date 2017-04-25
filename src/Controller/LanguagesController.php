@@ -1,6 +1,7 @@
 <?php
 namespace Translations\Controller;
 
+use Cake\Core\Configure;
 use Translations\Controller\AppController;
 
 /**
@@ -12,6 +13,22 @@ class LanguagesController extends AppController
 {
 
     /**
+     * @var $languages
+     */
+    protected $languages = [];
+
+    /**
+     *  initialize method
+     *
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->languages = (array)Configure::read('Translations.languages');
+    }
+
+    /**
      * Index method
      *
      * @return \Cake\Network\Response|null
@@ -19,8 +36,8 @@ class LanguagesController extends AppController
     public function index()
     {
         $languages = $this->paginate($this->Languages);
-
-        $this->set(compact('languages'));
+        $langs = $this->languages;
+        $this->set(compact('languages', 'langs'));
         $this->set('_serialize', ['languages']);
     }
 
@@ -37,6 +54,7 @@ class LanguagesController extends AppController
             'contain' => ['Translations']
         ]);
 
+        $this->set('langs', $this->languages);
         $this->set('language', $language);
         $this->set('_serialize', ['language']);
     }
@@ -58,7 +76,8 @@ class LanguagesController extends AppController
             }
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
-        $this->set(compact('language'));
+        $languages = $this->languages;
+        $this->set(compact('language', 'languages'));
         $this->set('_serialize', ['language']);
     }
 
@@ -83,7 +102,8 @@ class LanguagesController extends AppController
             }
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
-        $this->set(compact('language'));
+        $languages = $this->languages;
+        $this->set(compact('language', 'languages'));
         $this->set('_serialize', ['language']);
     }
 

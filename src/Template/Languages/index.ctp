@@ -33,10 +33,10 @@ echo $this->Html->scriptBlock(
             <table class="table table-hover table-condensed table-vertical-align table-datatable">
                 <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('name') ?></th>
-                        <th><?= h('Short Code'); ?></th>
+                        <th><?= $this->Paginator->sort('code') ?></th>
+                        <th><?= h('Name'); ?></th>
                         <th><?= h('Description'); ?></th>
-                        <th><?= h('Status'); ?></th>
+                        <th><?= h('Right to left'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
@@ -44,16 +44,16 @@ echo $this->Html->scriptBlock(
                     <?php foreach ($languages as $language) : ?>
                     <tr>
                         <td>
-                            <?= h($language->name) ?>
+                            <?= h($language->code) ?>
                         </td>
                         <td>
-                            <?= h($language->short_code) ?>
+                            <?= h(!empty($langs[$language->code]) ? $langs[$language->code] : $language->code) ?>
                         </td>
                         <td>
                             <?= h($language->description) ?>
                         </td>
                         <td>
-                            <?= h($language->is_active ? 'Active' : 'Disabled') ?>
+                            <?= h($language->is_rtl ? 'Yes' : 'No') ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">
