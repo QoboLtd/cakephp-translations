@@ -33,13 +33,13 @@ echo $this->Html->scriptBlock(
             echo $this->Form->hidden('object_foreign_key');
             echo $this->Form->hidden('language_id', ['value' => $language->id]);
         ?>        
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-8">
             <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code]); ?>
         </div>
-        <div class="col-xs-12 col-md-3">
-            <?= $language->name ?>
+        <div class="col-xs-12 col-md-2">
+            <?= $language->code ?>
         </div>
-        <div class="col-xs-12 col-md-3">
+        <div class="col-xs-12 col-md-2">
             <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
         </div>
         <?= $this->Form->end(); ?>

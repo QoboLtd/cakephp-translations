@@ -11,7 +11,7 @@ var translation = translation || {};
         $.get('/translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
             if (data.length != 0) {
                 $.each(data, function (key, val) {
-                    $('#translation_' + val['language']['short_code']).val(val['translation']);
+                    $('#translation_' + val['language']['code']).val(val['translation']);
                 });
             } else {
                 $('textarea[name=translation]').each(function () {
