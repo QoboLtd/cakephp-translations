@@ -3,7 +3,6 @@
 return [
     'Translations' => [
         'languages' => [
-            '' => '',
             'af' => 'Afrikaans',
             'af_NA' => 'Afrikaans (Namibia)',
             'af_ZA' => 'Afrikaans (South Africa)',
