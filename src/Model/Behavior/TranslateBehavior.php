@@ -115,7 +115,7 @@ class TranslateBehavior extends Behavior
     /**
      *  Retrive language ID by code
      *
-     * @param string $code     language short code i.e. ru, cn etc
+     * @param string $shortCode     language short code i.e. ru, cn etc
      * @return string          language's uuid
      */
     public function getLanguageId($shortCode)

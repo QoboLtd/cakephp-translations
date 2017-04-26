@@ -19,8 +19,10 @@ echo $this->Html->scriptBlock(
     ['block' => 'scriptBotton']
 );
 ?>
-<div class="alert">
-    <h4 id="translate_result" ></h4>
+
+<div id="orig_for_translate"></div>
+
+<div id="translate_result">
 </div>
 
 <section class="content">
@@ -31,13 +33,14 @@ echo $this->Html->scriptBlock(
             echo $this->Form->hidden('object_model');
             echo $this->Form->hidden('object_field');
             echo $this->Form->hidden('object_foreign_key');
+            echo $this->Form->hidden('id', ['id' => 'translation_id_' . $language->code]);
             echo $this->Form->hidden('language_id', ['value' => $language->id]);
         ?>        
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-7">
             <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code]); ?>
         </div>
-        <div class="col-xs-12 col-md-2">
-            <?= $language->code ?>
+        <div class="col-xs-12 col-md-3">
+            <?= $locales[$language->code]; ?>
         </div>
         <div class="col-xs-12 col-md-2">
             <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>

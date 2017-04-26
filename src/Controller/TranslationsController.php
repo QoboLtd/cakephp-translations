@@ -2,6 +2,7 @@
 namespace Translations\Controller;
 
 use Translations\Controller\AppController;
+use Translations\Controller\Component\LanguageComponent;
 
 /**
  * Translations Controller
@@ -10,6 +11,17 @@ use Translations\Controller\AppController;
  */
 class TranslationsController extends AppController
 {
+    /**
+     *  initialize method
+     *
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->loadComponent('Translations.Language');
+    }
+
     /**
      * Index method
      *
@@ -79,7 +91,8 @@ class TranslationsController extends AppController
             $this->Flash->error(__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('all', ['limit' => 200]);
-        $this->set(compact('translation', 'languages'));
+        $locales = $this->Language->languages;
+        $this->set(compact('translation', 'languages', 'locales'));
         $this->set('_serialize', ['translation']);
     }
 
@@ -94,6 +107,7 @@ class TranslationsController extends AppController
             throw new \RuntimeException('Wrong type of request!');
         }
         $params = $this->request->getData();
+        error_log(__METHOD__ . ": " . print_r($params, true), 3, '/tmp/qobo.log');
         $translation = $this->Translations->getTranslations(
             $params['object_model'],
             $params['object_foreign_key'],
@@ -108,8 +122,9 @@ class TranslationsController extends AppController
         }
 
         $translation = $this->Translations->patchEntity($translation, $params);
+        error_log(__METHOD__ . ": translation=" . print_r($translation, true), 3, '/tmp/qobo.log');
         $result = $this->Translations->save($translation);
-
+        error_log(__METHOD__ . ": result=" . print_r($result, true), 3, '/tmp/qobo.log');
         $this->response->type('application/json');
         $this->autoRender = false;
         echo json_encode(!empty($result) ? true : false);

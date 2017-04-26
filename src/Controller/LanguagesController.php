@@ -1,8 +1,8 @@
 <?php
 namespace Translations\Controller;
 
-use Cake\Core\Configure;
 use Translations\Controller\AppController;
+use Translations\Controller\Component\LanguageComponent;
 
 /**
  * Languages Controller
@@ -11,12 +11,6 @@ use Translations\Controller\AppController;
  */
 class LanguagesController extends AppController
 {
-
-    /**
-     * @var $languages
-     */
-    protected $languages = [];
-
     /**
      *  initialize method
      *
@@ -25,7 +19,7 @@ class LanguagesController extends AppController
     {
         parent::initialize();
 
-        $this->languages = (array)Configure::read('Translations.languages');
+        $this->loadComponent('Translations.Language');
     }
 
     /**
@@ -36,7 +30,7 @@ class LanguagesController extends AppController
     public function index()
     {
         $languages = $this->paginate($this->Languages);
-        $langs = $this->languages;
+        $langs = $this->Language->languages;
         $this->set(compact('languages', 'langs'));
         $this->set('_serialize', ['languages']);
     }
@@ -54,7 +48,7 @@ class LanguagesController extends AppController
             'contain' => ['Translations']
         ]);
 
-        $this->set('langs', $this->languages);
+        $this->set('langs', $this->Languages->languages);
         $this->set('language', $language);
         $this->set('_serialize', ['language']);
     }
@@ -76,7 +70,7 @@ class LanguagesController extends AppController
             }
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
-        $languages = $this->languages;
+        $languages = $this->Language->languages;
         $this->set(compact('language', 'languages'));
         $this->set('_serialize', ['language']);
     }
@@ -102,7 +96,7 @@ class LanguagesController extends AppController
             }
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
-        $languages = $this->languages;
+        $languages = $this->Language->languages;
         $this->set(compact('language', 'languages'));
         $this->set('_serialize', ['language']);
     }

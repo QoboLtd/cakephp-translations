@@ -7,11 +7,15 @@ var translation = translation || {};
         var record_id = button.data('record');
         var model_name = button.data('model');
         var field_name = button.data('field');
+        var field_value = button.data('value');
+
+        $('#orig_for_translate').html('<ul><li>Translated field: ' + field_name + '</li><li>Translated value: ' + field_value + '</li></ul>');
 
         $.get('/translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
             if (data.length != 0) {
                 $.each(data, function (key, val) {
                     $('#translation_' + val['language']['code']).val(val['translation']);
+                    $('#translation_id_' + val['language']['code']).val(val['id']);
                 });
             } else {
                 $('textarea[name=translation]').each(function () {
@@ -30,8 +34,8 @@ var translation = translation || {};
     $('button[name=btn_translation]').click(function () {
         form = $(this).closest("form");
         $.post('/translations/translations/addOrUpdate', form.serialize(), function (data) {
-            $('#translate_result').attr('class', data ? 'alert-success' : 'alert-danger');
-            $('#translate_result').html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved.').show().delay(5000).fadeOut();
+            $('#translate_result').attr('class', data ? 'alert alert-success' : 'alert alert-danger');
+            $('#translate_result').html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved. Please try later.').show().delay(5000).fadeOut();
         });
     });
 })(jQuery);

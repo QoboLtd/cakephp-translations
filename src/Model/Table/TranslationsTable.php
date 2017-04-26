@@ -112,6 +112,7 @@ class TranslationsTable extends Table
             'conditions' => $conditions,
             'contain' => ['Languages'],
             'fields' => [
+                'Translations.id',
                 'Translations.translation',
                 'Translations.object_model',
                 'Translations.object_field',
