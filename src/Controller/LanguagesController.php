@@ -48,7 +48,7 @@ class LanguagesController extends AppController
             'contain' => ['Translations']
         ]);
 
-        $this->set('langs', $this->Languages->languages);
+        $this->set('langs', $this->Language->languages);
         $this->set('language', $language);
         $this->set('_serialize', ['language']);
     }

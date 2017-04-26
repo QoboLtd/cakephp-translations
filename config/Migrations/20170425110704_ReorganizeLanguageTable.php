@@ -17,16 +17,13 @@ class ReorganizeLanguageTable extends AbstractMigration
             'default' => false,
             'null' => false,
         ]);         
-        
         $table->changeColumn('is_active', 'boolean', [
             'default' => true,
             'null' => false,
         ]);
-
         $table->renameColumn('short_code', 'code');
-
         $table->removeColumn('name');
-
+        $table->removeColumn('description');
         $table->update();
     }
 }

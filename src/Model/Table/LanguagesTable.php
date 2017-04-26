@@ -53,9 +53,6 @@ class LanguagesTable extends Table
             ->notEmpty('code')
             ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
-        $validator
-            ->allowEmpty('description');
-
         return $validator;
     }
 

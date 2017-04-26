@@ -35,8 +35,7 @@ echo $this->Html->scriptBlock(
                     <tr>
                         <th><?= $this->Paginator->sort('code') ?></th>
                         <th><?= h('Name'); ?></th>
-                        <th><?= h('Description'); ?></th>
-                        <th><?= h('Right to left'); ?></th>
+                        <th><?= h('Direction'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
@@ -50,10 +49,7 @@ echo $this->Html->scriptBlock(
                             <?= h(!empty($langs[$language->code]) ? $langs[$language->code] : $language->code) ?>
                         </td>
                         <td>
-                            <?= h($language->description) ?>
-                        </td>
-                        <td>
-                            <?= h($language->is_rtl ? 'Yes' : 'No') ?>
+                            <?= h($language->is_rtl ? 'Right-to-left' : 'Left-to-right'); ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">

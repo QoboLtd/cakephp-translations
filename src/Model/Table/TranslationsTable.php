@@ -118,7 +118,6 @@ class TranslationsTable extends Table
                 'Translations.object_field',
                 'Translations.object_foreign_key',
                 'Languages.code',
-                'Languages.description',
             ],
         ]);
         if (!empty($options['toEntity'])) {

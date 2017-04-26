@@ -36,16 +36,13 @@ echo $this->Html->scriptBlock(
                 <?= $this->Form->create($language) ?>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <?= $this->Form->input('code', ['options' => $languages]); ?>
-                        </div>
-                        <div class="col-xs-6">
-                            <?= $this->Form->input('description'); ?> 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <?= $this->Form->input('is_rtl', ['label' => 'Right to left']); ?> 
+                        <div class="col-md-12">
+                            <?= $this->Form->input('code', [
+                                    'options' => $languages,
+                                    'class' => 'select2',
+                                    'empty' => true,
+                                ]);
+                            ?>
                         </div>
                     </div>
                 </div>

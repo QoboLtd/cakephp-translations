@@ -29,7 +29,7 @@ echo $this->Html->scriptBlock(
                 <?= $this->Form->create($language) ?>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12">
                             <?= $this->Form->input('code', [
                                     'options' => $languages,
                                     'type' => 'select',
@@ -37,14 +37,6 @@ echo $this->Html->scriptBlock(
                                     'empty' => true
                                 ]);
                             ?>
-                        </div>
-                        <div class="col-xs-6">
-                            <?= $this->Form->input('description'); ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <?= $this->Form->input('is_rtl', ['label' => __('Right to left direction')]); ?> 
                         </div>
                     </div>
                 </div>

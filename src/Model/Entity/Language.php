@@ -10,7 +10,6 @@ use Cake\ORM\Entity;
  * @property string $code
  * @property boolean $is_active
  * @property boolean $is_rtl
- * @property string $description
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *

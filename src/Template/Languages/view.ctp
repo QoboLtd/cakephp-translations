@@ -19,10 +19,8 @@
                         <dd><?= h($language->code) ?></dd>
                         <dt><?= __('Name') ?></dt>
                         <dd><?= h(!empty($langs[$language->code]) ? $langs[$language->code] : $language->code) ?></dd>
-                        <dt><?= __('Description') ?></dt>
-                        <dd><?= h($language->description) ?></dd>
-                        <dt><?= __('Right to left') ?></dt>
-                        <dd><?= h($language->is_rtl ? 'Yes' : 'No') ?></dd>
+                        <dt><?= h('Direction') ?></dd>
+                        <dd><?= h($language->is_rtl ? 'Right-to-left' : 'Left-to-right'); ?></dd>
                     </dl>
                 </div>
             </div>

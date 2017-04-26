@@ -107,7 +107,6 @@ class TranslationsController extends AppController
             throw new \RuntimeException('Wrong type of request!');
         }
         $params = $this->request->getData();
-        error_log(__METHOD__ . ": " . print_r($params, true), 3, '/tmp/qobo.log');
         $translation = $this->Translations->getTranslations(
             $params['object_model'],
             $params['object_foreign_key'],
@@ -122,9 +121,7 @@ class TranslationsController extends AppController
         }
 
         $translation = $this->Translations->patchEntity($translation, $params);
-        error_log(__METHOD__ . ": translation=" . print_r($translation, true), 3, '/tmp/qobo.log');
         $result = $this->Translations->save($translation);
-        error_log(__METHOD__ . ": result=" . print_r($result, true), 3, '/tmp/qobo.log');
         $this->response->type('application/json');
         $this->autoRender = false;
         echo json_encode(!empty($result) ? true : false);
