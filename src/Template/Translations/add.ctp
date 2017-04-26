@@ -35,6 +35,7 @@ echo $this->Html->scriptBlock(
             echo $this->Form->hidden('object_foreign_key');
             echo $this->Form->hidden('id', ['id' => 'translation_id_' . $language->code]);
             echo $this->Form->hidden('language_id', ['value' => $language->id]);
+            echo $this->Form->hidden('code', ['value' => $language->code]);
         ?>        
         <div class="col-xs-12 col-md-7">
             <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code]); ?>
@@ -43,9 +44,14 @@ echo $this->Html->scriptBlock(
             <?= $locales[$language->code]; ?>
         </div>
         <div class="col-xs-12 col-md-2">
-            <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
+            <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'data-lang' => $language->code, 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
         </div>
         <?= $this->Form->end(); ?>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="result_<?= $language->code; ?>"></div>
+        </div>
+    </div>    
     <?php endforeach; ?>
 </section>

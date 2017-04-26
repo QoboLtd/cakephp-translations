@@ -28,14 +28,19 @@ var translation = translation || {};
         $('input[name=object_model]').val(model_name);
         $('input[name=object_field]').val(field_name);
     });
+
     $('#translations_translate_id_modal').on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
     });
+
     $('button[name=btn_translation]').click(function () {
+        $(this).prop('disabled', true);
         form = $(this).closest("form");
+        lang = $(this).data('lang');
         $.post('/translations/translations/addOrUpdate', form.serialize(), function (data) {
-            $('#translate_result').attr('class', data ? 'alert alert-success' : 'alert alert-danger');
-            $('#translate_result').html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved. Please try later.').show().delay(5000).fadeOut();
+            $('#result_' + lang).attr('class', data ? 'alert alert-success' : 'alert alert-danger');
+            $('#result_' + lang).html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved. Please try later.').show().delay(5000).fadeOut();
         });
+        $(this).prop('disabled', false);
     });
 })(jQuery);
