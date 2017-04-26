@@ -30,7 +30,13 @@ echo $this->Html->scriptBlock(
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-6">
-                            <?= $this->Form->input('code', ['options' => $languages]); ?>
+                            <?= $this->Form->input('code', [
+                                    'options' => $languages,
+                                    'type' => 'select',
+                                    'class' => 'select2',
+                                    'empty' => true
+                                ]);
+                            ?>
                         </div>
                         <div class="col-xs-6">
                             <?= $this->Form->input('description'); ?>
