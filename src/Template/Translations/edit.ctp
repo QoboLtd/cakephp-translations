@@ -31,7 +31,6 @@ echo $this->Html->scriptBlock(
                     <div class="row">
                         <div class="col-md-6">
                             <?= $this->Form->input('translation'); ?>
-                            <?= $this->Form->input('is_active'); ?> 
                         </div>
                         <div class="col-md-6">
                             <div class="box-body">
@@ -39,7 +38,7 @@ echo $this->Html->scriptBlock(
                                     <dt><?= __('Model') ?></dt>
                                     <dd><?= h($translation->object_model) ?></dd>
                                     <dt><?= __('Language') ?></dt>
-                                    <dd><?= h($translation->language->name) ?></dd>
+                                    <dd><?= h(!empty($locales[$translation->language->code]) ? $locales[$translation->language->code] : $translation->language->code); ?></dd>
                                     <dt><?= __('Original') ?></dt>
                                     <dd><?= h($translation->translation) ?></dd>
                                 </dl>
