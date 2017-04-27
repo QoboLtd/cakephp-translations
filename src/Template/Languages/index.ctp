@@ -33,8 +33,8 @@ echo $this->Html->scriptBlock(
             <table class="table table-hover table-condensed table-vertical-align table-datatable">
                 <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('code') ?></th>
                         <th><?= h('Name'); ?></th>
+                        <th><?= $this->Paginator->sort('code') ?></th>
                         <th><?= h('Direction'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
@@ -43,28 +43,16 @@ echo $this->Html->scriptBlock(
                     <?php foreach ($languages as $language) : ?>
                     <tr>
                         <td>
-                            <?= h($language->code) ?>
+                            <?= h(!empty($langs[$language->code]) ? $langs[$language->code] : $language->code) ?>
                         </td>
                         <td>
-                            <?= h(!empty($langs[$language->code]) ? $langs[$language->code] : $language->code) ?>
+                            <?= h($language->code) ?>
                         </td>
                         <td>
                             <?= h($language->is_rtl ? 'Right-to-left' : 'Left-to-right'); ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">
-                            <?= $this->Html->link(
-                                '<i class="fa fa-eye"></i>',
-                                ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'view', $language->id],
-                                ['title' => __('View'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
-                            ); ?>
-                            <?php if (!$language->deny_edit) : ?>
-                                <?= $this->Html->link(
-                                    '<i class="fa fa-pencil"></i>',
-                                    ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'edit', $language->id],
-                                    ['title' => __('Edit'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
-                                ); ?>
-                            <?php endif; ?>
                             <?php if (!$language->deny_delete) : ?>
                                 <?= $this->Form->postLink(
                                     '<i class="fa fa-trash"></i>',
