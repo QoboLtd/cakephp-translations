@@ -566,5 +566,11 @@ return [
             'zu' => 'Zulu',
             'zu_ZA' => 'Zulu (South Africa)',
         ],
+        'rtl_languages' => [
+            'ur',
+            'ar',
+            'he',
+            'fa',
+        ],
     ],
 ];
