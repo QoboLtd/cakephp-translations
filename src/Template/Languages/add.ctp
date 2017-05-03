@@ -34,7 +34,7 @@ echo $this->Html->scriptBlock(
                                     'options' => $languages,
                                     'type' => 'select',
                                     'class' => 'select2',
-                                    'empty' => true
+                                    'empty' => false,
                                 ]);
                             ?>
                         </div>
