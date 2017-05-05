@@ -66,6 +66,13 @@ class LanguagesController extends AppController
             $data['is_rtl'] = $this->_setDirection($data);
             $data['name'] = $this->Language->languages[$data['code']];
 
+            $languageEntity = $this->_loadDeletedLanguage($data['code']);
+            if (!empty($languageEntity)) {
+                $this->Languages->restoreTrash($languageEntity);
+
+                return $this->redirect(['action' => 'index']);
+            }
+
             $language = $this->Languages->patchEntity($language, $data);
             if ($this->Languages->save($language)) {
                 $this->Flash->success(__('The language has been saved.'));
@@ -124,5 +131,19 @@ class LanguagesController extends AppController
         $locale = preg_replace('/_[A-Za-z]+/', '', $locale);
 
         return in_array($locale, $this->Language->rtl_languages) ? true : false;
+    }
+
+    /**
+     *  _loadDeletedLanguage() method
+     *
+     * @param string $code  language code
+     * @return bool|\Cake\Datasource\EntityInterface
+     */
+    protected function _loadDeletedLanguage($code)
+    {
+        $query = $this->Languages->find('onlyTrashed')
+                                ->where(['code' => $code]);
+
+        return $query->first();
     }
 }

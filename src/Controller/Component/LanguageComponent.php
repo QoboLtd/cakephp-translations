@@ -24,12 +24,13 @@ class LanguageComponent extends Component
      */
     public function initialize(array $config)
     {
-        $addedLanguages = TableRegistry::get('languages')
-                            ->find('list', [
+        $table = TableRegistry::get('languages');
+        $query = $table->find('list', [
                                 'keyField' => 'code',
                                 'valueField' => 'code'
                             ])
-                            ->toArray();
+                            ->where(['trashed IS' => null]);
+        $addedLanguages = $query->toArray();
         foreach ((array)Configure::read('Translations.languages') as $key => $val) {
             if (empty($addedLanguages[$key])) {
                 $this->languages[$key] = $val;
