@@ -41,7 +41,7 @@ echo $this->Html->scriptBlock(
             <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code]); ?>
         </div>
         <div class="col-xs-12 col-md-3">
-            <?= $locales[$language->code]; ?>
+            <?= $language->name; ?>
         </div>
         <div class="col-xs-12 col-md-2">
             <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'data-lang' => $language->code, 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>

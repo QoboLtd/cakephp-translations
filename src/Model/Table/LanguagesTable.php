@@ -29,6 +29,7 @@ class LanguagesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Trash.Trash');
 
         $this->hasMany('Translations', [
             'foreignKey' => 'language_id',

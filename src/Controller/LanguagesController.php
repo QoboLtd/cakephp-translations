@@ -64,6 +64,7 @@ class LanguagesController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $data['is_rtl'] = $this->_setDirection($data);
+            $data['name'] = $this->Language->languages[$data['code']];
 
             $language = $this->Languages->patchEntity($language, $data);
             if ($this->Languages->save($language)) {
@@ -87,24 +88,8 @@ class LanguagesController extends AppController
      */
     public function edit($id = null)
     {
-        $language = $this->Languages->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $data = $this->request->getData();
-            $data['is_rtl'] = $this->_setDirection($data);
-
-            $language = $this->Languages->patchEntity($language, $this->request->getData());
-            if ($this->Languages->save($language)) {
-                $this->Flash->success(__('The language has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The language could not be saved. Please, try again.'));
-        }
-        $languages = $this->Language->languages;
-        $this->set(compact('language', 'languages'));
-        $this->set('_serialize', ['language']);
+        // Edit language is disabled because no any property to do that
+        return $this->redirect(['action' => 'index']);
     }
 
     /**

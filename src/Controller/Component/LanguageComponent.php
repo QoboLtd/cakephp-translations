@@ -30,7 +30,6 @@ class LanguageComponent extends Component
                                 'valueField' => 'code'
                             ])
                             ->toArray();
-
         foreach ((array)Configure::read('Translations.languages') as $key => $val) {
             if (empty($addedLanguages[$key])) {
                 $this->languages[$key] = $val;

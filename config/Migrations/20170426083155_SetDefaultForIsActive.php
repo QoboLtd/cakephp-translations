@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class RemoveFlagIsActive extends AbstractMigration
+class SetDefaultForIsActive extends AbstractMigration
 {
     /**
      * Change Method.
