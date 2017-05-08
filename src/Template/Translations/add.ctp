@@ -20,12 +20,13 @@ echo $this->Html->scriptBlock(
 );
 ?>
 
-<div id="orig_for_translate"></div>
-
-<div id="translate_result">
-</div>
-
 <section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <?= $this->Form->input('orig_for_translate', ['type' => 'textarea', 'label' => 'English', 'id' => 'orig_for_translate', 'required' => false, 'disabled' => true]); ?>
+        </div>
+    </div>
+    <hr/>
     <?php foreach ($languages as $language) : ?>
     <div class="row">
         <?php
@@ -37,21 +38,21 @@ echo $this->Html->scriptBlock(
             echo $this->Form->hidden('language_id', ['value' => $language->id]);
             echo $this->Form->hidden('code', ['value' => $language->code]);
         ?>        
-        <div class="col-xs-12 col-md-7">
-            <?= $this->Form->input('translation', ['label' => false, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code]); ?>
+        <div class="col-xs-12 col-md-12">
+            <?= $this->Form->input('translation', ['label' => $language->name, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code, 'required' => false]); ?>
         </div>
-        <div class="col-xs-12 col-md-3">
-            <?= $language->name; ?>
-        </div>
-        <div class="col-xs-12 col-md-2">
-            <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'data-lang' => $language->code, 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
-        </div>
-        <?= $this->Form->end(); ?>
     </div>
     <div class="row">
         <div class="col-xs-12">
             <div id="result_<?= $language->code; ?>"></div>
         </div>
-    </div>    
+    </div> 
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'data-lang' => $language->code, 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
+        </div>
+        <?= $this->Form->end(); ?>
+    </div>
+    <br/>
     <?php endforeach; ?>
 </section>

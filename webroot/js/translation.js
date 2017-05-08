@@ -9,7 +9,7 @@ var translation = translation || {};
         var field_name = button.data('field');
         var field_value = button.data('value');
 
-        $('#orig_for_translate').html('<ul><li>Translated field: ' + field_name + '</li><li>Translated value: ' + field_value + '</li></ul>');
+        $('#orig_for_translate').val(field_value);
 
         $.get('/translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
             if (data.length != 0) {
