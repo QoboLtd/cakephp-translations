@@ -34,7 +34,7 @@ class TranslationsControllerTest extends IntegrationTestCase
             ],
         ]);
 
-        $this->get('/translations/translations');
+        $this->get('/language-translations/translations');
         $this->assertResponseOk();
     }
 
