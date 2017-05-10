@@ -9,6 +9,7 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class TranslationsFixture extends TestFixture
 {
+    public $table = 'language_translations';
 
     /**
      * Fields
