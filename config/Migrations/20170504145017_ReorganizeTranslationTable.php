@@ -19,10 +19,17 @@ class ReorganizeTranslationTable extends AbstractMigration
         if ($table->hasColumn('code')) {
             $table->removeColumn('code');
         }
-        $table->addColumn('language_id', 'string', [
-            'limit' => 36,
-            'null' => false,
-        ]);
+        if ($table->hasColumn('language_id')) {
+            $table->changeColumn('language_id', 'string', [
+                'limit' => 36,
+                'null' => false,
+            ]);
+        } else {
+            $table->addColumn('language_id', 'string', [
+                'limit' => 36,
+                'null' => false,
+            ]);
+        }
         $table->save();
     }
 }
