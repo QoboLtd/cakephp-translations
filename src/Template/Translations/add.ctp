@@ -30,7 +30,7 @@ echo $this->Html->scriptBlock(
     <?php foreach ($languages as $language) : ?>
     <div class="row">
         <?php
-            echo $this->Form->create($translation);
+            echo $this->Form->create($translation, ['id' => 'form_translation_' . $language->code]);
             echo $this->Form->hidden('object_model');
             echo $this->Form->hidden('object_field');
             echo $this->Form->hidden('object_foreign_key');
