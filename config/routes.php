@@ -4,7 +4,7 @@ use Cake\Routing\Router;
 
 Router::plugin(
     'Translations',
-    ['path' => '/translations'],
+    ['path' => '/language-translations'],
     function ($routes) {
         $routes->fallbacks('DashedRoute');
     }
