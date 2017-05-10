@@ -26,7 +26,7 @@ class TranslationsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('translations');
+        $this->setTable('language_translations');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
