@@ -13,8 +13,12 @@ class ReorganizeTranslationTable extends AbstractMigration
     public function change()
     {
         $table = $this->table('language_translations');
-        $table->removeColumn('is_active');
-        $table->removeColumn('code');
+        if ($table->hasColumn('is_active')) {
+            $table->removeColumn('is_active');
+        }
+        if ($table->hasColumn('code')) {
+            $table->removeColumn('code');
+        }
         $table->addColumn('language_id', 'string', [
             'limit' => 36,
             'null' => false,
