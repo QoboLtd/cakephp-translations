@@ -36,7 +36,6 @@ var translation = translation || {};
     $('button[name=btn_translation]').click(function () {
         lang = $(this).data('lang');
         formData = $('#form_translation_' + lang).serialize();
-        console.log(formData);
         $.post('/language-translations/translations/addOrUpdate', formData, function (data) {
             $('#result_' + lang).attr('class', data ? 'alert alert-success' : 'alert alert-danger');
             $('#result_' + lang).html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved. Please try later.').show().delay(5000).fadeOut();
