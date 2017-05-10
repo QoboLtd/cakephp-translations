@@ -7,11 +7,15 @@ var translation = translation || {};
         var record_id = button.data('record');
         var model_name = button.data('model');
         var field_name = button.data('field');
+        var field_value = button.data('value');
+
+        $('#orig_for_translate').val(field_value);
 
         $.get('/translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
             if (data.length != 0) {
                 $.each(data, function (key, val) {
-                    $('#translation_' + val['language']['short_code']).val(val['translation']);
+                    $('#translation_' + val['language']['code']).val(val['translation']);
+                    $('#translation_id_' + val['language']['code']).val(val['id']);
                 });
             } else {
                 $('textarea[name=translation]').each(function () {
@@ -24,14 +28,19 @@ var translation = translation || {};
         $('input[name=object_model]').val(model_name);
         $('input[name=object_field]').val(field_name);
     });
+
     $('#translations_translate_id_modal').on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
     });
+
     $('button[name=btn_translation]').click(function () {
+        $(this).prop('disabled', true);
         form = $(this).closest("form");
+        lang = $(this).data('lang');
         $.post('/translations/translations/addOrUpdate', form.serialize(), function (data) {
-            $('#translate_result').attr('class', data ? 'alert-success' : 'alert-danger');
-            $('#translate_result').html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved.').show().delay(5000).fadeOut();
+            $('#result_' + lang).attr('class', data ? 'alert alert-success' : 'alert alert-danger');
+            $('#result_' + lang).html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved. Please try later.').show().delay(5000).fadeOut();
         });
+        $(this).prop('disabled', false);
     });
 })(jQuery);

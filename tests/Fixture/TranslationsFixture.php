@@ -56,7 +56,7 @@ class TranslationsFixture extends TestFixture
             'language_id' => '00000000-0000-0000-0000-000000000001',
             'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
             'object_model' => 'Leads',
-            'object_field' => 'name',
+            'object_field' => 'code',
             'translation' => 'This is a test.',
             'created' => '2017-03-20 12:56:37',
             'modified' => '2017-03-20 12:56:37'

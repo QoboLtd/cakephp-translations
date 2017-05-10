@@ -2,6 +2,7 @@
 namespace Translations\Controller;
 
 use Translations\Controller\AppController;
+use Translations\Controller\Component\LanguageComponent;
 
 /**
  * Languages Controller
@@ -10,6 +11,16 @@ use Translations\Controller\AppController;
  */
 class LanguagesController extends AppController
 {
+    /**
+     *  initialize method
+     *
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->loadComponent('Translations.Language');
+    }
 
     /**
      * Index method
@@ -19,8 +30,8 @@ class LanguagesController extends AppController
     public function index()
     {
         $languages = $this->paginate($this->Languages);
-
-        $this->set(compact('languages'));
+        $langs = $this->Language->languages;
+        $this->set(compact('languages', 'langs'));
         $this->set('_serialize', ['languages']);
     }
 
@@ -37,6 +48,7 @@ class LanguagesController extends AppController
             'contain' => ['Translations']
         ]);
 
+        $this->set('langs', $this->Language->languages);
         $this->set('language', $language);
         $this->set('_serialize', ['language']);
     }
@@ -50,7 +62,18 @@ class LanguagesController extends AppController
     {
         $language = $this->Languages->newEntity();
         if ($this->request->is('post')) {
-            $language = $this->Languages->patchEntity($language, $this->request->getData());
+            $data = $this->request->getData();
+            $data['is_rtl'] = $this->_setDirection($data);
+            $data['name'] = $this->Language->languages[$data['code']];
+
+            $languageEntity = $this->_loadDeletedLanguage($data['code']);
+            if (!empty($languageEntity)) {
+                $this->Languages->restoreTrash($languageEntity);
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $language = $this->Languages->patchEntity($language, $data);
             if ($this->Languages->save($language)) {
                 $this->Flash->success(__('The language has been saved.'));
 
@@ -58,7 +81,8 @@ class LanguagesController extends AppController
             }
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
-        $this->set(compact('language'));
+        $languages = $this->Language->languages;
+        $this->set(compact('language', 'languages'));
         $this->set('_serialize', ['language']);
     }
 
@@ -71,20 +95,8 @@ class LanguagesController extends AppController
      */
     public function edit($id = null)
     {
-        $language = $this->Languages->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $language = $this->Languages->patchEntity($language, $this->request->getData());
-            if ($this->Languages->save($language)) {
-                $this->Flash->success(__('The language has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The language could not be saved. Please, try again.'));
-        }
-        $this->set(compact('language'));
-        $this->set('_serialize', ['language']);
+        // Edit language is disabled because no any property to do that
+        return $this->redirect(['action' => 'index']);
     }
 
     /**
@@ -105,5 +117,33 @@ class LanguagesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     *  _setDirection method
+     *
+     * @param array $data   post data
+     * @return bool         true in case of right to left language
+     */
+    protected function _setDirection($data)
+    {
+        $locale = $data['code'];
+        $locale = preg_replace('/_[A-Za-z]+/', '', $locale);
+
+        return in_array($locale, $this->Language->rtl_languages) ? true : false;
+    }
+
+    /**
+     *  _loadDeletedLanguage() method
+     *
+     * @param string $code  language code
+     * @return bool|\Cake\Datasource\EntityInterface
+     */
+    protected function _loadDeletedLanguage($code)
+    {
+        $query = $this->Languages->find('onlyTrashed')
+                                ->where(['code' => $code]);
+
+        return $query->first();
     }
 }

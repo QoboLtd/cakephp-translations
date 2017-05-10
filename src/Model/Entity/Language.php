@@ -7,9 +7,9 @@ use Cake\ORM\Entity;
  * Language Entity
  *
  * @property string $id
- * @property string $name
- * @property string $short_code
- * @property string $description
+ * @property string $code
+ * @property boolean $is_active
+ * @property boolean $is_rtl
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *

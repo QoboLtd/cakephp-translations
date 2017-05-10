@@ -2,6 +2,7 @@
 namespace Translations\Controller;
 
 use Translations\Controller\AppController;
+use Translations\Controller\Component\LanguageComponent;
 
 /**
  * Translations Controller
@@ -10,6 +11,17 @@ use Translations\Controller\AppController;
  */
 class TranslationsController extends AppController
 {
+    /**
+     *  initialize method
+     *
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->loadComponent('Translations.Language');
+    }
+
     /**
      * Index method
      *
@@ -39,6 +51,7 @@ class TranslationsController extends AppController
         } else {
             $translations = $this->paginate($this->Translations);
             $this->set(compact('translations'));
+            $this->set('locales', $this->Language->languages);
             $this->set('_serialize', ['translations']);
         }
     }
@@ -57,6 +70,7 @@ class TranslationsController extends AppController
         ]);
 
         $this->set('translation', $translation);
+        $this->set('locales', $this->Language->languages);
         $this->set('_serialize', ['translation']);
     }
 
@@ -79,7 +93,8 @@ class TranslationsController extends AppController
             $this->Flash->error(__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('all', ['limit' => 200]);
-        $this->set(compact('translation', 'languages'));
+        $locales = $this->Language->languages;
+        $this->set(compact('translation', 'languages', 'locales'));
         $this->set('_serialize', ['translation']);
     }
 
@@ -109,7 +124,6 @@ class TranslationsController extends AppController
 
         $translation = $this->Translations->patchEntity($translation, $params);
         $result = $this->Translations->save($translation);
-
         $this->response->type('application/json');
         $this->autoRender = false;
         echo json_encode(!empty($result) ? true : false);
@@ -137,6 +151,7 @@ class TranslationsController extends AppController
             $this->Flash->error(__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('list', ['limit' => 200]);
+        $this->set('locales', $this->Language->languages);
         $this->set(compact('translation', 'languages'));
         $this->set('_serialize', ['translation']);
     }

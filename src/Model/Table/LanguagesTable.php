@@ -25,10 +25,11 @@ class LanguagesTable extends Table
         parent::initialize($config);
 
         $this->setTable('languages');
-        $this->setDisplayField('name');
+        $this->setDisplayField('code');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Trash.Trash');
 
         $this->hasMany('Translations', [
             'foreignKey' => 'language_id',
@@ -49,16 +50,9 @@ class LanguagesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
-        $validator
-            ->requirePresence('short_code', 'create')
-            ->notEmpty('short_code');
-
-        $validator
-            ->allowEmpty('description');
+            ->requirePresence('code', 'create')
+            ->notEmpty('code')
+            ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;
     }
@@ -72,7 +66,7 @@ class LanguagesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['name']));
+        $rules->add($rules->isUnique(['code']));
 
         return $rules;
     }

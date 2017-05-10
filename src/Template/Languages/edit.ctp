@@ -8,7 +8,14 @@ echo $this->Html->css(
         'block' => 'css'
     ]
 );
-echo $this->Html->script('AdminLTE./plugins/select2/select2.full.min', ['block' => 'scriptBotton']);
+echo $this->Html->script(
+    [
+        'AdminLTE./plugins/select2/select2.full.min',
+    ],
+    [
+        'block' => 'scriptBotton'
+    ]
+);
 echo $this->Html->scriptBlock(
     '$(".select2").select2({
         theme: "bootstrap",
@@ -29,21 +36,13 @@ echo $this->Html->scriptBlock(
                 <?= $this->Form->create($language) ?>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <?= $this->Form->input('name'); ?>
-                        </div>
-                        <div class="col-md-6">
-                            <?= $this->Form->input('short_code'); ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <?= $this->Form->input('description'); ?> 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <?= $this->Form->input('is_active'); ?> 
+                        <div class="col-md-12">
+                            <?= $this->Form->input('code', [
+                                    'options' => $languages,
+                                    'class' => 'select2',
+                                    'empty' => true,
+                                ]);
+                            ?>
                         </div>
                     </div>
                 </div>

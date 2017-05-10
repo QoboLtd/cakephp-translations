@@ -112,12 +112,12 @@ class TranslationsTable extends Table
             'conditions' => $conditions,
             'contain' => ['Languages'],
             'fields' => [
+                'Translations.id',
                 'Translations.translation',
                 'Translations.object_model',
                 'Translations.object_field',
                 'Translations.object_foreign_key',
-                'Languages.short_code',
-                'Languages.description',
+                'Languages.code',
             ],
         ]);
         if (!empty($options['toEntity'])) {
@@ -155,15 +155,15 @@ class TranslationsTable extends Table
     }
 
     /**
-     *  Retrive language ID by short code
+     *  Retrive language ID by code
      *
-     * @param string $shortCode     language short code i.e. ru, cn etc
+     * @param string $shortCode     language code i.e. ru, cn etc
      * @return string               language's uuid
      */
     public function getLanguageId($shortCode)
     {
         $query = $this->Languages->find('all', [
-            'conditions' => ['Languages.short_code' => $shortCode]
+            'conditions' => ['Languages.code' => $shortCode]
         ]);
         $language = $query->first();
 

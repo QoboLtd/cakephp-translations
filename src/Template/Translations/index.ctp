@@ -27,7 +27,6 @@ echo $this->Html->scriptBlock(
                         <th><?= h('Language') ?></th>
                         <th><?= h('Original Text'); ?></th>
                         <th><?= h('Translation'); ?></th>
-                        <th><?= h('Status'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
@@ -38,16 +37,13 @@ echo $this->Html->scriptBlock(
                             <?= h($translate->object_model) ?>
                         </td>
                         <td>
-                            <?= h($translate->language->name) ?>
+                            <?= h(!empty($locales[$translate->language->code]) ? $locales[$translate->language->code] : $translate->language->code); ?>
                         </td>
                         <td>
                             <?= h($translate->translation) ?>
                         </td>
                         <td>
                             <?= h($translate->translation) ?>
-                        </td>
-                        <td>
-                            <?= h($translate->is_active ? 'Active' : 'Disabled') ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">
