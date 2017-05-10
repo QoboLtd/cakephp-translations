@@ -11,7 +11,7 @@ var translation = translation || {};
 
         $('#orig_for_translate').val(field_value);
 
-        $.get('/translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
+        $.get('/language-translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
             if (data.length != 0) {
                 $.each(data, function (key, val) {
                     $('#translation_' + val['language']['code']).val(val['translation']);
@@ -37,7 +37,7 @@ var translation = translation || {};
         $(this).prop('disabled', true);
         form = $(this).closest("form");
         lang = $(this).data('lang');
-        $.post('/translations/translations/addOrUpdate', form.serialize(), function (data) {
+        $.post('/language-translations/translations/addOrUpdate', form.serialize(), function (data) {
             $('#result_' + lang).attr('class', data ? 'alert alert-success' : 'alert alert-danger');
             $('#result_' + lang).html(data ? 'Translation is created or updated successfully.' : 'Translation cannot be saved. Please try later.').show().delay(5000).fadeOut();
         });
