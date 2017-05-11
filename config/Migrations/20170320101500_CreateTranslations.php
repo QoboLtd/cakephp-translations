@@ -15,6 +15,10 @@ class CreateTranslations extends AbstractMigration
      */
     public function change()
     {
+        if ($this->hasTable('language_translations')) {
+            return;
+        }
+
         $table = $this->table('language_translations');
         $table->addColumn('id', 'uuid', [
             'default' => null,

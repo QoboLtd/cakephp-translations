@@ -12,7 +12,12 @@ class AddIsActiveFlagToTranslations extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('language_translations');
+        $tableName = 'language_translations';
+        if (!$this->hasTable($tableName)) {
+            $tableName = 'translations';
+        }
+
+        $table = $this->table($tableName);
         $table->addColumn('is_active', 'boolean', [
             'default' => 0,
             'null' => false,

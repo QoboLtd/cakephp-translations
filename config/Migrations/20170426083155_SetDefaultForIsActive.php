@@ -12,7 +12,12 @@ class SetDefaultForIsActive extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('language_translations');
+        $tableName = 'language_translations';
+        if (!$this->hasTable($tableName)) {
+            $tableName = 'translations';
+        }
+
+        $table = $this->table($tableName);
         $table->changeColumn('is_active', 'boolean', [
             'default' => true,
             'null' => true,
