@@ -12,7 +12,11 @@ class ReorganizeTranslationTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('language_translations');
+        $tableName = 'language_translations';
+        if (!$this->hasTable($tableName)) {
+            $tableName = 'translations';
+        }
+        $table = $this->table($tableName);
         if ($table->hasColumn('is_active')) {
             $table->removeColumn('is_active');
         }

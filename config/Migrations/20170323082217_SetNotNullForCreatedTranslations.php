@@ -12,7 +12,12 @@ class SetNotNullForCreatedTranslations extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('language_translations');
+        $tableName = 'language_translations';
+        if (!$this->hasTable($tableName)) {
+            $tableName = 'translations';
+        }
+
+        $table = $this->table($tableName);
         $table->changeColumn('created', 'datetime', [
             'default' => null,
             'null' => true
