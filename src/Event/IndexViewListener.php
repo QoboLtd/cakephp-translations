@@ -1,17 +1,10 @@
 <?php
 namespace Translations\Event;
 
-use App\View\AppView;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
-use Cake\Event\EventManager;
-use Cake\Network\Request;
-use Cake\ORM\Entity;
 use Cake\ORM\Query;
-use Cake\ORM\ResultSet;
-use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
-use Translations\Model\Table\TranslationsTable;
 
 class IndexViewListener implements EventListenerInterface
 {

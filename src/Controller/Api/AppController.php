@@ -4,10 +4,8 @@ namespace Translations\Controller\Api;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
 use Crud\Controller\ControllerTrait;
-use ReflectionMethod;
 
 class AppController extends Controller
 {
@@ -18,11 +16,6 @@ class AppController extends Controller
         'Crud.Crud' => [
             'actions' => [
                 'Crud.Index',
-                'Crud.View',
-                'Crud.Add',
-                'Crud.Edit',
-                'Crud.Delete',
-                'Crud.Lookup'
             ],
             'listeners' => [
                 'Crud.Api',
@@ -74,8 +67,6 @@ class AppController extends Controller
         parent::initialize();
 
         $this->_authentication();
-
-        $this->_acl();
     }
 
     /**
@@ -104,48 +95,6 @@ class AppController extends Controller
     }
 
     /**
-     * Method that handles ACL checks from third party libraries,
-     * if the associated parameters are set in the plugin's configuration.
-     *
-     * @return void
-     * @todo currently only copes with Table class instances. Probably there is better way to handle this.
-     */
-    protected function _acl()
-    {
-        $className = Configure::read('Translations.acl.class');
-        $methodName = Configure::read('Translations.acl.method');
-        $componentName = Configure::read('Translations.acl.component');
-
-        if ($componentName) {
-            $this->loadComponent($componentName, [
-                'currentRequest' => $this->request->params
-            ]);
-        }
-
-        if (!$className || !$methodName) {
-            return;
-        }
-
-        $class = TableRegistry::get($className);
-
-        if (!method_exists($class, $methodName)) {
-            return;
-        }
-
-        $method = new ReflectionMethod($class, $methodName);
-
-        if (!$method->isPublic()) {
-            return;
-        }
-
-        if ($method->isStatic()) {
-            $class::{$methodName}($this->request->params, $this->Auth->user());
-        } else {
-            $class->{$methodName}($this->request->params, $this->Auth->user());
-        }
-    }
-
-    /**
      * Index CRUD action events handling logic.
      *
      * @return \Cake\Network\Response
@@ -155,20 +104,6 @@ class AppController extends Controller
         $this->Crud->on('beforePaginate', function (Event $event) {
             $ev = new Event('Translations.Index.beforePaginate', $this, [
                 'query' => $event->subject()->query
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('afterPaginate', function (Event $event) {
-            $ev = new Event('Translations.Index.afterPaginate', $this, [
-                'entities' => $event->subject()->entities
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('beforeRender', function (Event $event) {
-            $ev = new Event('Translations.Index.beforeRender', $this, [
-                'entities' => $event->subject()->entities
             ]);
             $this->eventManager()->dispatch($ev);
         });
@@ -224,21 +159,5 @@ class AppController extends Controller
         }
 
         return $result;
-    }
-
-    /**
-     * Generates Swagger annotations
-     *
-     * Instantiates CsvAnnotation with required parameters
-     * and returns its generated swagger annotation content.
-     *
-     * @param string $path File path
-     * @return string
-     */
-    public static function generateSwaggerAnnotations($path)
-    {
-        $csvAnnotation = new Annotation(get_called_class(), $path);
-
-        return $csvAnnotation->getContent();
     }
 }
