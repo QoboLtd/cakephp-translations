@@ -2,6 +2,10 @@
 
 return [
     'Translations' => [
+        'api' => [
+            'auth' => true,
+            'token' => null
+        ],
         'languages' => [
             'af' => 'Afrikaans',
             'af_NA' => 'Afrikaans (Namibia)',
