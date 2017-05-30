@@ -2,6 +2,15 @@
 
 return [
     'Translations' => [
+        'api' => [
+            'auth' => true,
+            'token' => null
+        ],
+        'acl' => [
+            'class' => null, // currently only accepts Table class with prefixed plugin name. Example: 'MyPlugin.TableName'
+            'method' => null,
+            'component' => null
+        ],
         'languages' => [
             'af' => 'Afrikaans',
             'af_NA' => 'Afrikaans (Namibia)',

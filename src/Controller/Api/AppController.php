@@ -146,30 +146,6 @@ class AppController extends Controller
     }
 
     /**
-     * View CRUD action events handling logic.
-     *
-     * @return \Cake\Network\Response
-     */
-    public function view()
-    {
-        $this->Crud->on('beforeFind', function (Event $event) {
-            $ev = new Event('Translations.View.beforeFind', $this, [
-                'query' => $event->subject()->query
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('afterFind', function (Event $event) {
-            $ev = new Event('Translations.View.afterFind', $this, [
-                'entity' => $event->subject()->entity
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        return $this->Crud->execute();
-    }
-
-    /**
      * Index CRUD action events handling logic.
      *
      * @return \Cake\Network\Response
@@ -195,105 +171,6 @@ class AppController extends Controller
                 'entities' => $event->subject()->entities
             ]);
             $this->eventManager()->dispatch($ev);
-        });
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * Add CRUD action events handling logic.
-     *
-     * @return \Cake\Network\Response
-     */
-    public function add()
-    {
-        $this->Crud->on('beforeSave', function (Event $event) {
-            $ev = new Event('Translations.Add.beforeSave', $this, [
-                'entity' => $event->subject()->entity
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('afterSave', function (Event $event) {
-            // handle file uploads if found in the request data
-            $linked = $this->_fileUploadsUtils->linkFilesToEntity($event->subject()->entity, $this->{$this->name}, $this->request->data);
-
-            $ev = new Event('Translations.Add.afterSave', $this, [
-                'entity' => $event->subject()->entity
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * Edit CRUD action events handling logic.
-     *
-     * @return \Cake\Network\Response
-     */
-    public function edit()
-    {
-        $this->Crud->on('beforeFind', function (Event $event) {
-            $ev = new Event('Translations.Edit.beforeFind', $this, [
-                'query' => $event->subject()->query
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('afterFind', function (Event $event) {
-            $ev = new Event('Translations.Edit.afterFind', $this, [
-                'entity' => $event->subject()->entity
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('beforeSave', function (Event $event) {
-            $ev = new Event('Translations.Edit.beforeSave', $this, [
-                'entity' => $event->subject()->entity
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('afterSave', function (Event $event) {
-            // handle file uploads if found in the request data
-            $linked = $this->_fileUploadsUtils->linkFilesToEntity($event->subject()->entity, $this->{$this->name}, $this->request->data);
-        });
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * Delete CRUD action events handling logic.
-     *
-     * @return \Cake\Network\Response
-     */
-    public function delete()
-    {
-        return $this->Crud->execute();
-    }
-
-   
-    /**
-     * Lookup CRUD action events handling logic.
-     *
-     * @return \Cake\Network\Response
-     */
-    public function lookup()
-    {
-        $this->Crud->on('beforeLookup', function (Event $event) {
-            $ev = new Event('Translations.beforeLookup', $this, [
-                'query' => $event->subject()->query
-            ]);
-            $this->eventManager()->dispatch($ev);
-        });
-
-        $this->Crud->on('afterLookup', function (Event $event) {
-            $ev = new Event('Translations.afterLookup', $this, [
-                'entities' => $event->subject()->entities
-            ]);
-            $this->eventManager()->dispatch($ev);
-            $event->subject()->entities = $ev->result;
         });
 
         return $this->Crud->execute();

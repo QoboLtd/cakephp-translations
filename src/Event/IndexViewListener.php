@@ -8,9 +8,9 @@ use Cake\Event\EventManager;
 use Cake\Network\Request;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
+use Cake\ORM\ResultSet;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
-use Cake\ORM\ResultSet;
 use Translations\Model\Table\TranslationsTable;
 
 class IndexViewListener implements EventListenerInterface
@@ -56,8 +56,8 @@ class IndexViewListener implements EventListenerInterface
                 $table = TableRegistry::get('Translations.Translations');
                 $conditions['language_id'] = $table->getLanguageId($params['language']);
             }
-            
+
             $query->applyOptions(['conditions' => $conditions]);
         }
     }
- }
+}
