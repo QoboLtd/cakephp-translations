@@ -58,6 +58,16 @@ class IndexViewListener implements EventListenerInterface
             }
 
             $query->applyOptions(['conditions' => $conditions]);
+            $query->applyOptions(['contain' => ['Languages']]);
+            $query->applyOptions(['fields' =>
+                                [
+                                    'Translations.translation',
+                                    'Translations.object_model',
+                                    'Translations.object_foreign_key',
+                                    'Translations.object_field',
+                                    'Languages.code'
+                                ]
+            ]);
         }
     }
 }
