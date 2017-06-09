@@ -12,8 +12,9 @@ use Translations\Controller\Component\LanguageComponent;
 class LanguagesController extends AppController
 {
     /**
-     *  initialize method
+     * Initialize method
      *
+     * @return void
      */
     public function initialize()
     {
@@ -25,7 +26,7 @@ class LanguagesController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null
+     * @return void
      */
     public function index()
     {
@@ -38,9 +39,9 @@ class LanguagesController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Language id.
-     * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param string|null $id Language id.
+     * @return void
      */
     public function view($id = null)
     {

@@ -130,13 +130,15 @@ class TranslationsTable extends Table
     }
 
     /**
-     *  addTranslation
-     *  adding a new translation for specified language and field
+     * addTranslation
+     *
+     * adding a new translation for specified language and field
      *
      * @param string $modelName          UUID record the translated field belongs to
      * @param string $recordId         translated field name
      * @param string $fieldName          language used for translation
-     * @param string $language    Translated text
+     * @param string $language    Language
+     * @param string $translatedText Translated text
      * @return bool                     true in case of successfully saved translation and false otherwise
      */
     public function addTranslation($modelName, $recordId, $fieldName, $language, $translatedText)

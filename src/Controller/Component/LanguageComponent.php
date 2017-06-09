@@ -19,8 +19,10 @@ class LanguageComponent extends Component
     protected $rtl_languages = [];
 
     /**
-     *  initialize method
+     * Initialize method
      *
+     * @param array $config Options
+     * @return void
      */
     public function initialize(array $config)
     {

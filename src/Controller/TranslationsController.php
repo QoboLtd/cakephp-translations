@@ -12,8 +12,9 @@ use Translations\Controller\Component\LanguageComponent;
 class TranslationsController extends AppController
 {
     /**
-     *  initialize method
+     * Initialize method
      *
+     * @return void
      */
     public function initialize()
     {
@@ -25,7 +26,7 @@ class TranslationsController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null
+     * @return void
      */
     public function index()
     {
@@ -59,9 +60,9 @@ class TranslationsController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Translation id.
-     * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param string|null $id Translation id.
+     * @return void
      */
     public function view($id = null)
     {
@@ -77,7 +78,7 @@ class TranslationsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise
      */
     public function add()
     {
@@ -99,8 +100,9 @@ class TranslationsController extends AppController
     }
 
     /**
-     *  Add or update method
-     * @return bool     when successfully added or updated returns true, false otherwise
+     * Add or update method
+     *
+     * @return void     When successfully added or updated prints in JSON true, false otherwise
      */
     public function addOrUpdate()
     {
