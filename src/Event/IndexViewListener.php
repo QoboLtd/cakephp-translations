@@ -37,13 +37,15 @@ class IndexViewListener implements EventListenerInterface
         $request = $event->subject()->request;
         $params = $request->query;
 
-        $conditions = [];
-        if (!empty($params['object_model']) && !empty($params['object_foreign_key']) && !empty($params['object_field'])) {
+        if (!empty($params['object_model']) && !empty($params['object_foreign_key'])) {
             $conditions = [
                 'object_model' => $params['object_model'],
                 'object_foreign_key' => $params['object_foreign_key'],
-                'object_field' => $params['object_field']
             ];
+
+            if (!empty($params['object_field'])) {
+                $conditions['object_field'] = $params['object_field'];
+            }
 
             if (!empty($params['language'])) {
                 $table = TableRegistry::get('Translations.Translations');
@@ -61,6 +63,9 @@ class IndexViewListener implements EventListenerInterface
                                     'Languages.code'
                                 ]
             ]);
+        } else {
+            // In case of missing params to return empty dataset instead of all records
+            $query->applyOptions(['conditions' => ['id' => null]]);
         }
     }
 }
