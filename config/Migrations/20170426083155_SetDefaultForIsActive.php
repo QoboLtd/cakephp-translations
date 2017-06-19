@@ -18,10 +18,12 @@ class SetDefaultForIsActive extends AbstractMigration
         }
 
         $table = $this->table($tableName);
-        $table->changeColumn('is_active', 'boolean', [
-            'default' => true,
-            'null' => true,
-        ]);
+        if ($table->hasColumn('is_active')) {
+            $table->changeColumn('is_active', 'boolean', [
+                'default' => true,
+                'null' => true,
+            ]);
+        }
         $table->update();
     }
 }
