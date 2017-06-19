@@ -18,14 +18,18 @@ class SetNotNullForCreatedTranslations extends AbstractMigration
         }
 
         $table = $this->table($tableName);
-        $table->changeColumn('created', 'datetime', [
-            'default' => null,
-            'null' => true
-        ]);
-        $table->changeColumn('modified', 'datetime', [
-            'default' => null,
-            'null' => true
-        ]);
+        if ($table->hasColumn('created')) {
+            $table->changeColumn('created', 'datetime', [
+                'default' => null,
+                'null' => true
+            ]);
+        }
+        if ($table->hasColumn('modified')) {
+            $table->changeColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => true
+            ]);
+        }
         $table->save();
     }
 }
