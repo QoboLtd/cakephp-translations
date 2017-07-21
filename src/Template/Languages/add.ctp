@@ -2,7 +2,8 @@
 echo $this->Html->css(
     [
         'AdminLTE./plugins/select2/select2.min',
-        'Groups.select2-bootstrap.min'
+        'Qobo/Utils.select2-bootstrap.min',
+        'Qobo/Utils.select2-style'
     ],
     [
         'block' => 'css'

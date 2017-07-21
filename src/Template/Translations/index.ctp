@@ -1,4 +1,6 @@
 <?php
+use Cake\Core\Configure;
+
 echo $this->Html->css('AdminLTE./plugins/datatables/dataTables.bootstrap', ['block' => 'css']);
 echo $this->Html->script(
     [
@@ -10,7 +12,10 @@ echo $this->Html->script(
     ]
 );
 echo $this->Html->scriptBlock(
-    '$(".table-datatable").DataTable();',
+    '$(".table-datatable").DataTable({
+        stateSave: true,
+        stateDuration: ' . (int)(Configure::read('Session.timeout') * 60) . '
+    });',
     ['block' => 'scriptBotton']
 );
 ?>
@@ -18,14 +23,14 @@ echo $this->Html->scriptBlock(
     <h1>Translations</h1>
 </section>
 <section class="content">
-    <div class="box">
+    <div class="box box-solid">
         <div class="box-body">
             <table class="table table-hover table-condensed table-vertical-align table-datatable">
                 <thead>
                     <tr>
                         <th><?= h('Model') ?></th>
+                        <th><?= h('Field'); ?></th>
                         <th><?= h('Language') ?></th>
-                        <th><?= h('Original Text'); ?></th>
                         <th><?= h('Translation'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
@@ -37,10 +42,10 @@ echo $this->Html->scriptBlock(
                             <?= h($translate->object_model) ?>
                         </td>
                         <td>
-                            <?= h(!empty($locales[$translate->language->code]) ? $locales[$translate->language->code] : $translate->language->code); ?>
+                            <?= h($translate->object_field) ?>
                         </td>
                         <td>
-                            <?= h($translate->translation) ?>
+                            <?= h(!empty($locales[$translate->language->code]) ? $locales[$translate->language->code] : $translate->language->code); ?>
                         </td>
                         <td>
                             <?= h($translate->translation) ?>

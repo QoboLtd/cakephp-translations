@@ -1,4 +1,6 @@
 <?php
+use Cake\Core\Configure;
+
 echo $this->Html->css('AdminLTE./plugins/datatables/dataTables.bootstrap', ['block' => 'css']);
 echo $this->Html->script(
     [
@@ -10,7 +12,10 @@ echo $this->Html->script(
     ]
 );
 echo $this->Html->scriptBlock(
-    '$(".table-datatable").DataTable();',
+    '$(".table-datatable").DataTable({
+        stateSave: true,
+        stateDuration: ' . (int)(Configure::read('Session.timeout') * 60) . '
+    });',
     ['block' => 'scriptBotton']
 );
 ?>
@@ -28,14 +33,14 @@ echo $this->Html->scriptBlock(
     </h1>
 </section>
 <section class="content">
-    <div class="box">
+    <div class="box box-solid">
         <div class="box-body">
             <table class="table table-hover table-condensed table-vertical-align table-datatable">
                 <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('name'); ?></th>
-                        <th><?= h('Code') ?></th>
-                        <th><?= h('Direction'); ?></th>
+                        <th><?= __('Name') ?></th>
+                        <th><?= __('Code') ?></th>
+                        <th><?= __('Direction'); ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
