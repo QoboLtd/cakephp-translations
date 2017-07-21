@@ -30,7 +30,7 @@ class LanguagesController extends AppController
      */
     public function index()
     {
-        $languages = $this->paginate($this->Languages);
+        $languages = $this->Languages->find('all');
         $langs = $this->Language->languages;
         $this->set(compact('languages', 'langs'));
         $this->set('_serialize', ['languages']);

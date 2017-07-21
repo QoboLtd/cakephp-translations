@@ -30,10 +30,6 @@ class TranslationsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Languages']
-        ];
-
         $params = $this->request->getQueryParams();
         $languageId = !empty($params['language']) ? $this->Translations->getLanguageId($params['language']) : null;
 
@@ -50,7 +46,7 @@ class TranslationsController extends AppController
             $this->autoRender = false;
             echo json_encode($translations, JSON_UNESCAPED_UNICODE);
         } else {
-            $translations = $this->paginate($this->Translations);
+            $translations = $this->Translations->find('all')->contain('Languages');
             $this->set(compact('translations'));
             $this->set('locales', $this->Language->languages);
             $this->set('_serialize', ['translations']);

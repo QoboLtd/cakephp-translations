@@ -2,7 +2,8 @@
 echo $this->Html->css(
     [
         'AdminLTE./plugins/select2/select2.min',
-        'Groups.select2-bootstrap.min'
+        'Qobo/Utils.select2-bootstrap.min',
+        'Qobo/Utils.select2-style'
     ],
     [
         'block' => 'css'
@@ -24,26 +25,26 @@ echo $this->Html->scriptBlock(
 </section>
 <section class="content">
     <div class="row">
-        <div class="col-xs-12 col-md-6">
-            <div class="box box-solid">                
+        <div class="col-md-6">
+            <div class="box box-solid">
                 <?= $this->Form->create($translation) ?>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <dl class="dl">
+                                <dt><?= __('Model') ?></dt>
+                                <dd><?= h($translation->object_model) ?></dd>
+                                <dt><?= __('Language') ?></dt>
+                                <dd><?= h(!empty($locales[$translation->language->code]) ?
+                                    $locales[$translation->language->code] :
+                                    $translation->language->code); ?></dd>
+                                <dt><?= __('Field') ?></dt>
+                                <dd><?= h($translation->object_field) ?></dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-8">
                             <?= $this->Form->input('translation'); ?>
                         </div>
-                        <div class="col-md-6">
-                            <div class="box-body">
-                                <dl class="dl-horizontal">
-                                    <dt><?= __('Model') ?></dt>
-                                    <dd><?= h($translation->object_model) ?></dd>
-                                    <dt><?= __('Language') ?></dt>
-                                    <dd><?= h(!empty($locales[$translation->language->code]) ? $locales[$translation->language->code] : $translation->language->code); ?></dd>
-                                    <dt><?= __('Original') ?></dt>
-                                    <dd><?= h($translation->translation) ?></dd>
-                                </dl>
-                            </div>
-                        </div>                        
                     </div>
                 </div>
                 <div class="box-footer">

@@ -2,7 +2,8 @@
 echo $this->Html->css(
     [
         'AdminLTE./plugins/select2/select2.min',
-        'Groups.select2-bootstrap.min'
+        'Qobo/Utils.select2-bootstrap.min',
+        'Qobo/Utils.select2-style'
     ],
     [
         'block' => 'css'
@@ -37,7 +38,7 @@ echo $this->Html->scriptBlock(
             echo $this->Form->hidden('id', ['id' => 'translation_id_' . $language->code]);
             echo $this->Form->hidden('language_id', ['value' => $language->id]);
             echo $this->Form->hidden('code', ['value' => $language->code]);
-        ?>        
+        ?>
         <div class="col-xs-12 col-md-12">
             <?= $this->Form->input('translation', ['label' => $language->name, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code, 'required' => false]); ?>
         </div>
@@ -46,7 +47,7 @@ echo $this->Html->scriptBlock(
         <div class="col-xs-12">
             <div id="result_<?= $language->code; ?>"></div>
         </div>
-    </div> 
+    </div>
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'data-lang' => $language->code, 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
