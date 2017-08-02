@@ -57,7 +57,6 @@ class TranslateBehavior extends Behavior
         if (!empty($language)) {
             $conditions['language_id'] = $language;
         }
-        debug($this->translationsTable->associations());
         $query = $this->translationsTable->find('all', [
             'conditions' => $conditions,
             //'contain' => ['Languages']
