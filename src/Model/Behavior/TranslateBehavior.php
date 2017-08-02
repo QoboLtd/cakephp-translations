@@ -15,12 +15,12 @@ class TranslateBehavior extends Behavior
     /**
      *  Translation table instance
      */
-    protected $_translationsTable = null;
+    protected $translationsTable = null;
 
     /**
      *  Language table instance
      */
-    protected $_languagesTable = null;
+    protected $languagesTable = null;
 
     /**
      *  Initialization
@@ -30,8 +30,8 @@ class TranslateBehavior extends Behavior
      */
     public function initialize(array $config)
     {
-        $this->_translationsTable = TableRegistry::get('Translations');
-        $this->_languagesTable = TableRegistry::get('Languages');
+        $this->translationsTable = TableRegistry::get('Translations');
+        $this->languagesTable = TableRegistry::get('Languages');
     }
 
     /**
@@ -57,8 +57,8 @@ class TranslateBehavior extends Behavior
         if (!empty($language)) {
             $conditions['language_id'] = $language;
         }
-        debug($this->_translationsTable->associations());
-        $query = $this->_translationsTable->find('all', [
+        debug($this->translationsTable->associations());
+        $query = $this->translationsTable->find('all', [
             'conditions' => $conditions,
             //'contain' => ['Languages']
         ]);
@@ -79,7 +79,7 @@ class TranslateBehavior extends Behavior
      */
     public function addTranslation($recordId, $fieldName, $language, $translatedText)
     {
-        $translationEntity = $this->_translationsTable->newEntity();
+        $translationEntity = $this->translationsTable->newEntity();
 
         $translationEntity->object_model = $this->getTable()->alias();
         $translationEntity->object_field = $fieldName;
@@ -87,7 +87,7 @@ class TranslateBehavior extends Behavior
         $translationEntity->language_id = $this->getLanguageId($language);
         $translationEntity->translation = $translatedText;
 
-        $result = $this->_translationsTable->save($translationEntity);
+        $result = $this->translationsTable->save($translationEntity);
 
         return !empty($result->id) ? true : false;
     }
@@ -106,10 +106,10 @@ class TranslateBehavior extends Behavior
      */
     public function updateTranslation($recordId, $fieldName, $language, $translatedText)
     {
-        $translation = $this->_translationsTable->get($recordId);
+        $translation = $this->translationsTable->get($recordId);
         $translation->translation = $translatedText;
 
-        return $this->_translationsTable->save($translation);
+        return $this->translationsTable->save($translation);
     }
 
     /**
@@ -120,7 +120,7 @@ class TranslateBehavior extends Behavior
      */
     public function getLanguageId($shortCode)
     {
-        $query = $this->_languagesTable->find('all', [
+        $query = $this->languagesTable->find('all', [
             'conditions' => ['Languages.code' => $shortCode]
         ]);
         $language = $query->first();
