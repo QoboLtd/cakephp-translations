@@ -252,4 +252,28 @@ class LanguagesTableTest extends TestCase
             $this->assertFalse(empty($label), "Label  for code [$code] is empty");
         }
     }
+
+    /**
+     * Test getName method
+     *
+     * @return void
+     */
+    public function testGetName()
+    {
+        $result = $this->Languages->getName('zh');
+        $this->assertTrue(is_string($result), 'getName() returned a non-string result');
+        $this->assertEquals('Chinese', $result, 'getName() returned a wrong value: ' . $result);
+    }
+
+    /**
+     * Test getName method exception
+     *
+     * @expectedException \InvalidArgumentException
+     * @return void
+     */
+    public function testGetNameException()
+    {
+        // Send a non-string parameter
+        $result = $this->Languages->getName(['ru']);
+    }
 }

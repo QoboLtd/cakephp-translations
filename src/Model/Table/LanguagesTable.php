@@ -79,6 +79,7 @@ class LanguagesTable extends Table
      * On Linux, have a look at /usr/share/locale for the
      * list of possible locales and locale formats.
      *
+     * @throws \InvalidArgumentException when locale is not a string
      * @param string $locale Locale string (example: ru_RU.KOI8-R)
      * @return string Language (example: ru)
      */
@@ -160,6 +161,30 @@ class LanguagesTable extends Table
             if (empty($dbLanguages[$key])) {
                 $result[$key] = $val;
             }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get language name by code
+     *
+     * @todo Thsi needs to be more obvious and CakePHP native
+     * @throws \InvalidArgumentException when code is not a string
+     * @param string $code Language code to lookup
+     * @return string
+     */
+    public function getName($code)
+    {
+        $result = null;
+
+        if (!is_string($code)) {
+            throw new InvalidArgumentException("Code must be string. " . gettype($code) . " given.");
+        }
+
+        $allLanguages = $this->getAll();
+        if (!empty($allLanguages[$code])) {
+            $result = $allLanguages[$code];
         }
 
         return $result;

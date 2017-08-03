@@ -2,7 +2,6 @@
 namespace Translations\Controller;
 
 use Translations\Controller\AppController;
-use Translations\Controller\Component\LanguageComponent;
 
 /**
  * Languages Controller
@@ -19,8 +18,6 @@ class LanguagesController extends AppController
     public function initialize()
     {
         parent::initialize();
-
-        $this->loadComponent('Translations.Language');
     }
 
     /**
@@ -31,7 +28,7 @@ class LanguagesController extends AppController
     public function index()
     {
         $languages = $this->Languages->find('all');
-        $langs = $this->Language->languages;
+        $langs = $this->Languages->getAll();
         $this->set(compact('languages', 'langs'));
         $this->set('_serialize', ['languages']);
     }
@@ -49,7 +46,7 @@ class LanguagesController extends AppController
             'contain' => ['Translations']
         ]);
 
-        $this->set('langs', $this->Language->languages);
+        $this->set('langs', $this->Languages->getAll());
         $this->set('language', $language);
         $this->set('_serialize', ['language']);
     }
@@ -65,7 +62,7 @@ class LanguagesController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $data['is_rtl'] = $this->Languages->isRtl($data['code']);
-            $data['name'] = $this->Language->languages[$data['code']];
+            $data['name'] = $this->Languages->getName([$data['code']]);
 
             $languageEntity = $this->_loadDeletedLanguage($data['code']);
             if (!empty($languageEntity)) {
@@ -82,7 +79,7 @@ class LanguagesController extends AppController
             }
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
-        $languages = $this->Language->languages;
+        $languages = $this->Languages->getAll();
         $this->set(compact('language', 'languages'));
         $this->set('_serialize', ['language']);
     }
