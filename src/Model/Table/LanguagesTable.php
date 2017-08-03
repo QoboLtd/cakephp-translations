@@ -191,6 +191,7 @@ class LanguagesTable extends Table
      * Add a new language or restore a deleted one
      *
      * @param array $data Language data to populate Entity with
+     * @return \Cake\ORM\Entity
      */
     public function addOrRestore(array $data)
     {
