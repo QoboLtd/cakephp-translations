@@ -14,11 +14,6 @@ class LanguageComponent extends Component
     protected $languages = [];
 
     /**
-     * @var $rtl_languages
-     */
-    protected $rtl_languages = [];
-
-    /**
      * Initialize method
      *
      * @param array $config Options
@@ -38,6 +33,5 @@ class LanguageComponent extends Component
                 $this->languages[$key] = $val;
             }
         }
-        $this->rtl_languages = (array)Configure::read('Translations.rtl_languages');
     }
 }

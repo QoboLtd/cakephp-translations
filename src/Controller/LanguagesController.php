@@ -64,7 +64,7 @@ class LanguagesController extends AppController
         $language = $this->Languages->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
-            $data['is_rtl'] = $this->_setDirection($data);
+            $data['is_rtl'] = $this->Languages->isRtl($data['code']);
             $data['name'] = $this->Language->languages[$data['code']];
 
             $languageEntity = $this->_loadDeletedLanguage($data['code']);
@@ -118,20 +118,6 @@ class LanguagesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    /**
-     *  _setDirection method
-     *
-     * @param array $data   post data
-     * @return bool         true in case of right to left language
-     */
-    protected function _setDirection($data)
-    {
-        $locale = $data['code'];
-        $locale = preg_replace('/_[A-Za-z]+/', '', $locale);
-
-        return in_array($locale, $this->Language->rtl_languages) ? true : false;
     }
 
     /**
