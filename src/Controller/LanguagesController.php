@@ -11,16 +11,6 @@ use Translations\Controller\AppController;
 class LanguagesController extends AppController
 {
     /**
-     * Initialize method
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
-    }
-
-    /**
      * Index method
      *
      * @return void
