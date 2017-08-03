@@ -280,4 +280,36 @@ class LanguagesTableTest extends TestCase
         // Send a non-string parameter
         $result = $this->Languages->getName(['ru']);
     }
+
+    /**
+     * Test addOrRestore method exception
+     *
+     * @expectedException \InvalidArgumentException
+     * @return void
+     */
+    public function testAddOrRestoreException()
+    {
+        // Send an empty array.  Anything without 'code' key.
+        $result = $this->Languages->addOrRestore([]);
+    }
+
+    /**
+     * Test addOrRestore method
+     *
+     * @return void
+     */
+    public function testAddOrRestore()
+    {
+        // Add Thai
+        $result = $this->Languages->addOrRestore(['code' => 'th']);
+        $this->assertTrue(is_object($result), 'testAddOrRestore() returned a non-object result');
+        $this->assertEquals('Thai', $result->name, 'testAddOrRestore() failed to set correct name');
+
+        // Restore Italian
+        $result = $this->Languages->addOrRestore(['code' => 'it']);
+        $this->assertTrue(is_object($result), 'testAddOrRestore() returned a non-object result');
+        $this->assertEquals('Italian', $result->name, 'testAddOrRestore() failed to set correct name');
+        $this->assertEquals(false, $result->trashed, 'testAddOrRestore() failed to set correct trashed');
+    }
+
 }
