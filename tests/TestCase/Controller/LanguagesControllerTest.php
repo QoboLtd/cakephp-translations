@@ -58,16 +58,6 @@ class LanguagesControllerTest extends IntegrationTestCase
     }
 
     /**
-     * Test edit method
-     *
-     * @return void
-     */
-    public function testEdit()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
      * Test delete method
      *
      * @return void
