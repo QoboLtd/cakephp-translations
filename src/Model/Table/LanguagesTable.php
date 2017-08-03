@@ -186,4 +186,38 @@ class LanguagesTable extends Table
 
         return $result;
     }
+
+    /**
+     * Add a new language or restore a deleted one
+     *
+     * @param array $data Language data to populate Entity with
+     */
+    public function addOrRestore(array $data)
+    {
+        if (empty($data['code'])) {
+            throw new InvalidArgumentException("Language data is missing 'code' key");
+        }
+
+        if (empty($data['is_rtl'])) {
+            $data['is_rtl'] = $this->isRtl($data['code']);
+        }
+
+        if (empty($data['name'])) {
+            $data['name'] = $this->getName($data['code']);
+        }
+
+        $deletedEntity = $this->find('onlyTrashed')
+            ->where(['code' => $data['code']])
+            ->first();
+
+        if (!empty($deletedEntity)) {
+            return $this->restoreTrash($deletedEntity);
+        }
+
+        $newEntity = $this->newEntity();
+        $newEntity = $this->patchEntity($newEntity, $data);
+        $result = $this->save($newEntity);
+
+        return $result;
+    }
 }
