@@ -23,24 +23,6 @@ class LanguagesController extends AppController
     }
 
     /**
-     * View method
-     *
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @param string|null $id Language id.
-     * @return void
-     */
-    public function view($id = null)
-    {
-        $language = $this->Languages->get($id, [
-            'contain' => ['Translations']
-        ]);
-
-        $this->set('langs', $this->Languages->getAll());
-        $this->set('language', $language);
-        $this->set('_serialize', ['language']);
-    }
-
-    /**
      * Add method
      *
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.

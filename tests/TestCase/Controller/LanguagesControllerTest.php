@@ -39,26 +39,6 @@ class LanguagesControllerTest extends IntegrationTestCase
     }
 
     /**
-     * Test view method
-     *
-     * @return void
-     */
-    public function testView()
-    {
-        $this->markTestIncomplete('FIXME: modify me!');
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
-        $this->get('/translations/languages/view/00000000-0000-0000-0000-000000000001');
-        $this->assertResponseOk();
-    }
-
-    /**
      * Test add method
      *
      * @return void
