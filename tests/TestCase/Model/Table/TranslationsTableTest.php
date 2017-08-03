@@ -1,8 +1,10 @@
 <?php
 namespace Translations\Test\TestCase\Model\Table;
 
+use Cake\ORM\RulesChecker;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
+use Cake\Validation\Validator;
 use Translations\Model\Table\TranslationsTable;
 
 /**
@@ -122,7 +124,10 @@ class TranslationsTableTest extends TestCase
      */
     public function testValidationDefault()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $validator = new Validator();
+        $result = $this->Translations->validationDefault($validator);
+        $this->assertTrue(is_object($result), 'validationDefault() returned a non-object result');
+        $this->assertEquals(get_class($result), get_class($validator));
     }
 
     /**
@@ -132,6 +137,9 @@ class TranslationsTableTest extends TestCase
      */
     public function testBuildRules()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $rulesChecker = new RulesChecker();
+        $result = $this->Translations->buildRules($rulesChecker);
+        $this->assertTrue(is_object($result), 'buildRules() returned a non-object result');
+        $this->assertEquals(get_class($result), get_class($rulesChecker));
     }
 }
