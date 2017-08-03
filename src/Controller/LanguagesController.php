@@ -39,7 +39,7 @@ class LanguagesController extends AppController
             }
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
-        $languages = $this->Languages->getAll();
+        $languages = $this->Languages->getAvailable();
         $this->set(compact('language', 'languages'));
         $this->set('_serialize', ['language']);
     }

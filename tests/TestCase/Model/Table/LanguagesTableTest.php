@@ -220,35 +220,32 @@ class LanguagesTableTest extends TestCase
     }
 
     /**
-     * Test getAll method
-     *
-     * For the sake of simplicity, this test is the same
-     * as the testGetSupported.
+     * Test getAvailable method
      *
      * @return void
      */
-    public function testGetAll()
+    public function testGetAvailable()
     {
-        $result = $this->Languages->getAll();
-        $this->assertTrue(is_array($result), 'getAll() returned a non-array result');
-        $this->assertFalse(empty($result), 'getAll() returned empty result');
+        $result = $this->Languages->getAvailable();
+        $this->assertTrue(is_array($result), 'getAvailable() returned a non-array result');
+        $this->assertFalse(empty($result), 'getAvailable() returned empty result');
 
         $codes = array_keys($result);
 
         // RTL languages
-        $this->assertTrue(in_array('ar', $codes), 'Arabic is missing from all languages');
-        $this->assertTrue(in_array('he', $codes), 'Hewbrew is missing from all languages');
-        $this->assertTrue(in_array('fa', $codes), 'Persian is missing from all languages');
+        $this->assertTrue(in_array('ar', $codes), 'Arabic is missing from available languages');
+        $this->assertTrue(in_array('he', $codes), 'Hewbrew is missing from available languages');
+        $this->assertTrue(in_array('fa', $codes), 'Persian is missing from available languages');
 
         // LTR languages
-        $this->assertTrue(in_array('zh', $codes), 'Chinese is missing from all languages');
+        $this->assertTrue(in_array('zh', $codes), 'Chinese is missing from available languages');
 
         // English is system default, so shouldn't be in the list
-        $this->assertFalse(in_array('en', $codes), 'English is found in all languages');
+        $this->assertFalse(in_array('en', $codes), 'English is found in available languages');
 
         // Languages which are already added (db/fixture), shouldn't be in the list
-        $this->assertFalse(in_array('ru', $codes), 'Russian is found in all languages');
-        $this->assertFalse(in_array('de', $codes), 'German is found in all languages');
+        $this->assertFalse(in_array('ru', $codes), 'Russian is found in available languages');
+        $this->assertFalse(in_array('de', $codes), 'German is found in available languages');
 
         // All languages have label
         foreach ($result as $code => $label) {
@@ -311,5 +308,4 @@ class LanguagesTableTest extends TestCase
         $this->assertEquals('Italian', $result->name, 'testAddOrRestore() failed to set correct name');
         $this->assertEquals(false, $result->trashed, 'testAddOrRestore() failed to set correct trashed');
     }
-
 }

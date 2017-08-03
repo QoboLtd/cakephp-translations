@@ -141,12 +141,15 @@ class LanguagesTable extends Table
     }
 
     /**
-     * Get a list of all language codes and labels
+     * Get a list of all available languages
      *
-     * @todo This needs to be more obvious
+     * Available languages are those that are in
+     * configuration, but haven't yet been used for
+     * an active language.
+     *
      * @return array
      */
-    public function getAll()
+    public function getAvailable()
     {
         $result = [];
 
@@ -166,22 +169,21 @@ class LanguagesTable extends Table
     /**
      * Get language name by code
      *
-     * @todo Thsi needs to be more obvious and CakePHP native
      * @throws \InvalidArgumentException when code is not a string
      * @param string $code Language code to lookup
      * @return string
      */
     public function getName($code)
     {
-        $result = null;
+        $result = $code;
 
         if (!is_string($code)) {
             throw new InvalidArgumentException("Code must be string. " . gettype($code) . " given.");
         }
 
-        $allLanguages = $this->getAll();
-        if (!empty($allLanguages[$code])) {
-            $result = $allLanguages[$code];
+        $languages = $this->getSupported();
+        if (!empty($languages[$code])) {
+            $result = $languages[$code];
         }
 
         return $result;
