@@ -20,7 +20,7 @@
                         <dt><?= __('Field') ?></dt>
                         <dd><?= h($translation->object_field) ?></dd>
                         <dt><?= __('Language') ?></dt>
-                        <dd><?= h(!empty($locales[$translation->language->code]) ? $locales[$translation->language->code] : $translation->language->code); ?></dd>
+                        <dd><?= h($translation->language->name ?: $translation->language->code); ?></dd>
                         <dt><?= __('Translation') ?></dt>
                         <dd><?= h($translation->translation) ?></dd>
                     </dl>

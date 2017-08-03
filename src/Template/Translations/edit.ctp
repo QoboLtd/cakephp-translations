@@ -35,9 +35,7 @@ echo $this->Html->scriptBlock(
                                 <dt><?= __('Model') ?></dt>
                                 <dd><?= h($translation->object_model) ?></dd>
                                 <dt><?= __('Language') ?></dt>
-                                <dd><?= h(!empty($locales[$translation->language->code]) ?
-                                    $locales[$translation->language->code] :
-                                    $translation->language->code); ?></dd>
+                                <dd><?= h($translation->language->name ?: $translation->language->code); ?></dd>
                                 <dt><?= __('Field') ?></dt>
                                 <dd><?= h($translation->object_field) ?></dd>
                             </dl>
