@@ -150,12 +150,9 @@ class LanguagesTable extends Table
     {
         $result = [];
 
-        $query = $this->find('list', [
-                                'keyField' => 'code',
-                                'valueField' => 'code'
-                            ])
-                            ->where(['trashed IS' => null]);
-        $dbLanguages = $query->toArray();
+        $dbLanguages = $this->find('list', ['keyField' => 'code', 'valueField' => 'code'])
+                            ->where(['trashed IS' => null])
+                            ->toArray();
         $supportedLanguages = $this->getSupported();
         foreach ($supportedLanguages as $key => $val) {
             if (empty($dbLanguages[$key])) {
