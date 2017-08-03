@@ -1,5 +1,4 @@
 <?php
-
 namespace Translations\Model\Behavior;
 
 use Cake\ORM\Behavior;
