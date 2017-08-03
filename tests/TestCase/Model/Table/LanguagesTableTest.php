@@ -2,6 +2,7 @@
 namespace Translations\Test\TestCase\Model\Table;
 
 use Cake\Core\Configure;
+use Cake\ORM\RulesChecker;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Translations\Model\Table\LanguagesTable;
@@ -83,7 +84,10 @@ class LanguagesTableTest extends TestCase
      */
     public function testBuildRules()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $rulesChecker = new RulesChecker();
+        $result = $this->Languages->buildRules($rulesChecker);
+        $this->assertTrue(is_object($result), 'buildRules() returned a non-object result');
+        $this->assertEquals(get_class($result), get_class($rulesChecker));
     }
 
     /**
