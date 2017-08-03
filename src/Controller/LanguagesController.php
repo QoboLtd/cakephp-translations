@@ -18,8 +18,7 @@ class LanguagesController extends AppController
     public function index()
     {
         $languages = $this->Languages->find('all');
-        $langs = $this->Languages->getAll();
-        $this->set(compact('languages', 'langs'));
+        $this->set(compact('languages'));
         $this->set('_serialize', ['languages']);
     }
 
