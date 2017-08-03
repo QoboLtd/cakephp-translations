@@ -126,4 +126,42 @@ class LanguagesTable extends Table
 
         return $result;
     }
+
+    /**
+     * Get a list of supported language codes and labels
+     *
+     * @return array
+     */
+    public function getSupported()
+    {
+        $result = (array)Configure::read('Translations.languages');
+
+        return $result;
+    }
+
+    /**
+     * Get a list of all language codes and labels
+     *
+     * @todo This needs to be more obvious
+     * @return array
+     */
+    public function getAll()
+    {
+        $result = [];
+
+        $query = $this->find('list', [
+                                'keyField' => 'code',
+                                'valueField' => 'code'
+                            ])
+                            ->where(['trashed IS' => null]);
+        $dbLanguages = $query->toArray();
+        $supportedLanguages = $this->getSupported();
+        foreach ($supportedLanguages as $key => $val) {
+            if (empty($dbLanguages[$key])) {
+                $result[$key] = $val;
+            }
+        }
+
+        return $result;
+    }
 }
