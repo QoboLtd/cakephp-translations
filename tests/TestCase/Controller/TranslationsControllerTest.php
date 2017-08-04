@@ -1,6 +1,7 @@
 <?php
 namespace Translations\Test\TestCase\Controller;
 
+use Cake\Core\Configure;
 use Cake\TestSuite\IntegrationTestCase;
 use Translations\Controller\TranslationsController;
 
@@ -16,16 +17,19 @@ class TranslationsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.translations.translations'
+        'plugin.translations.languages',
+        'plugin.translations.language_translations'
     ];
 
     /**
-     * Test index method
+     * setUp method
      *
      * @return void
      */
-    public function testIndex()
+    public function setUp()
     {
+        parent::setUp();
+        // Run all tests as authenticated user
         $this->session([
             'Auth' => [
                 'User' => [
@@ -34,6 +38,17 @@ class TranslationsControllerTest extends IntegrationTestCase
             ],
         ]);
 
+        // Load default plugin configuration
+        Configure::load('Translations.translations');
+    }
+
+    /**
+     * Test index method
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
         $this->get('/language-translations/translations');
         $this->assertResponseOk();
     }
@@ -45,7 +60,8 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/language-translations/translations/view/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
     }
 
     /**
@@ -55,7 +71,8 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/language-translations/translations/add');
+        $this->assertResponseOk();
     }
 
     /**
@@ -65,7 +82,8 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/language-translations/translations/edit/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
     }
 
     /**
@@ -75,6 +93,7 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->post('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001', []);
+        $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
     }
 }

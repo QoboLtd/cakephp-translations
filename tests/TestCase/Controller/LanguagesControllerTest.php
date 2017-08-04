@@ -1,6 +1,7 @@
 <?php
 namespace Translations\Test\TestCase\Controller;
 
+use Cake\Core\Configure;
 use Cake\TestSuite\IntegrationTestCase;
 use Translations\Controller\LanguagesController;
 
@@ -9,6 +10,27 @@ use Translations\Controller\LanguagesController;
  */
 class LanguagesControllerTest extends IntegrationTestCase
 {
+
+    /**
+     * setUp method
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        // Run all tests as authenticated user
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        // Load default plugin configuration
+        Configure::load('Translations.translations');
+    }
 
     /**
      * Fixtures
@@ -26,35 +48,7 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
         $this->get('/language-translations/languages');
-        $this->assertResponseOk();
-    }
-
-    /**
-     * Test view method
-     *
-     * @return void
-     */
-    public function testView()
-    {
-        $this->markTestIncomplete('FIXME: modify me!');
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
-        $this->get('/translations/languages/view/00000000-0000-0000-0000-000000000001');
         $this->assertResponseOk();
     }
 
@@ -65,26 +59,8 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
         $this->get('/language-translations/languages/add');
         $this->assertResponseOk();
-    }
-
-    /**
-     * Test edit method
-     *
-     * @return void
-     */
-    public function testEdit()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
@@ -94,6 +70,7 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->post('/language-translations/languages/delete/00000000-0000-0000-0000-000000000001', []);
+        $this->assertRedirect(['controller' => 'Languages', 'action' => 'index']);
     }
 }

@@ -45,7 +45,7 @@ echo $this->Html->scriptBlock(
                             <?= h($translate->object_field) ?>
                         </td>
                         <td>
-                            <?= h(!empty($locales[$translate->language->code]) ? $locales[$translate->language->code] : $translate->language->code); ?>
+                            <?= h($translate->language->name ?: $translate->language->code); ?>
                         </td>
                         <td>
                             <?= h($translate->translation) ?>

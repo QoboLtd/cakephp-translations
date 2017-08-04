@@ -2,7 +2,6 @@
 namespace Translations\Controller;
 
 use Translations\Controller\AppController;
-use Translations\Controller\Component\LanguageComponent;
 
 /**
  * Translations Controller
@@ -11,18 +10,6 @@ use Translations\Controller\Component\LanguageComponent;
  */
 class TranslationsController extends AppController
 {
-    /**
-     * Initialize method
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
-
-        $this->loadComponent('Translations.Language');
-    }
-
     /**
      * Index method
      *
@@ -48,7 +35,6 @@ class TranslationsController extends AppController
         } else {
             $translations = $this->Translations->find('all')->contain('Languages');
             $this->set(compact('translations'));
-            $this->set('locales', $this->Language->languages);
             $this->set('_serialize', ['translations']);
         }
     }
@@ -67,7 +53,6 @@ class TranslationsController extends AppController
         ]);
 
         $this->set('translation', $translation);
-        $this->set('locales', $this->Language->languages);
         $this->set('_serialize', ['translation']);
     }
 
@@ -90,8 +75,7 @@ class TranslationsController extends AppController
             $this->Flash->error(__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('all', ['limit' => 200]);
-        $locales = $this->Language->languages;
-        $this->set(compact('translation', 'languages', 'locales'));
+        $this->set(compact('translation', 'languages'));
         $this->set('_serialize', ['translation']);
     }
 
@@ -149,7 +133,6 @@ class TranslationsController extends AppController
             $this->Flash->error(__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('list', ['limit' => 200]);
-        $this->set('locales', $this->Language->languages);
         $this->set(compact('translation', 'languages'));
         $this->set('_serialize', ['translation']);
     }
