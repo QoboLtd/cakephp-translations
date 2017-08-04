@@ -153,15 +153,11 @@ class LanguagesTable extends Table
     {
         $result = [];
 
-        $dbLanguages = $this->find('list', ['keyField' => 'code', 'valueField' => 'code'])
+        $dbLanguages = $this->find('list', ['keyField' => 'code', 'valueField' => 'name'])
                             ->where(['trashed IS' => null])
                             ->toArray();
         $supportedLanguages = $this->getSupported();
-        foreach ($supportedLanguages as $key => $val) {
-            if (empty($dbLanguages[$key])) {
-                $result[$key] = $val;
-            }
-        }
+        $result = array_diff_assoc($supportedLanguages, $dbLanguages);
 
         return $result;
     }
