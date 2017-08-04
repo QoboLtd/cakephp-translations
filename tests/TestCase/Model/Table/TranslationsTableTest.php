@@ -26,8 +26,8 @@ class TranslationsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.translations.language_translations',
         'plugin.translations.languages',
+        'plugin.translations.language_translations',
     ];
 
     /**
