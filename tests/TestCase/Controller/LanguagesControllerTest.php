@@ -64,6 +64,15 @@ class LanguagesControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->post('/language-translations/languages/delete/00000000-0000-0000-0000-000000000001', []);
+        $this->assertRedirect(['controller' => 'Languages', 'action' => 'index']);
     }
 }

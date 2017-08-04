@@ -5,6 +5,7 @@ use Cake\Core\Configure;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
+use Cake\Validation\Validator;
 use Translations\Model\Table\LanguagesTable;
 
 /**
@@ -74,7 +75,10 @@ class LanguagesTableTest extends TestCase
      */
     public function testValidationDefault()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $validator = new Validator();
+        $result = $this->Languages->validationDefault($validator);
+        $this->assertTrue(is_object($result), 'validationDefault() returned a non-object result');
+        $this->assertEquals(get_class($result), get_class($validator));
     }
 
     /**

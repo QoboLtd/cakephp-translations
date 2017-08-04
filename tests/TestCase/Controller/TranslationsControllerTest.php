@@ -16,6 +16,7 @@ class TranslationsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
+        'plugin.translations.languages',
         'plugin.translations.translations'
     ];
 
@@ -45,7 +46,16 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->get('/language-translations/translations/view/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
     }
 
     /**
@@ -55,7 +65,16 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->get('/language-translations/translations/add');
+        $this->assertResponseOk();
     }
 
     /**
@@ -65,7 +84,16 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->get('/language-translations/translations/edit/00000000-0000-0000-0000-000000000001');
+        $this->assertResponseOk();
     }
 
     /**
@@ -75,6 +103,15 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => '00000000-0000-0000-0000-000000000001',
+                ],
+            ],
+        ]);
+
+        $this->post('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001', []);
+        $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
     }
 }
