@@ -17,7 +17,7 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'plugin.translations.languages',
-        'plugin.translations.translations'
+        'plugin.translations.language_translations'
     ];
 
     /**

@@ -4,13 +4,11 @@ namespace Translations\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * TranslationsFixture
+ * LanguageTranslationsFixture
  *
  */
-class TranslationsFixture extends TestFixture
+class LanguageTranslationsFixture extends TestFixture
 {
-    public $table = 'language_translations';
-
     /**
      * Fields
      *
