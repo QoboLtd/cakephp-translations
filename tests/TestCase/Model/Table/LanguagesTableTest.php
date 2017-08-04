@@ -251,6 +251,9 @@ class LanguagesTableTest extends TestCase
         $this->assertFalse(in_array('ru', $codes), 'Russian is found in available languages');
         $this->assertFalse(in_array('de', $codes), 'German is found in available languages');
 
+        // Languages which are in db/fixture, but trashed
+        $this->assertTrue(in_array('it', $codes), 'Italian is missing from available languages');
+
         // All languages have label
         foreach ($result as $code => $label) {
             $this->assertTrue(is_string($label), "Label for code [$code] is not a string");
