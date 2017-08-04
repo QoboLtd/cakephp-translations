@@ -1,6 +1,7 @@
 <?php
 namespace Translations\Test\TestCase\Controller;
 
+use Cake\Core\Configure;
 use Cake\TestSuite\IntegrationTestCase;
 use Translations\Controller\TranslationsController;
 
@@ -21,12 +22,14 @@ class TranslationsControllerTest extends IntegrationTestCase
     ];
 
     /**
-     * Test index method
+     * setUp method
      *
      * @return void
      */
-    public function testIndex()
+    public function setUp()
     {
+        parent::setUp();
+        // Run all tests as authenticated user
         $this->session([
             'Auth' => [
                 'User' => [
@@ -35,6 +38,17 @@ class TranslationsControllerTest extends IntegrationTestCase
             ],
         ]);
 
+        // Load default plugin configuration
+        Configure::load('Translations.translations');
+    }
+
+    /**
+     * Test index method
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
         $this->get('/language-translations/translations');
         $this->assertResponseOk();
     }
@@ -46,14 +60,6 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
         $this->get('/language-translations/translations/view/00000000-0000-0000-0000-000000000001');
         $this->assertResponseOk();
     }
@@ -65,14 +71,6 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
         $this->get('/language-translations/translations/add');
         $this->assertResponseOk();
     }
@@ -84,14 +82,6 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
         $this->get('/language-translations/translations/edit/00000000-0000-0000-0000-000000000001');
         $this->assertResponseOk();
     }
@@ -103,14 +93,6 @@ class TranslationsControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => '00000000-0000-0000-0000-000000000001',
-                ],
-            ],
-        ]);
-
         $this->post('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001', []);
         $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
     }
