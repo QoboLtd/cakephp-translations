@@ -59,7 +59,6 @@ class TranslationsTableTest extends TestCase
      */
     public function testGetTranslations()
     {
-        $this->markTestIncomplete('FIXME: failed on Travic CI only!!!');
         $result = $this->Translations->getTranslations(
             'Leads',
             '00000000-0000-0000-0000-100000000001',
