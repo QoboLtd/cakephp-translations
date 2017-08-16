@@ -5,6 +5,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Cake\Validation\Validator;
+use Translations\Model\Entity\Translation;
 use Translations\Model\Table\TranslationsTable;
 
 /**
@@ -59,15 +60,52 @@ class TranslationsTableTest extends TestCase
      */
     public function testGetTranslations()
     {
-        $result = $this->Translations->getTranslations(
-            'Leads',
-            '00000000-0000-0000-0000-100000000001',
-            [
-                'language_id' => '00000000-0000-0000-0000-000000000001',
-            ]
-        );
+        $modelName = 'Leads';
+        $recordId = '00000000-0000-0000-0000-100000000001';
+
+        $result = $this->Translations->getTranslations($modelName, $recordId);
+
+        $this->assertInternalType('array', $result);
         $this->assertEquals(3, count($result));
         $this->assertEquals($result[0]['object_model'], 'Leads');
+    }
+
+    public function testGetTranslationsWithLanguageId()
+    {
+        $modelName = 'Leads';
+        $recordId = '00000000-0000-0000-0000-100000000001';
+        $languageId = '00000000-0000-0000-0000-000000000001';
+
+        $result = $this->Translations->getTranslations($modelName, $recordId, [
+            'language' => $languageId,
+        ]);
+
+        $this->assertEquals(2, count($result));
+    }
+
+    public function testGetTranslationsWithObjectField()
+    {
+        $modelName = 'Leads';
+        $recordId = '00000000-0000-0000-0000-100000000001';
+        $objectField = 'description';
+
+        $result = $this->Translations->getTranslations($modelName, $recordId, [
+            'field' => $objectField,
+        ]);
+
+        $this->assertEquals(2, count($result));
+    }
+
+    public function testGetTranslationsAsEntity()
+    {
+        $modelName = 'Leads';
+        $recordId = '00000000-0000-0000-0000-100000000001';
+
+        $result = $this->Translations->getTranslations($modelName, $recordId, [
+            'toEntity' => true,
+        ]);
+
+        $this->assertInstanceOf(Translation::class, $result);
     }
 
     /**
