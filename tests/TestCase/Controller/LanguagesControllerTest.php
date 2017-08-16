@@ -2,6 +2,7 @@
 namespace Translations\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
 use Translations\Controller\LanguagesController;
 
@@ -10,15 +11,16 @@ use Translations\Controller\LanguagesController;
  */
 class LanguagesControllerTest extends IntegrationTestCase
 {
+    public $fixtures = [
+        'plugin.translations.languages'
+    ];
 
-    /**
-     * setUp method
-     *
-     * @return void
-     */
     public function setUp()
     {
         parent::setUp();
+
+        $this->Languages = TableRegistry::get('Translations.Languages');
+
         // Run all tests as authenticated user
         $this->session([
             'Auth' => [
@@ -32,42 +34,38 @@ class LanguagesControllerTest extends IntegrationTestCase
         Configure::load('Translations.translations');
     }
 
-    /**
-     * Fixtures
-     *
-     * @var array
-     */
-    public $fixtures = [
-        'plugin.translations.languages'
-    ];
+    public function tearDown()
+    {
+        unset($this->Languages);
 
-    /**
-     * Test index method
-     *
-     * @return void
-     */
+        parent::tearDown();
+    }
+
     public function testIndex()
     {
         $this->get('/language-translations/languages');
         $this->assertResponseOk();
     }
 
-    /**
-     * Test add method
-     *
-     * @return void
-     */
-    public function testAdd()
+    public function testAddGet()
     {
         $this->get('/language-translations/languages/add');
         $this->assertResponseOk();
     }
 
-    /**
-     * Test delete method
-     *
-     * @return void
-     */
+    public function testAddPost()
+    {
+        $data = ['code' => 'el_CY'];
+        $this->post('/language-translations/languages/add', $data);
+        $this->assertRedirect();
+
+        $query = $this->Languages->find()->where($data);
+
+        $this->assertFalse($query->isEmpty());
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals('Greek (Cyprus)', $query->first()->get('name'));
+    }
+
     public function testDelete()
     {
         $this->post('/language-translations/languages/delete/00000000-0000-0000-0000-000000000001', []);
