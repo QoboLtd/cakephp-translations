@@ -1,5 +1,10 @@
 # Translations plugin for CakePHP
 
+## About
+
+CakePHP 3+ plugin for managing content translations.
+
+Developed by [Qobo](https://www.qobo.biz), used in [Qobrix](https://qobrix.com).
 
 ## Installation
 
@@ -30,6 +35,6 @@ To load the Translations component in your application just add behavior Transla
 public function initialize(array $config)
 {
     $this->addBehavior('Translate');
-}    
+}
 
 ```
