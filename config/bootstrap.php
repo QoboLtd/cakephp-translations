@@ -2,8 +2,8 @@
 
 use Cake\Core\Configure;
 use Cake\Event\EventManager;
-use Translations\Event\IndexViewListener;
+use Translations\Event\Controller\Api\IndexActionListener;
 
 Configure::load('Translations.translations');
 
-EventManager::instance()->on(new IndexViewListener());
+EventManager::instance()->on(new IndexActionListener());

@@ -1,12 +1,12 @@
 <?php
-namespace Translations\Event;
+namespace Translations\Event\Controller\Api;
 
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 
-class IndexViewListener implements EventListenerInterface
+class IndexActionListener implements EventListenerInterface
 {
     /**
      * Pretty format identifier
