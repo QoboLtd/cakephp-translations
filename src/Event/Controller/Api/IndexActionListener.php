@@ -5,6 +5,7 @@ use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
+use Translations\Event\EventName;
 
 class IndexActionListener implements EventListenerInterface
 {
@@ -24,7 +25,7 @@ class IndexActionListener implements EventListenerInterface
     public function implementedEvents()
     {
         return [
-            'Translations.Index.beforePaginate' => 'beforePaginate',
+            (string)EventName::API_INDEX_BEFORE_PAGINATE() => 'beforePaginate',
         ];
     }
 
