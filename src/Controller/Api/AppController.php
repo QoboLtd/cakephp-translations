@@ -6,6 +6,7 @@ use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Utility\Hash;
 use Crud\Controller\ControllerTrait;
+use Translations\Event\EventName;
 
 class AppController extends Controller
 {
@@ -102,7 +103,7 @@ class AppController extends Controller
     public function index()
     {
         $this->Crud->on('beforePaginate', function (Event $event) {
-            $ev = new Event('Translations.Index.beforePaginate', $this, [
+            $ev = new Event((string)EventName::API_INDEX_BEFORE_PAGINATE(), $this, [
                 'query' => $event->subject()->query
             ]);
             $this->eventManager()->dispatch($ev);
