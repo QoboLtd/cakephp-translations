@@ -1,25 +1,3 @@
-<?php
-echo $this->Html->css(
-    [
-        'AdminLTE./plugins/select2/select2.min',
-        'Qobo/Utils.select2-bootstrap.min',
-        'Qobo/Utils.select2-style'
-    ],
-    [
-        'block' => 'css'
-    ]
-);
-echo $this->Html->script('AdminLTE./plugins/select2/select2.full.min', ['block' => 'scriptBotton']);
-echo $this->Html->scriptBlock(
-    '$(".select2").select2({
-        theme: "bootstrap",
-        tags: "true",
-        placeholder: "Select an option",
-        allowClear: true
-    });',
-    ['block' => 'scriptBotton']
-);
-?>
 <section class="content-header">
     <h1><?= __('Edit {0}', ['Translation']) ?></h1>
 </section>
