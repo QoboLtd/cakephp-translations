@@ -4,8 +4,6 @@
     "type": "cakephp-plugin",
     "license": "GPL-2.0",
     "require": {
-        "admad/cakephp-jwt-auth": "^2.0",
-        "friendsofcake/crud": "^4.3",
         "qobo/cakephp-utils": "^5.0"
     },
     "require-dev": {
