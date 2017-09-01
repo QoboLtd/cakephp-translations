@@ -9,4 +9,5 @@ use MyCLabs\Enum\Enum;
 class EventName extends Enum
 {
     const API_INDEX_BEFORE_PAGINATE = 'Translations.Index.beforePaginate';
+    const VIEW_BOTTOM = 'View.View.Body.Bottom';
 }
