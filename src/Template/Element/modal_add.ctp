@@ -10,7 +10,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$modalBody = (!empty($modalBody) ? $modalBody : '');
+echo $this->Html->script(['Translations.translation'], ['block' => 'scriptBottom']);
 ?>
 <div id="translations_translate_id_modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
@@ -22,7 +22,17 @@ $modalBody = (!empty($modalBody) ? $modalBody : '');
                 <h2 class="modal-title"><?= __('Manage Translations') ?></h2>
             </div> <!-- modal-header -->
             <div class="modal-body">
-                <?= $modalBody ?>
+                <?= $this->requestAction([
+                    'plugin' => 'Translations',
+                    'controller' => 'Translations',
+                    'action' => 'add'
+                ], [
+                    'query' => [
+                        'embedded' => 'Translations',
+                        'foreign_key' => 'object_foreign_key',
+                        'modal_id' => 'translations_translate_id_modal',
+                    ]
+                ]); ?>
             </div>
         </div> <!-- modal-content -->
     </div> <!-- modal-dialog -->
