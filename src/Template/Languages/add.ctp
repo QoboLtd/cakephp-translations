@@ -36,7 +36,7 @@ echo $this->Html->script(
 <section class="content">
     <div class="row">
         <div class="col-xs-12 col-md-6">
-            <div class="box box-solid">
+            <div class="box box-primary">
                 <?= $this->Form->create($language) ?>
                 <div class="box-body">
                     <div class="row">
