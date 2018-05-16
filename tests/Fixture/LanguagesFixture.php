@@ -9,6 +9,7 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class LanguagesFixture extends TestFixture
 {
+    public $table = 'qobo_languages';
 
     /**
      * Fields

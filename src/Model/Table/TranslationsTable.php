@@ -36,7 +36,7 @@ class TranslationsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('language_translations');
+        $this->setTable('qobo_language_translations');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
