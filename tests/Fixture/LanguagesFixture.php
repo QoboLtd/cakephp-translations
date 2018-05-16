@@ -9,7 +9,7 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class LanguagesFixture extends TestFixture
 {
-    public $table = 'qobo_languages';
+    public $table = 'qobo_translations_languages';
 
     /**
      * Fields
