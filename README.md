@@ -6,6 +6,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/qobo/cakephp-translations/v/unstable)](https://packagist.org/packages/qobo/cakephp-translations)
 [![License](https://poser.pugx.org/qobo/cakephp-translations/license)](https://packagist.org/packages/qobo/cakephp-translations)
 [![codecov](https://codecov.io/gh/QoboLtd/cakephp-translations/branch/master/graph/badge.svg)](https://codecov.io/gh/QoboLtd/cakephp-translations)
+[![BCH compliance](https://bettercodehub.com/edge/badge/QoboLtd/cakephp-translations?branch=master)](https://bettercodehub.com/)
 
 ## About
 
