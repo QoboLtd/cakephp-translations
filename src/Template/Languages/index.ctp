@@ -74,7 +74,7 @@ echo $this->Html->scriptBlock(
                                     '<i class="fa fa-trash"></i>',
                                     ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'delete', $language->id],
                                     [
-                                        'confirm' => __('Are you sure you want to delete # {0}?', $language->id),
+                                        'confirm' => __('Are you sure you want to delete {0}?', $language->name),
                                         'title' => __('Delete'),
                                         'class' => 'btn btn-default btn-sm',
                                         'escape' => false
