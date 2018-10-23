@@ -1,5 +1,5 @@
 <?php
-namespace Translations\Test\App\Config;
+namespace Qobo\Translations\Test\App\Config;
 
 use Cake\Core\Configure;
 use Cake\Core\Plugin;

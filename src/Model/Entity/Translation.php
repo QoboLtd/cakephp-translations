@@ -9,7 +9,7 @@
  * @copyright     Copyright (c) Qobo Ltd. (https://www.qobo.biz)
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Translations\Model\Entity;
+namespace Qobo\Translations\Model\Entity;
 
 use Cake\ORM\Entity;
 
@@ -24,8 +24,8 @@ use Cake\ORM\Entity;
  * @property string $translation
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
- * @property \Translations\Model\Entity\Language $language
- * @property \Translations\Model\Entity\Phinxlog[] $phinxlog
+ * @property \Qobo\Translations\Model\Entity\Language $language
+ * @property \Qobo\Translations\Model\Entity\Phinxlog[] $phinxlog
  */
 class Translation extends Entity
 {

@@ -9,7 +9,7 @@
  * @copyright     Copyright (c) Qobo Ltd. (https://www.qobo.biz)
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Translations\Controller;
+namespace Qobo\Translations\Controller;
 
 use App\Controller\AppController as BaseController;
 

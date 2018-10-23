@@ -65,20 +65,20 @@ echo $this->Html->scriptBlock(
                             <div class="btn-group btn-group-xs" role="group">
                             <?= $this->Html->link(
                                 '<i class="fa fa-eye"></i>',
-                                ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'view', $translate->id],
+                                ['plugin' => 'Qobo/Translations', 'controller' => 'Translations', 'action' => 'view', $translate->id],
                                 ['title' => __('View'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
                             ); ?>
                             <?php if (!$translate->deny_edit) : ?>
                                 <?= $this->Html->link(
                                     '<i class="fa fa-pencil"></i>',
-                                    ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'edit', $translate->id],
+                                    ['plugin' => 'Qobo/Translations', 'controller' => 'Translations', 'action' => 'edit', $translate->id],
                                     ['title' => __('Edit'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
                                 ); ?>
                             <?php endif; ?>
                             <?php if (!$translate->deny_delete) : ?>
                                 <?= $this->Form->postLink(
                                     '<i class="fa fa-trash"></i>',
-                                    ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'delete', $translate->id],
+                                    ['plugin' => 'Qobo/Translations', 'controller' => 'Translations', 'action' => 'delete', $translate->id],
                                     [
                                         'confirm' => __('Are you sure you want to delete # {0}?', $translate->id),
                                         'title' => __('Delete'),

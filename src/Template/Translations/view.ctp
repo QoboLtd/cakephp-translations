@@ -13,7 +13,7 @@
 <section class="content-header">
     <h1><?= $this->Html->link(
         __('Translations'),
-        ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'index']
+        ['plugin' => 'Qobo/Translations', 'controller' => 'Translations', 'action' => 'index']
     ) . ' &raquo; ' . h($translation->id) ?></h1>
 </section>
 <section class="content">
@@ -41,4 +41,3 @@
         </div>
     </div>
 </section>
-

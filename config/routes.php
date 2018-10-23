@@ -2,7 +2,7 @@
 use Cake\Routing\Router;
 
 Router::plugin(
-    'Translations',
+    'Qobo/Translations',
     ['path' => '/language-translations'],
     function ($routes) {
         $routes->fallbacks('DashedRoute');

@@ -1,5 +1,5 @@
 <?php
-namespace Translations\Test\App\Controller;
+namespace Qobo\Translations\Test\App\Controller;
 
 use \Cake\Controller\Controller;
 

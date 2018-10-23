@@ -36,7 +36,7 @@ echo $this->Html->scriptBlock(
             <div class="btn-group btn-group-sm" role="group">
             <?= $this->Html->link(
                 '<i class="fa fa-plus"></i> ' . __('Add'),
-                ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'add'],
+                ['plugin' => 'Qobo/Translations', 'controller' => 'Languages', 'action' => 'add'],
                 ['escape' => false, 'title' => __('Add'), 'class' => 'btn btn-default']
             ); ?>
             </div>
@@ -72,7 +72,7 @@ echo $this->Html->scriptBlock(
                             <?php if (!$language->deny_delete) : ?>
                                 <?= $this->Form->postLink(
                                     '<i class="fa fa-trash"></i>',
-                                    ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'delete', $language->id],
+                                    ['plugin' => 'Qobo/Translations', 'controller' => 'Languages', 'action' => 'delete', $language->id],
                                     [
                                         'confirm' => __('Are you sure you want to delete {0}?', $language->name),
                                         'title' => __('Delete'),

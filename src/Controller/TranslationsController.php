@@ -9,14 +9,14 @@
  * @copyright     Copyright (c) Qobo Ltd. (https://www.qobo.biz)
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Translations\Controller;
+namespace Qobo\Translations\Controller;
 
-use Translations\Controller\AppController;
+use Qobo\Translations\Controller\AppController;
 
 /**
  * Translations Controller
  *
- * @property \Translations\Model\Table\TranslationsTable $Translations
+ * @property \Qobo\Translations\Model\Table\TranslationsTable $Translations
  */
 class TranslationsController extends AppController
 {

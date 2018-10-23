@@ -1,5 +1,5 @@
 <?php
-namespace Translations\Test\TestCase\Controller;
+namespace Qobo\Translations\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
@@ -11,15 +11,15 @@ use Cake\TestSuite\IntegrationTestCase;
 class TranslationsControllerTest extends IntegrationTestCase
 {
     public $fixtures = [
-        'plugin.translations.languages',
-        'plugin.translations.language_translations'
+        'plugin.qobo/translations.languages',
+        'plugin.qobo/translations.language_translations'
     ];
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->Translations = TableRegistry::get('Translations.Translations');
+        $this->Translations = TableRegistry::get('Qobo/Translations.Translations');
 
         // Run all tests as authenticated user
         $this->session([
@@ -31,7 +31,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         ]);
 
         // Load default plugin configuration
-        Configure::load('Translations.translations');
+        Configure::load('Qobo/Translations.translations');
 
         $this->enableRetainFlashMessages();
     }
@@ -76,7 +76,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->post('/language-translations/translations/add', $data);
 
         $url = [
-            'plugin' => 'Translations',
+            'plugin' => 'Qobo/Translations',
             'controller' => 'Translations',
             'action' => 'index'
         ];
@@ -180,7 +180,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->post('/language-translations/translations/edit/' . $id, $data);
 
         $url = [
-            'plugin' => 'Translations',
+            'plugin' => 'Qobo/Translations',
             'controller' => 'Translations',
             'action' => 'index'
         ];

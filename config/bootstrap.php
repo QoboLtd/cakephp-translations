@@ -1,4 +1,4 @@
 <?php
 use Cake\Core\Configure;
 
-Configure::load('Translations.translations');
+Configure::load('Qobo/Translations.translations');

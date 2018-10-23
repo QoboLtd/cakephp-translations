@@ -1,10 +1,10 @@
 <?php
-namespace Translations\Test\TestCase\Controller;
+namespace Qobo\Translations\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
-use Translations\Controller\LanguagesController;
+use Qobo\Translations\Controller\LanguagesController;
 
 /**
  * Translations\Controller\LanguagesController Test Case
@@ -12,14 +12,14 @@ use Translations\Controller\LanguagesController;
 class LanguagesControllerTest extends IntegrationTestCase
 {
     public $fixtures = [
-        'plugin.translations.languages'
+        'plugin.qobo/translations.languages'
     ];
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->Languages = TableRegistry::get('Translations.Languages');
+        $this->Languages = TableRegistry::get('Qobo/Translations.Languages');
 
         // Run all tests as authenticated user
         $this->session([
@@ -31,7 +31,7 @@ class LanguagesControllerTest extends IntegrationTestCase
         ]);
 
         // Load default plugin configuration
-        Configure::load('Translations.translations');
+        Configure::load('Qobo/Translations.translations');
     }
 
     public function tearDown()

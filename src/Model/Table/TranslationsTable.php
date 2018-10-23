@@ -9,7 +9,7 @@
  * @copyright     Copyright (c) Qobo Ltd. (https://www.qobo.biz)
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Translations\Model\Table;
+namespace Qobo\Translations\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -45,7 +45,7 @@ class TranslationsTable extends Table
         $this->belongsTo('Languages', [
             'foreignKey' => 'language_id',
             'joinType' => 'INNER',
-            'className' => 'Translations.Languages'
+            'className' => 'Qobo/Translations.Languages'
         ]);
     }
 

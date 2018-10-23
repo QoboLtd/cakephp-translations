@@ -1,12 +1,12 @@
 <?php
-namespace Translations\Test\TestCase\Model\Table;
+namespace Qobo\Translations\Test\TestCase\Model\Table;
 
 use Cake\ORM\RulesChecker;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Cake\Validation\Validator;
-use Translations\Model\Entity\Translation;
-use Translations\Model\Table\TranslationsTable;
+use Qobo\Translations\Model\Entity\Translation;
+use Qobo\Translations\Model\Table\TranslationsTable;
 
 /**
  * Translations\Model\Table\TranslationsTable Test Case
@@ -27,8 +27,8 @@ class TranslationsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.translations.languages',
-        'plugin.translations.language_translations',
+        'plugin.qobo/translations.languages',
+        'plugin.qobo/translations.language_translations',
     ];
 
     /**
@@ -39,7 +39,7 @@ class TranslationsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Translations') ? [] : ['className' => 'Translations\Model\Table\TranslationsTable'];
+        $config = TableRegistry::exists('Translations') ? [] : ['className' => TranslationsTable::class];
         $this->Translations = TableRegistry::get('Translations', $config);
     }
 
