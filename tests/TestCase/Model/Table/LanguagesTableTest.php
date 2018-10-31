@@ -63,7 +63,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testInitialize()
+    public function testInitialize(): void
     {
         $this->assertInstanceOf(LanguagesTable::class, $this->Languages);
     }
@@ -73,7 +73,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testValidationDefault()
+    public function testValidationDefault(): void
     {
         $validator = new Validator();
         $result = $this->Languages->validationDefault($validator);
@@ -86,7 +86,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testBuildRules()
+    public function testBuildRules(): void
     {
         $rulesChecker = new RulesChecker();
         $result = $this->Languages->buildRules($rulesChecker);
@@ -99,7 +99,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testGetRtl()
+    public function testGetRtl(): void
     {
         $result = $this->Languages->getRtl();
         $this->assertTrue(is_array($result), 'getRtl() returned a non-array result');
@@ -119,9 +119,9 @@ class LanguagesTableTest extends TestCase
     /**
      * Locale/Langauge Provider
      *
-     * @return array
+     * @return mixed[]
      */
-    public function localeLanguageProvider()
+    public function localeLanguageProvider(): array
     {
         return [
             ['ru', 'ru'],
@@ -139,7 +139,7 @@ class LanguagesTableTest extends TestCase
      * @param string $expected Expected language
      * @return void
      */
-    public function testLocaleToLanguage($locale, $expected)
+    public function testLocaleToLanguage(string $locale, string $expected): void
     {
         $actual = $this->Languages->localeToLanguage($locale);
         $this->assertTrue(is_string($actual), 'localeToLanguage() returned a non-string result');
@@ -152,18 +152,18 @@ class LanguagesTableTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @return void
      */
-    public function testLocaleToLanguageException()
+    public function testLocaleToLanguageException(): void
     {
-        // Send a non-string parameter
-        $result = $this->Languages->localeToLanguage(['ru']);
+        // Send an empty string parameter
+        $result = $this->Languages->localeToLanguage('');
     }
 
     /**
      * Langauge/RTL Provider
      *
-     * @return array
+     * @return mixed[]
      */
-    public function languageRtlProvider()
+    public function languageRtlProvider(): array
     {
         return [
             ['ar', true],
@@ -184,7 +184,7 @@ class LanguagesTableTest extends TestCase
      * @param bool $expected Expected result
      * @return void
      */
-    public function testIsRtl($language, $expected)
+    public function testIsRtl(string $language, bool $expected): void
     {
         $actual = $this->Languages->isRtl($language);
         $this->assertTrue(is_bool($actual), 'isRtl() returned a non-boolean result');
@@ -196,7 +196,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testGetSupported()
+    public function testGetSupported(): void
     {
         $result = $this->Languages->getSupported();
         $this->assertTrue(is_array($result), 'getSupported() returned a non-array result');
@@ -228,7 +228,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testGetAvailable()
+    public function testGetAvailable(): void
     {
         $result = $this->Languages->getAvailable();
         $this->assertTrue(is_array($result), 'getAvailable() returned a non-array result');
@@ -266,7 +266,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $result = $this->Languages->getName('zh');
         $this->assertTrue(is_string($result), 'getName() returned a non-string result');
@@ -279,10 +279,10 @@ class LanguagesTableTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @return void
      */
-    public function testGetNameException()
+    public function testGetNameException(): void
     {
-        // Send a non-string parameter
-        $result = $this->Languages->getName(['ru']);
+        // Send an empty string parameter
+        $result = $this->Languages->getName('');
     }
 
     /**
@@ -291,7 +291,7 @@ class LanguagesTableTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @return void
      */
-    public function testAddOrRestoreException()
+    public function testAddOrRestoreException(): void
     {
         // Send an empty array.  Anything without 'code' key.
         $result = $this->Languages->addOrRestore([]);
@@ -302,7 +302,7 @@ class LanguagesTableTest extends TestCase
      *
      * @return void
      */
-    public function testAddOrRestore()
+    public function testAddOrRestore(): void
     {
         // Add Thai
         $result = $this->Languages->addOrRestore(['code' => 'th']);

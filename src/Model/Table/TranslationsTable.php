@@ -102,10 +102,10 @@ class TranslationsTable extends Table
      *
      * @param string $modelName     model name
      * @param string $recordId      uuid of record the translated field belogns to
-     * @param string $options       ID of the language used for translation
-     * @return array                list of saved translations
+     * @param mixed[] $options      ID of the language used for translation
+     * @return mixed[]              list of saved translations
      */
-    public function getTranslations($modelName, $recordId, $options = [])
+    public function getTranslations(string $modelName, string $recordId, array $options = []): array
     {
         $conditions = [
             'object_model' => $modelName,
@@ -151,8 +151,11 @@ class TranslationsTable extends Table
      * @param string $translatedText Translated text
      * @return bool                     true in case of successfully saved translation and false otherwise
      */
-    public function addTranslation($modelName, $recordId, $fieldName, $language, $translatedText)
+    public function addTranslation(string $modelName, string $recordId, string $fieldName, string $language, string $translatedText): bool
     {
+        /**
+         * @var \Translations\Model\Entity\Translation $translationEntity
+         */
         $translationEntity = $this->newEntity();
 
         $translationEntity->object_model = $modelName;
@@ -170,9 +173,9 @@ class TranslationsTable extends Table
      *  Retrive language ID by code
      *
      * @param string $shortCode     language code i.e. ru, cn etc
-     * @return string               language's uuid
+     * @return string|null          language's uuid
      */
-    public function getLanguageId($shortCode)
+    public function getLanguageId(string $shortCode): ?string
     {
         $query = $this->Languages->find('all', [
             'conditions' => ['Languages.code' => $shortCode]

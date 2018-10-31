@@ -8,6 +8,8 @@ use Translations\Controller\LanguagesController;
 
 /**
  * Translations\Controller\LanguagesController Test Case
+ *
+ * @property \Translations\Model\Table\LanguagesTable $Languages
  */
 class LanguagesControllerTest extends IntegrationTestCase
 {
@@ -41,19 +43,19 @@ class LanguagesControllerTest extends IntegrationTestCase
         parent::tearDown();
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
         $this->get('/language-translations/languages');
         $this->assertResponseOk();
     }
 
-    public function testAddGet()
+    public function testAddGet(): void
     {
         $this->get('/language-translations/languages/add');
         $this->assertResponseOk();
     }
 
-    public function testAddPost()
+    public function testAddPost(): void
     {
         $data = ['code' => 'el_CY'];
         $this->post('/language-translations/languages/add', $data);
@@ -63,10 +65,14 @@ class LanguagesControllerTest extends IntegrationTestCase
 
         $this->assertFalse($query->isEmpty());
         $this->assertEquals(1, $query->count());
-        $this->assertEquals('Greek (Cyprus)', $query->first()->get('name'));
+        /**
+         * @var \Translations\Model\Entity\Language $first
+         */
+        $first = $query->first();
+        $this->assertEquals('Greek (Cyprus)', $first->get('name'));
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->post('/language-translations/languages/delete/00000000-0000-0000-0000-000000000001', []);
         $this->assertRedirect(['controller' => 'Languages', 'action' => 'index']);

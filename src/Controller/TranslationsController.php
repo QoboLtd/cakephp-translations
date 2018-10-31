@@ -23,7 +23,7 @@ class TranslationsController extends AppController
     /**
      * Index method
      *
-     * @return void
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -54,9 +54,9 @@ class TranslationsController extends AppController
      *
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      * @param string|null $id Translation id.
-     * @return void
+     * @return \Cake\Http\Response|void
      */
-    public function view($id = null)
+    public function view(string $id = null)
     {
         $translation = $this->Translations->get($id, [
             'contain' => ['Languages']
@@ -69,7 +69,7 @@ class TranslationsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise
+     * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise
      */
     public function add()
     {
@@ -92,7 +92,7 @@ class TranslationsController extends AppController
     /**
      * Add or update method
      *
-     * @return void     When successfully added or updated prints in JSON true, false otherwise
+     * @return \Cake\Http\Response|void     When successfully added or updated prints in JSON true, false otherwise
      */
     public function addOrUpdate()
     {
@@ -125,10 +125,10 @@ class TranslationsController extends AppController
      * Edit method
      *
      * @param string|null $id Translation id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(string $id = null)
     {
         $translation = $this->Translations->get($id, [
             'contain' => ['Languages']
@@ -151,10 +151,10 @@ class TranslationsController extends AppController
      * Delete method
      *
      * @param string|null $id Translation id.
-     * @return \Cake\Http\Response|null Redirects to index.
+     * @return \Cake\Http\Response|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $translation = $this->Translations->get($id);

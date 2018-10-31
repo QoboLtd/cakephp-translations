@@ -93,10 +93,10 @@ class LanguagesTable extends Table
      * @param string $locale Locale string (example: ru_RU.KOI8-R)
      * @return string Language (example: ru)
      */
-    public function localeToLanguage($locale)
+    public function localeToLanguage(string $locale): string
     {
-        if (!is_string($locale)) {
-            throw new InvalidArgumentException("Locale must be string. " . gettype($locale) . " given.");
+        if (empty($locale)) {
+            throw new InvalidArgumentException("Locale must be a non-emptystring.");
         }
 
         // Truncate all, starting with underscore, at, or dot
@@ -110,9 +110,9 @@ class LanguagesTable extends Table
     /**
      * Get a list of all right-to-left language codes
      *
-     * @return array
+     * @return mixed[]
      */
-    public function getRtl()
+    public function getRtl(): array
     {
         $result = (array)Configure::read('Translations.rtl_languages');
 
@@ -125,7 +125,7 @@ class LanguagesTable extends Table
      * @param string $language Language code or locale string (example: ru_RU.KOI8-R)
      * @return bool
      */
-    public function isRtl($language)
+    public function isRtl(string $language): bool
     {
         $result = false;
 
@@ -141,9 +141,9 @@ class LanguagesTable extends Table
     /**
      * Get a list of supported language codes and labels
      *
-     * @return array
+     * @return mixed[]
      */
-    public function getSupported()
+    public function getSupported(): array
     {
         $result = (array)Configure::read('Translations.languages');
 
@@ -157,9 +157,9 @@ class LanguagesTable extends Table
      * configuration, but haven't yet been used for
      * an active language.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function getAvailable()
+    public function getAvailable(): array
     {
         $result = [];
 
@@ -179,12 +179,12 @@ class LanguagesTable extends Table
      * @param string $code Language code to lookup
      * @return string
      */
-    public function getName($code)
+    public function getName(string $code): string
     {
         $result = $code;
 
-        if (!is_string($code)) {
-            throw new InvalidArgumentException("Code must be string. " . gettype($code) . " given.");
+        if (empty($code)) {
+            throw new InvalidArgumentException("Code must be a non-empty string.");
         }
 
         $languages = $this->getSupported();
@@ -198,10 +198,11 @@ class LanguagesTable extends Table
     /**
      * Add a new language or restore a deleted one
      *
-     * @param array $data Language data to populate Entity with
-     * @return \Cake\ORM\Entity
+     * @throws \InvalidArgumentException when data is wrong or incomplete
+     * @param mixed[] $data Language data to populate Entity with
+     * @return \Translations\Model\Entity\Language
      */
-    public function addOrRestore(array $data)
+    public function addOrRestore(array $data): \Translations\Model\Entity\Language
     {
         if (empty($data['code'])) {
             throw new InvalidArgumentException("Language data is missing 'code' key");
@@ -225,6 +226,9 @@ class LanguagesTable extends Table
 
         $newEntity = $this->newEntity();
         $newEntity = $this->patchEntity($newEntity, $data);
+        /**
+         * @var \Translations\Model\Entity\Language $result
+         */
         $result = $this->save($newEntity);
 
         return $result;
