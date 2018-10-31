@@ -35,7 +35,7 @@ class LanguagesController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
@@ -58,7 +58,7 @@ class LanguagesController extends AppController
      * Delete method
      *
      * @param string|null $id Language id.
-     * @return \Cake\Network\Response|null Redirects to index.
+     * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
