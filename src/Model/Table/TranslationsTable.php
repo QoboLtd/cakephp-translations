@@ -15,6 +15,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use InvalidArgumentException;
 
 /**
  * Translations Model
@@ -177,16 +178,21 @@ class TranslationsTable extends Table
     /**
      *  Retrive language ID by code
      *
+     * @throws \InvalidArgumentException for unknown short code
      * @param string $shortCode     language code i.e. ru, cn etc
-     * @return string|null          language's uuid
+     * @return string              language's uuid
      */
-    public function getLanguageId(string $shortCode): ?string
+    public function getLanguageId(string $shortCode): string
     {
         $query = $this->Languages->find('all', [
             'conditions' => ['Languages.code' => $shortCode]
         ]);
         $language = $query->first();
 
-        return !empty($language->id) ? $language->id : null;
+        if (empty($language->id)) {
+            throw new InvalidArgumentException("Unsupported language code [$shortCode]");
+        }
+
+        return $language->id;
     }
 }

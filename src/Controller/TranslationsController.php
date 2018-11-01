@@ -75,7 +75,8 @@ class TranslationsController extends AppController
     {
         $translation = $this->Translations->newEntity();
         if ($this->request->is('post')) {
-            $translation = $this->Translations->patchEntity($translation, $this->request->getData());
+            $data = is_array($this->request->getData()) ? $this->request->getData() : [];
+            $translation = $this->Translations->patchEntity($translation, $data);
             $result = $this->Translations->save($translation);
             if ($result) {
                 $this->Flash->success((string)__('The translation has been saved.'));
@@ -100,7 +101,10 @@ class TranslationsController extends AppController
         if (!$this->request->is('ajax')) {
             throw new \RuntimeException('Wrong type of request!');
         }
-        $params = $this->request->getData();
+        $params = is_array($this->request->getData()) ? $this->request->getData() : [];
+        /**
+         * @var \Cake\Datasource\EntityInterface $translation
+         */
         $translation = $this->Translations->getTranslations(
             $params['object_model'],
             $params['object_foreign_key'],
@@ -111,6 +115,9 @@ class TranslationsController extends AppController
             ]
         );
         if (empty($translation)) {
+            /**
+             * @var \Cake\Datasource\EntityInterface $translation
+             */
             $translation = $this->Translations->newEntity();
         }
 
@@ -134,7 +141,8 @@ class TranslationsController extends AppController
             'contain' => ['Languages']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $translation = $this->Translations->patchEntity($translation, $this->request->getData());
+            $data = is_array($this->request->getData()) ? $this->request->getData() : [];
+            $translation = $this->Translations->patchEntity($translation, $data);
             if ($this->Translations->save($translation)) {
                 $this->Flash->success((string)__('The translation has been saved.'));
 

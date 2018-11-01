@@ -41,7 +41,8 @@ class LanguagesController extends AppController
     {
         $language = $this->Languages->newEntity();
         if ($this->request->is('post')) {
-            $languageEntity = $this->Languages->addOrRestore($this->request->getData());
+            $data = is_array($this->request->getData()) ? $this->request->getData() : [];
+            $languageEntity = $this->Languages->addOrRestore($data);
             if (!empty($languageEntity)) {
                 $this->Flash->success((string)__('The language has been saved.'));
 

@@ -22,6 +22,7 @@ use InvalidArgumentException;
  * Languages Model
  *
  * @property \Cake\ORM\Association\HasMany $Translations
+ * @method restoreTrash(\Cake\Datasource\EntityInterface $entity = null, array $options)
  *
  */
 class LanguagesTable extends Table
@@ -216,6 +217,9 @@ class LanguagesTable extends Table
             $data['name'] = $this->getName($data['code']);
         }
 
+        /**
+         * @var \Cake\Datasource\EntityInterface $deletedEntity
+         */
         $deletedEntity = $this->find('onlyTrashed')
             ->where(['code' => $data['code']])
             ->first();
