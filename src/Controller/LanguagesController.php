@@ -23,7 +23,7 @@ class LanguagesController extends AppController
     /**
      * Index method
      *
-     * @return void
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -35,19 +35,20 @@ class LanguagesController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|void|null Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
         $language = $this->Languages->newEntity();
         if ($this->request->is('post')) {
-            $languageEntity = $this->Languages->addOrRestore($this->request->getData());
+            $data = is_array($this->request->getData()) ? $this->request->getData() : [];
+            $languageEntity = $this->Languages->addOrRestore($data);
             if (!empty($languageEntity)) {
-                $this->Flash->success(__('The language has been saved.'));
+                $this->Flash->success((string)__('The language has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The language could not be saved. Please, try again.'));
+            $this->Flash->error((string)__('The language could not be saved. Please, try again.'));
         }
         $languages = $this->Languages->getAvailable();
         $this->set(compact('language', 'languages'));
@@ -58,17 +59,17 @@ class LanguagesController extends AppController
      * Delete method
      *
      * @param string|null $id Language id.
-     * @return \Cake\Network\Response|null Redirects to index.
+     * @return \Cake\Http\Response|void|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $language = $this->Languages->get($id);
         if ($this->Languages->delete($language)) {
-            $this->Flash->success(__('The language has been deleted.'));
+            $this->Flash->success((string)__('The language has been deleted.'));
         } else {
-            $this->Flash->error(__('The language could not be deleted. Please, try again.'));
+            $this->Flash->error((string)__('The language could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
