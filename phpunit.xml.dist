@@ -21,7 +21,7 @@
 
     <!-- Add any additional test suites you want to run here -->
     <testsuites>
-        <testsuite name="plugin">
+        <testsuite name="translations">
             <directory>tests/TestCase</directory>
         </testsuite>
     </testsuites>
