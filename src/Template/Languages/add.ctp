@@ -41,7 +41,7 @@ echo $this->Html->script(
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12">
-                            <?= $this->Form->input('code', [
+                            <?= $this->Form->control('code', [
                                 'options' => $languages,
                                 'type' => 'select',
                                 'class' => 'select2',

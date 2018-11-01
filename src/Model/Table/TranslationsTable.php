@@ -138,7 +138,7 @@ class TranslationsTable extends Table
 
             return $entity;
         } else {
-            $query->hydrate(false);
+            $query->enableHydration(false);
 
             return $query->toList();
         }
