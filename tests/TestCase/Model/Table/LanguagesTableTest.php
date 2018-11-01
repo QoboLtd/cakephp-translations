@@ -40,7 +40,11 @@ class LanguagesTableTest extends TestCase
     {
         parent::setUp();
         $config = TableRegistry::exists('Languages') ? [] : ['className' => 'Translations\Model\Table\LanguagesTable'];
-        $this->Languages = TableRegistry::get('Languages', $config);
+        /**
+         * @var \Translations\Model\Table\LanguagesTable $table
+         */
+        $table = TableRegistry::get('Languages', $config);
+        $this->Languages = $table;
 
         // Load default plugin configuration
         Configure::load('Translations.translations');

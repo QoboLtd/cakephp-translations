@@ -103,9 +103,9 @@ class TranslationsTable extends Table
      * @param string $modelName     model name
      * @param string $recordId      uuid of record the translated field belogns to
      * @param mixed[] $options      ID of the language used for translation
-     * @return mixed[]              list of saved translations
+     * @return \Translations\Model\Entity\Translation|array|null single record or list of saved translations
      */
-    public function getTranslations(string $modelName, string $recordId, array $options = []): array
+    public function getTranslations(string $modelName, string $recordId, array $options = [])
     {
         $conditions = [
             'object_model' => $modelName,
@@ -131,7 +131,12 @@ class TranslationsTable extends Table
             ],
         ]);
         if (!empty($options['toEntity'])) {
-            return $query->first();
+            /**
+             * @var \Translations\Model\Entity\Translation $entity
+             */
+            $entity = $query->first();
+
+            return $entity;
         } else {
             $query->hydrate(false);
 

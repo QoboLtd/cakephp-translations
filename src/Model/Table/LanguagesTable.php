@@ -100,7 +100,7 @@ class LanguagesTable extends Table
         }
 
         // Truncate all, starting with underscore, at, or dot
-        $result = preg_replace('/(_|@|\.).*$/', '', strtolower($locale));
+        $result = (string)preg_replace('/(_|@|\.).*$/', '', strtolower($locale));
         // Convert to lowercase for consistency
         $result = strtolower($result);
 

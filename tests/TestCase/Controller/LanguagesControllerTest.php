@@ -21,7 +21,11 @@ class LanguagesControllerTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->Languages = TableRegistry::get('Translations.Languages');
+        /**
+         * @var \Translations\Model\Table\LanguagesTable $table
+         */
+        $table = TableRegistry::get('Translations.Languages');
+        $this->Languages = $table;
 
         // Run all tests as authenticated user
         $this->session([

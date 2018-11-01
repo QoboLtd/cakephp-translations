@@ -40,7 +40,11 @@ class TranslationsTableTest extends TestCase
     {
         parent::setUp();
         $config = TableRegistry::exists('Translations') ? [] : ['className' => 'Translations\Model\Table\TranslationsTable'];
-        $this->Translations = TableRegistry::get('Translations', $config);
+        /**
+         * @var \Translations\Model\Table\TranslationsTable $table
+         */
+        $table = TableRegistry::get('Translations', $config);
+        $this->Translations = $table;
     }
 
     /**
@@ -66,8 +70,10 @@ class TranslationsTableTest extends TestCase
         $result = $this->Translations->getTranslations($modelName, $recordId);
 
         $this->assertInternalType('array', $result);
-        $this->assertEquals(3, count($result));
-        $this->assertEquals($result[0]['object_model'], 'Leads');
+        if (is_array($result)) {
+            $this->assertEquals(3, count($result));
+            $this->assertEquals($result[0]['object_model'], 'Leads');
+        }
     }
 
     public function testGetTranslationsWithLanguageId(): void
@@ -79,8 +85,10 @@ class TranslationsTableTest extends TestCase
         $result = $this->Translations->getTranslations($modelName, $recordId, [
             'language' => $languageId,
         ]);
-
-        $this->assertEquals(2, count($result));
+        $this->assertTrue(is_array($result), "getTranslations() returned a non-array result");
+        if (is_array($result)) {
+            $this->assertEquals(2, count($result));
+        }
     }
 
     public function testGetTranslationsWithObjectField(): void
@@ -92,8 +100,10 @@ class TranslationsTableTest extends TestCase
         $result = $this->Translations->getTranslations($modelName, $recordId, [
             'field' => $objectField,
         ]);
-
-        $this->assertEquals(2, count($result));
+        $this->assertTrue(is_array($result), "getTranslations() returned a non-array result");
+        if (is_array($result)) {
+            $this->assertEquals(2, count($result));
+        }
     }
 
     public function testGetTranslationsAsEntity(): void
