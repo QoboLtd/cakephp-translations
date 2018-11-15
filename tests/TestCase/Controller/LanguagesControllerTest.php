@@ -7,7 +7,9 @@ use Cake\TestSuite\IntegrationTestCase;
 use Qobo\Translations\Controller\LanguagesController;
 
 /**
- * Translations\Controller\LanguagesController Test Case
+ * Qobo\Translations\Controller\LanguagesController Test Case
+ *
+ * @property \Qobo\Translations\Model\Table\LanguagesTable $Languages
  */
 class LanguagesControllerTest extends IntegrationTestCase
 {
@@ -19,7 +21,11 @@ class LanguagesControllerTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->Languages = TableRegistry::get('Qobo/Translations.Languages');
+        /**
+         * @var \Qobo\Translations\Model\Table\LanguagesTable $table
+         */
+        $table = TableRegistry::get('Translations.Languages');
+        $this->Languages = $table;
 
         // Run all tests as authenticated user
         $this->session([
@@ -41,19 +47,19 @@ class LanguagesControllerTest extends IntegrationTestCase
         parent::tearDown();
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
         $this->get('/language-translations/languages');
         $this->assertResponseOk();
     }
 
-    public function testAddGet()
+    public function testAddGet(): void
     {
         $this->get('/language-translations/languages/add');
         $this->assertResponseOk();
     }
 
-    public function testAddPost()
+    public function testAddPost(): void
     {
         $data = ['code' => 'el_CY'];
         $this->post('/language-translations/languages/add', $data);
@@ -63,10 +69,14 @@ class LanguagesControllerTest extends IntegrationTestCase
 
         $this->assertFalse($query->isEmpty());
         $this->assertEquals(1, $query->count());
-        $this->assertEquals('Greek (Cyprus)', $query->first()->get('name'));
+        /**
+         * @var \Qobo\Translations\Model\Entity\Language $first
+         */
+        $first = $query->first();
+        $this->assertEquals('Greek (Cyprus)', $first->get('name'));
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->post('/language-translations/languages/delete/00000000-0000-0000-0000-000000000001', []);
         $this->assertRedirect(['controller' => 'Languages', 'action' => 'index']);

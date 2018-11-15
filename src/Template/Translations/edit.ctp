@@ -31,7 +31,7 @@
                             </dl>
                         </div>
                         <div class="col-md-8">
-                            <?= $this->Form->input('translation'); ?>
+                            <?= $this->Form->control('translation'); ?>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ class TranslationsController extends AppController
     /**
      * Index method
      *
-     * @return void
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -39,7 +39,7 @@ class TranslationsController extends AppController
                     'field' => !empty($params['object_field']) ? $params['object_field'] : '',
                 ]
             );
-            $this->response->type('application/json');
+            $this->response->withType('application/json');
             $this->autoRender = false;
             echo json_encode($translations, JSON_UNESCAPED_UNICODE);
         } else {
@@ -54,9 +54,9 @@ class TranslationsController extends AppController
      *
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      * @param string|null $id Translation id.
-     * @return void
+     * @return \Cake\Http\Response|void
      */
-    public function view($id = null)
+    public function view(string $id = null)
     {
         $translation = $this->Translations->get($id, [
             'contain' => ['Languages']
@@ -69,20 +69,21 @@ class TranslationsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise
+     * @return \Cake\Http\Response|void|null Redirects on successful add, renders view otherwise
      */
     public function add()
     {
         $translation = $this->Translations->newEntity();
         if ($this->request->is('post')) {
-            $translation = $this->Translations->patchEntity($translation, $this->request->getData());
+            $data = is_array($this->request->getData()) ? $this->request->getData() : [];
+            $translation = $this->Translations->patchEntity($translation, $data);
             $result = $this->Translations->save($translation);
             if ($result) {
-                $this->Flash->success(__('The translation has been saved.'));
+                $this->Flash->success((string)__('The translation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The translation could not be saved. Please, try again.'));
+            $this->Flash->error((string)__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('all', ['limit' => 200]);
         $this->set(compact('translation', 'languages'));
@@ -92,7 +93,7 @@ class TranslationsController extends AppController
     /**
      * Add or update method
      *
-     * @return void     When successfully added or updated prints in JSON true, false otherwise
+     * @return \Cake\Http\Response|void     When successfully added or updated prints in JSON true, false otherwise
      */
     public function addOrUpdate()
     {
@@ -100,7 +101,10 @@ class TranslationsController extends AppController
         if (!$this->request->is('ajax')) {
             throw new \RuntimeException('Wrong type of request!');
         }
-        $params = $this->request->getData();
+        $params = is_array($this->request->getData()) ? $this->request->getData() : [];
+        /**
+         * @var \Cake\Datasource\EntityInterface $translation
+         */
         $translation = $this->Translations->getTranslations(
             $params['object_model'],
             $params['object_foreign_key'],
@@ -111,12 +115,15 @@ class TranslationsController extends AppController
             ]
         );
         if (empty($translation)) {
+            /**
+             * @var \Cake\Datasource\EntityInterface $translation
+             */
             $translation = $this->Translations->newEntity();
         }
 
         $translation = $this->Translations->patchEntity($translation, $params);
         $result = $this->Translations->save($translation);
-        $this->response->type('application/json');
+        $this->response->withType('application/json');
         $this->autoRender = false;
         echo json_encode(!empty($result) ? true : false);
     }
@@ -125,22 +132,23 @@ class TranslationsController extends AppController
      * Edit method
      *
      * @param string|null $id Translation id.
-     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @return \Cake\Http\Response|void|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(string $id = null)
     {
         $translation = $this->Translations->get($id, [
             'contain' => ['Languages']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $translation = $this->Translations->patchEntity($translation, $this->request->getData());
+            $data = is_array($this->request->getData()) ? $this->request->getData() : [];
+            $translation = $this->Translations->patchEntity($translation, $data);
             if ($this->Translations->save($translation)) {
-                $this->Flash->success(__('The translation has been saved.'));
+                $this->Flash->success((string)__('The translation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The translation could not be saved. Please, try again.'));
+            $this->Flash->error((string)__('The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('list', ['limit' => 200]);
         $this->set(compact('translation', 'languages'));
@@ -151,17 +159,17 @@ class TranslationsController extends AppController
      * Delete method
      *
      * @param string|null $id Translation id.
-     * @return \Cake\Network\Response|null Redirects to index.
+     * @return \Cake\Http\Response|void|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $translation = $this->Translations->get($id);
         if ($this->Translations->delete($translation)) {
-            $this->Flash->success(__('The translation has been deleted.'));
+            $this->Flash->success((string)__('The translation has been deleted.'));
         } else {
-            $this->Flash->error(__('The translation could not be deleted. Please, try again.'));
+            $this->Flash->error((string)__('The translation could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

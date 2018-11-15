@@ -13,7 +13,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <?= $this->Form->input('orig_for_translate', ['type' => 'textarea', 'label' => 'English', 'id' => 'orig_for_translate', 'required' => false, 'disabled' => true]); ?>
+            <?= $this->Form->control('orig_for_translate', ['type' => 'textarea', 'label' => 'English', 'id' => 'orig_for_translate', 'required' => false, 'disabled' => true]); ?>
         </div>
     </div>
     <hr/>
@@ -29,7 +29,7 @@
             echo $this->Form->hidden('code', ['value' => $language->code]);
         ?>
         <div class="col-xs-12 col-md-12">
-            <?= $this->Form->input('translation', ['label' => $language->name, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code, 'required' => false]); ?>
+            <?= $this->Form->control('translation', ['label' => $language->name, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code, 'required' => false]); ?>
         </div>
     </div>
     <div class="row">

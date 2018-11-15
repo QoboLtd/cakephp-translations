@@ -6,7 +6,9 @@ use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * Translations\Controller\TranslationsController Test Case
+ * Qobo\Translations\Controller\TranslationsController Test Case
+ *
+ * @property \Qobo\Translations\Model\Table\TranslationsTable $Translations
  */
 class TranslationsControllerTest extends IntegrationTestCase
 {
@@ -19,7 +21,11 @@ class TranslationsControllerTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->Translations = TableRegistry::get('Qobo/Translations.Translations');
+        /**
+         * @var \Qobo\Translations\Model\Table\TranslationsTable $table
+         */
+        $table = TableRegistry::get('Translations.Translations');
+        $this->Translations = $table;
 
         // Run all tests as authenticated user
         $this->session([
@@ -43,25 +49,25 @@ class TranslationsControllerTest extends IntegrationTestCase
         parent::tearDown();
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
         $this->get('/language-translations/translations');
         $this->assertResponseOk();
     }
 
-    public function testIndexJson()
+    public function testIndexJson(): void
     {
         $this->get('/language-translations/translations?json=1&object_model=Leads&object_foreign_key=00000000-0000-0000-0000-100000000001');
         $this->assertResponseOk();
     }
 
-    public function testView()
+    public function testView(): void
     {
         $this->get('/language-translations/translations/view/00000000-0000-0000-0000-000000000001');
         $this->assertResponseOk();
     }
 
-    public function testAdd()
+    public function testAdd(): void
     {
         $expected = 1 + $this->Translations->find('all')->count();
 
@@ -85,7 +91,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertEquals($expected, $this->Translations->find('all')->count());
     }
 
-    public function testAddMissingData()
+    public function testAddMissingData(): void
     {
         $expected = $this->Translations->find('all')->count();
 
@@ -104,7 +110,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertSession('The translation could not be saved. Please, try again.', 'Flash.flash.0.message');
     }
 
-    public function testAddInvalidData()
+    public function testAddInvalidData(): void
     {
         $expected = $this->Translations->find('all')->count();
 
@@ -124,7 +130,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertSession('The translation could not be saved. Please, try again.', 'Flash.flash.0.message');
     }
 
-    public function testAddNoData()
+    public function testAddNoData(): void
     {
         $expected = $this->Translations->find('all')->count();
         $this->post('/language-translations/translations/add');
@@ -134,13 +140,13 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertSession('The translation could not be saved. Please, try again.', 'Flash.flash.0.message');
     }
 
-    public function testAddGet()
+    public function testAddGet(): void
     {
         $this->get('/language-translations/translations/add');
         $this->assertResponseOk();
     }
 
-    public function testAddOrUpdate()
+    public function testAddOrUpdate(): void
     {
         $this->configRequest([
             'headers' => [
@@ -162,14 +168,14 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertResponseOk();
     }
 
-    public function testAddOrUpdateNonAjax()
+    public function testAddOrUpdateNonAjax(): void
     {
         $this->post('/language-translations/translations/add-or-update');
 
         $this->assertResponseFailure();
     }
 
-    public function testEdit()
+    public function testEdit(): void
     {
         $id = '00000000-0000-0000-0000-000000000001';
 
@@ -190,13 +196,13 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertEquals($data['translation'], $entity->get('translation'));
     }
 
-    public function testEditGet()
+    public function testEditGet(): void
     {
         $this->get('/language-translations/translations/edit/00000000-0000-0000-0000-000000000001');
         $this->assertResponseOk();
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->post('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001', []);
         $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);

@@ -17,11 +17,13 @@ use Cake\ORM\Entity;
  * Language Entity
  *
  * @property string $id
+ * @property string $name
  * @property string $code
  * @property boolean $is_active
  * @property boolean $is_rtl
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
+ * @property \Cake\I18n\Time $trashed
  *
  * @property \Translations\Model\Entity\Translation[] $translations
  */

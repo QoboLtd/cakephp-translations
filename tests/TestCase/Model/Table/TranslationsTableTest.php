@@ -9,7 +9,7 @@ use Qobo\Translations\Model\Entity\Translation;
 use Qobo\Translations\Model\Table\TranslationsTable;
 
 /**
- * Translations\Model\Table\TranslationsTable Test Case
+ * \Qobo\Translations\Model\Table\TranslationsTable Test Case
  */
 class TranslationsTableTest extends TestCase
 {
@@ -17,7 +17,7 @@ class TranslationsTableTest extends TestCase
     /**
      * Test subject
      *
-     * @var \Translations\Model\Table\TranslationsTable
+     * @var \Qobo\Translations\Model\Table\TranslationsTable
      */
     public $Translations;
 
@@ -39,8 +39,12 @@ class TranslationsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Translations') ? [] : ['className' => TranslationsTable::class];
-        $this->Translations = TableRegistry::get('Translations', $config);
+        $config = TableRegistry::exists('Translations') ? [] : ['className' => 'Qobo\Translations\Model\Table\TranslationsTable'];
+        /**
+         * @var \Qobo\Translations\Model\Table\TranslationsTable $table
+         */
+        $table = TableRegistry::get('Translations', $config);
+        $this->Translations = $table;
     }
 
     /**
@@ -58,7 +62,7 @@ class TranslationsTableTest extends TestCase
     /**
      *  testGetTranslations method
      */
-    public function testGetTranslations()
+    public function testGetTranslations(): void
     {
         $modelName = 'Leads';
         $recordId = '00000000-0000-0000-0000-100000000001';
@@ -66,11 +70,13 @@ class TranslationsTableTest extends TestCase
         $result = $this->Translations->getTranslations($modelName, $recordId);
 
         $this->assertInternalType('array', $result);
-        $this->assertEquals(3, count($result));
-        $this->assertEquals($result[0]['object_model'], 'Leads');
+        if (is_array($result)) {
+            $this->assertEquals(3, count($result));
+            $this->assertEquals($result[0]['object_model'], 'Leads');
+        }
     }
 
-    public function testGetTranslationsWithLanguageId()
+    public function testGetTranslationsWithLanguageId(): void
     {
         $modelName = 'Leads';
         $recordId = '00000000-0000-0000-0000-100000000001';
@@ -79,11 +85,13 @@ class TranslationsTableTest extends TestCase
         $result = $this->Translations->getTranslations($modelName, $recordId, [
             'language' => $languageId,
         ]);
-
-        $this->assertEquals(2, count($result));
+        $this->assertTrue(is_array($result), "getTranslations() returned a non-array result");
+        if (is_array($result)) {
+            $this->assertEquals(2, count($result));
+        }
     }
 
-    public function testGetTranslationsWithObjectField()
+    public function testGetTranslationsWithObjectField(): void
     {
         $modelName = 'Leads';
         $recordId = '00000000-0000-0000-0000-100000000001';
@@ -92,11 +100,13 @@ class TranslationsTableTest extends TestCase
         $result = $this->Translations->getTranslations($modelName, $recordId, [
             'field' => $objectField,
         ]);
-
-        $this->assertEquals(2, count($result));
+        $this->assertTrue(is_array($result), "getTranslations() returned a non-array result");
+        if (is_array($result)) {
+            $this->assertEquals(2, count($result));
+        }
     }
 
-    public function testGetTranslationsAsEntity()
+    public function testGetTranslationsAsEntity(): void
     {
         $modelName = 'Leads';
         $recordId = '00000000-0000-0000-0000-100000000001';
@@ -112,7 +122,7 @@ class TranslationsTableTest extends TestCase
      *  testAddTranslation method
      * @return void
      */
-    public function testAddTranslation()
+    public function testAddTranslation(): void
     {
         $params = [
             'object_model' => 'Leads',
@@ -137,7 +147,7 @@ class TranslationsTableTest extends TestCase
      *  testGetLanguageId method
      * @return void
      */
-    public function testGetLanguageId()
+    public function testGetLanguageId(): void
     {
         $languageId = '00000000-0000-0000-0000-000000000001';
         $shortCode = 'ru';
@@ -149,7 +159,7 @@ class TranslationsTableTest extends TestCase
      *
      * @return void
      */
-    public function testInitialize()
+    public function testInitialize(): void
     {
         $this->assertInstanceOf(TranslationsTable::class, new TranslationsTable);
     }
@@ -159,7 +169,7 @@ class TranslationsTableTest extends TestCase
      *
      * @return void
      */
-    public function testValidationDefault()
+    public function testValidationDefault(): void
     {
         $validator = new Validator();
         $result = $this->Translations->validationDefault($validator);
@@ -172,7 +182,7 @@ class TranslationsTableTest extends TestCase
      *
      * @return void
      */
-    public function testBuildRules()
+    public function testBuildRules(): void
     {
         $rulesChecker = new RulesChecker();
         $result = $this->Translations->buildRules($rulesChecker);
