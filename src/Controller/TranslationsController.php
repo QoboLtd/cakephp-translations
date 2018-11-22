@@ -39,9 +39,9 @@ class TranslationsController extends AppController
                     'field' => !empty($params['object_field']) ? $params['object_field'] : '',
                 ]
             );
-            $this->response->withType('application/json');
+            $body = (string)json_encode($translations, JSON_UNESCAPED_UNICODE);
+            $this->response->withType('application/json')->withStringBody($body);
             $this->autoRender = false;
-            echo json_encode($translations, JSON_UNESCAPED_UNICODE);
         } else {
             $translations = $this->Translations->find('all')->contain('Languages');
             $this->set(compact('translations'));
@@ -123,9 +123,9 @@ class TranslationsController extends AppController
 
         $translation = $this->Translations->patchEntity($translation, $params);
         $result = $this->Translations->save($translation);
-        $this->response->withType('application/json');
+        $body = (string)json_encode(!empty($result) ? true : false);
+        $this->response->withType('application/json')->withStringBody($body);
         $this->autoRender = false;
-        echo json_encode(!empty($result) ? true : false);
     }
 
     /**
