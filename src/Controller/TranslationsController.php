@@ -40,7 +40,7 @@ class TranslationsController extends AppController
                 ]
             );
             $body = (string)json_encode($translations, JSON_UNESCAPED_UNICODE);
-            $this->response->withType('application/json')->withStringBody($body);
+            $this->response = $this->response->withType('application/json')->withStringBody($body);
             $this->autoRender = false;
         } else {
             $translations = $this->Translations->find('all')->contain('Languages');
@@ -124,7 +124,7 @@ class TranslationsController extends AppController
         $translation = $this->Translations->patchEntity($translation, $params);
         $result = $this->Translations->save($translation);
         $body = (string)json_encode(!empty($result) ? true : false);
-        $this->response->withType('application/json')->withStringBody($body);
+        $this->response = $this->response->withType('application/json')->withStringBody($body);
         $this->autoRender = false;
     }
 
