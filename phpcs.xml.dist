@@ -12,6 +12,11 @@
     <rule ref="./vendor/cakephp/cakephp-codesniffer/CakePHP">
         <exclude name="Generic.Commenting.Todo" />
     </rule>
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <properties>
+            <property name="forbiddenFunctions" type="array" value="debug=>null,dd=>null,var_dump=>null,sizeof=>count,delete=>unset"/>
+        </properties>
+    </rule>
 
     <!-- Do not fail on warnings -->
     <config name="ignore_warnings_on_exit" value="1" />
@@ -31,9 +36,9 @@
     <file>./config/</file>
     <file>./webroot/</file>
 
-    <!-- Ignore files -->
-    <arg name="ignore" value="config/Migrations/" />
-
-    <!-- Ignore minified files -->
+    <!-- Exclude patterns -->
+    <exclude-pattern>config/Migrations/*</exclude-pattern>
+    <exclude-pattern>config/Seeds/*</exclude-pattern>
+    <exclude-pattern>webroot/plugins/*</exclude-pattern>
     <exclude-pattern>*\.min\.(css|js)</exclude-pattern>
 </ruleset>
