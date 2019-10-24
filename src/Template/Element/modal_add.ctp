@@ -21,19 +21,7 @@ echo $this->Html->script(['Translations.translation'], ['block' => 'scriptBottom
                 </button>
                 <h2 class="modal-title"><?= __('Manage Translations') ?></h2>
             </div> <!-- modal-header -->
-            <div class="modal-body">
-                <?= $this->requestAction([
-                    'plugin' => 'Translations',
-                    'controller' => 'Translations',
-                    'action' => 'add'
-                ], [
-                    'query' => [
-                        'embedded' => 'Translations',
-                        'foreign_key' => 'object_foreign_key',
-                        'modal_id' => 'translations_translate_id_modal',
-                    ]
-                ]); ?>
-            </div>
+            <div class="modal-body"><?= $this->element('Translations.modal_body') ?></div>
         </div> <!-- modal-content -->
     </div> <!-- modal-dialog -->
 </div> <!-- modal window -->
