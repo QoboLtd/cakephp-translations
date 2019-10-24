@@ -7,6 +7,7 @@ use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Cake\Validation\Validator;
 use Translations\Model\Table\LanguagesTable;
+use Webmozart\Assert\Assert;
 
 /**
  * Translations\Model\Table\LanguagesTable Test Case
@@ -310,12 +311,12 @@ class LanguagesTableTest extends TestCase
     {
         // Add Thai
         $result = $this->Languages->addOrRestore(['code' => 'th']);
-        $this->assertTrue(is_object($result), 'testAddOrRestore() returned a non-object result');
+        Assert::isInstanceOf($result, \Translations\Model\Entity\Language::class);
         $this->assertEquals('Thai', $result->name, 'testAddOrRestore() failed to set correct name');
 
         // Restore Italian
         $result = $this->Languages->addOrRestore(['code' => 'it']);
-        $this->assertTrue(is_object($result), 'testAddOrRestore() returned a non-object result');
+        Assert::isInstanceOf($result, \Translations\Model\Entity\Language::class);
         $this->assertEquals('Italian', $result->name, 'testAddOrRestore() failed to set correct name');
         $this->assertEquals(false, $result->trashed, 'testAddOrRestore() failed to set correct trashed');
     }

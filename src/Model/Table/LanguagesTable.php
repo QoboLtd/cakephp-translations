@@ -18,6 +18,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use InvalidArgumentException;
 use Translations\Model\Entity\Language;
+use Webmozart\Assert\Assert;
 
 /**
  * Languages Model
@@ -218,23 +219,23 @@ class LanguagesTable extends Table
             $data['name'] = $this->getName($data['code']);
         }
 
-        /**
-         * @var \Cake\Datasource\EntityInterface $deletedEntity
-         */
         $deletedEntity = $this->find('onlyTrashed')
             ->where(['code' => $data['code']])
             ->first();
+        Assert::nullOrIsInstanceOf($deletedEntity, Language::class);
 
-        if (!empty($deletedEntity)) {
-            return $this->restoreTrash($deletedEntity);
+        if (null !== $deletedEntity) {
+            $result = $this->restoreTrash($deletedEntity);
+            Assert::isInstanceOf($result, Language::class);
+
+            return $result;
         }
 
         $newEntity = $this->newEntity();
         $newEntity = $this->patchEntity($newEntity, $data);
-        /**
-         * @var \Translations\Model\Entity\Language $result
-         */
         if ($this->save($newEntity)) {
+            Assert::isInstanceOf($newEntity, Language::class);
+
             return $newEntity;
         }
 

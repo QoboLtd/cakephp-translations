@@ -227,7 +227,7 @@ class TranslationsControllerTest extends IntegrationTestCase
 
     public function testDelete(): void
     {
-        $this->delete('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001', []);
+        $this->delete('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001');
         $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
     }
 
@@ -242,7 +242,7 @@ class TranslationsControllerTest extends IntegrationTestCase
 
         $id = '00000000-0000-0000-0000-000000000001';
 
-        $this->delete('/language-translations/translations/delete/' . $id, []);
+        $this->delete('/language-translations/translations/delete/' . $id);
         $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
 
         $this->assertSession('The translation could not be deleted. Please, try again.', 'Flash.flash.0.message');

@@ -94,14 +94,14 @@ class LanguagesControllerTest extends IntegrationTestCase
 
         $query = $this->Languages->find()->where($data);
         $this->assertEquals(1, $query->count());
-        $language = $query->first();
+        $language = $query->firstOrFail();
         Assert::isInstanceOf($language, \Translations\Model\Entity\Language::class);
         $this->assertEquals('Russian', $language->get('name'));
     }
 
     public function testDelete(): void
     {
-        $this->delete('/language-translations/languages/delete/00000000-0000-0000-0000-000000000001', []);
+        $this->delete('/language-translations/languages/delete/00000000-0000-0000-0000-000000000001');
         $this->assertRedirect(['controller' => 'Languages', 'action' => 'index']);
     }
 
@@ -116,7 +116,7 @@ class LanguagesControllerTest extends IntegrationTestCase
 
         $id = '00000000-0000-0000-0000-000000000001';
 
-        $this->delete('/language-translations/languages/delete/' . $id, []);
+        $this->delete('/language-translations/languages/delete/' . $id);
         $this->assertRedirect(['controller' => 'Languages', 'action' => 'index']);
 
         $this->assertSession('The language could not be deleted. Please, try again.', 'Flash.flash.0.message');
