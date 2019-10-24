@@ -17,6 +17,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use InvalidArgumentException;
+use Translations\Model\Entity\Language;
 
 /**
  * Languages Model
@@ -201,9 +202,9 @@ class LanguagesTable extends Table
      *
      * @throws \InvalidArgumentException when data is wrong or incomplete
      * @param mixed[] $data Language data to populate Entity with
-     * @return \Translations\Model\Entity\Language
+     * @return \Translations\Model\Entity\Language|null
      */
-    public function addOrRestore(array $data): \Translations\Model\Entity\Language
+    public function addOrRestore(array $data): ?Language
     {
         if (empty($data['code'])) {
             throw new InvalidArgumentException("Language data is missing 'code' key");
@@ -233,8 +234,10 @@ class LanguagesTable extends Table
         /**
          * @var \Translations\Model\Entity\Language $result
          */
-        $result = $this->save($newEntity);
+        if ($this->save($newEntity)) {
+            return $newEntity;
+        }
 
-        return $result;
+        return null;
     }
 }
