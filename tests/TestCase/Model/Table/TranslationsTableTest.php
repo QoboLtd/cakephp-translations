@@ -154,6 +154,13 @@ class TranslationsTableTest extends TestCase
         $this->assertEquals($this->Translations->getLanguageId($shortCode), $languageId);
     }
 
+    public function testGetLanguageIdWithUnsupportedId(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->Translations->getLanguageId('foobar');
+    }
+
     /**
      * Test initialize method
      *
