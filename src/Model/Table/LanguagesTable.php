@@ -17,6 +17,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use InvalidArgumentException;
+use Translations\Model\Entity\Language;
+use Webmozart\Assert\Assert;
 
 /**
  * Languages Model
@@ -201,9 +203,9 @@ class LanguagesTable extends Table
      *
      * @throws \InvalidArgumentException when data is wrong or incomplete
      * @param mixed[] $data Language data to populate Entity with
-     * @return \Translations\Model\Entity\Language
+     * @return \Translations\Model\Entity\Language|null
      */
-    public function addOrRestore(array $data): \Translations\Model\Entity\Language
+    public function addOrRestore(array $data): ?Language
     {
         if (empty($data['code'])) {
             throw new InvalidArgumentException("Language data is missing 'code' key");
@@ -217,24 +219,26 @@ class LanguagesTable extends Table
             $data['name'] = $this->getName($data['code']);
         }
 
-        /**
-         * @var \Cake\Datasource\EntityInterface $deletedEntity
-         */
         $deletedEntity = $this->find('onlyTrashed')
             ->where(['code' => $data['code']])
             ->first();
+        Assert::nullOrIsInstanceOf($deletedEntity, Language::class);
 
-        if (!empty($deletedEntity)) {
-            return $this->restoreTrash($deletedEntity);
+        if (null !== $deletedEntity) {
+            $result = $this->restoreTrash($deletedEntity);
+            Assert::isInstanceOf($result, Language::class);
+
+            return $result;
         }
 
         $newEntity = $this->newEntity();
         $newEntity = $this->patchEntity($newEntity, $data);
-        /**
-         * @var \Translations\Model\Entity\Language $result
-         */
-        $result = $this->save($newEntity);
+        if ($this->save($newEntity)) {
+            Assert::isInstanceOf($newEntity, Language::class);
 
-        return $result;
+            return $newEntity;
+        }
+
+        return null;
     }
 }

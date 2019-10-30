@@ -2,6 +2,7 @@
 namespace Translations\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
+use Cake\Event\EventManager;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestCase;
 
@@ -183,7 +184,7 @@ class TranslationsControllerTest extends IntegrationTestCase
             'translation' => 'Modify translation.',
         ];
 
-        $this->post('/language-translations/translations/edit/' . $id, $data);
+        $this->put('/language-translations/translations/edit/' . $id, $data);
 
         $url = [
             'plugin' => 'Translations',
@@ -196,6 +197,28 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertEquals($data['translation'], $entity->get('translation'));
     }
 
+    public function testEditFail() : void
+    {
+        $this->enableRetainFlashMessages();
+
+        // prevent save
+        EventManager::instance()->on('Model.beforeSave', function () {
+            return false;
+        });
+
+        $id = '00000000-0000-0000-0000-000000000001';
+
+        $this->put('/language-translations/translations/edit/' . $id, ['name' => uniqid()]);
+        // $this->assertResponseCode(200);
+
+        $this->assertSession('The translation could not be saved. Please, try again.', 'Flash.flash.0.message');
+
+        $this->assertInstanceOf(
+            \Translations\Model\Entity\Translation::class,
+            $this->Translations->get($id)
+        );
+    }
+
     public function testEditGet(): void
     {
         $this->get('/language-translations/translations/edit/00000000-0000-0000-0000-000000000001');
@@ -204,7 +227,29 @@ class TranslationsControllerTest extends IntegrationTestCase
 
     public function testDelete(): void
     {
-        $this->post('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001', []);
+        $this->delete('/language-translations/translations/delete/00000000-0000-0000-0000-000000000001');
         $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
+    }
+
+    public function testDeleteFail() : void
+    {
+        $this->enableRetainFlashMessages();
+
+        // prevent delete
+        EventManager::instance()->on('Model.beforeDelete', function () {
+            return false;
+        });
+
+        $id = '00000000-0000-0000-0000-000000000001';
+
+        $this->delete('/language-translations/translations/delete/' . $id);
+        $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
+
+        $this->assertSession('The translation could not be deleted. Please, try again.', 'Flash.flash.0.message');
+
+        $this->assertInstanceOf(
+            \Translations\Model\Entity\Translation::class,
+            $this->Translations->get($id)
+        );
     }
 }
