@@ -41,7 +41,7 @@ $table = TableRegistry::getTableLocator()->get('Translations.Languages');
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-12">
-        <?= $this->Form->button(__('Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'data-lang' => $language->code, 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
+        <?= $this->Form->button(__d('Qobo/Translations', 'Save'), ['id' => 'btn_translate_ru', 'name' => 'btn_translation', 'data-lang' => $language->code, 'value' => 'save', 'class' => 'btn btn-primary', 'type' => 'button']); ?>
     </div>
     <?= $this->Form->end(); ?>
 </div>

@@ -35,9 +35,9 @@ echo $this->Html->scriptBlock(
         <div class="pull-right">
             <div class="btn-group btn-group-sm" role="group">
             <?= $this->Html->link(
-                '<i class="fa fa-plus"></i> ' . __('Add'),
+                '<i class="fa fa-plus"></i> ' . __d('Qobo/Translations', 'Add'),
                 ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'add'],
-                ['escape' => false, 'title' => __('Add'), 'class' => 'btn btn-default']
+                ['escape' => false, 'title' => __d('Qobo/Translations', 'Add'), 'class' => 'btn btn-default']
             ); ?>
             </div>
         </div>
@@ -49,10 +49,10 @@ echo $this->Html->scriptBlock(
             <table class="table table-hover table-condensed table-vertical-align table-datatable">
                 <thead>
                     <tr>
-                        <th><?= __('Name') ?></th>
-                        <th><?= __('Code') ?></th>
-                        <th><?= __('Direction'); ?></th>
-                        <th class="actions"><?= __('Actions') ?></th>
+                        <th><?= __d('Qobo/Translations', 'Name') ?></th>
+                        <th><?= __d('Qobo/Translations', 'Code') ?></th>
+                        <th><?= __d('Qobo/Translations', 'Direction'); ?></th>
+                        <th class="actions"><?= __d('Qobo/Translations', 'Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,8 +74,8 @@ echo $this->Html->scriptBlock(
                                     '<i class="fa fa-trash"></i>',
                                     ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'delete', $language->id],
                                     [
-                                        'confirm' => __('Are you sure you want to delete {0}?', $language->name),
-                                        'title' => __('Delete'),
+                                        'confirm' => __d('Qobo/Translations', 'Are you sure you want to delete {0}?', $language->name),
+                                        'title' => __d('Qobo/Translations', 'Delete'),
                                         'class' => 'btn btn-default btn-sm',
                                         'escape' => false
                                     ]

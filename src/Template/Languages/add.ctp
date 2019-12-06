@@ -31,7 +31,7 @@ echo $this->Html->script(
 );
 ?>
 <section class="content-header">
-    <h1><?= __('Create {0}', ['Language']) ?></h1>
+    <h1><?= __d('Qobo/Translations', 'Create {0}', ['Language']) ?></h1>
 </section>
 <section class="content">
     <div class="row">
@@ -51,9 +51,9 @@ echo $this->Html->script(
                     </div>
                 </div>
                 <div class="box-footer">
-                    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                    <?= $this->Form->button(__d('Qobo/Translations', 'Submit'), ['class' => 'btn btn-primary']) ?>
                     &nbsp;
-                    <?= $this->Form->button(__('Cancel'), ['class' => 'btn remove-client-validation', 'name' => 'btn_operation', 'value' => 'cancel']); ?>
+                    <?= $this->Form->button(__d('Qobo/Translations', 'Cancel'), ['class' => 'btn remove-client-validation', 'name' => 'btn_operation', 'value' => 'cancel']); ?>
                 </div>
                 <?= $this->Form->end() ?>
         </div>
