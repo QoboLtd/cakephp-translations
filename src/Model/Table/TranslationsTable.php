@@ -46,7 +46,7 @@ class TranslationsTable extends Table
         $this->belongsTo('Languages', [
             'foreignKey' => 'language_id',
             'joinType' => 'INNER',
-            'className' => 'Translations.Languages'
+            'className' => 'Translations.Languages',
         ]);
     }
 
@@ -110,7 +110,7 @@ class TranslationsTable extends Table
     {
         $conditions = [
             'object_model' => $modelName,
-            'object_foreign_key' => $recordId
+            'object_foreign_key' => $recordId,
         ];
 
         if (!empty($options['language'])) {
@@ -185,7 +185,7 @@ class TranslationsTable extends Table
     public function getLanguageId(string $shortCode): string
     {
         $query = $this->Languages->find('all', [
-            'conditions' => ['Languages.code' => $shortCode]
+            'conditions' => ['Languages.code' => $shortCode],
         ]);
         $language = $query->first();
 

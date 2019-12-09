@@ -47,21 +47,21 @@ class LanguagesFixture extends TestFixture
             'code' => 'ru',
             'name' => 'Russian',
             'created' => '2017-03-20 12:55:32',
-            'modified' => '2017-03-20 12:55:32'
+            'modified' => '2017-03-20 12:55:32',
         ],
         [
             'id' => '00000000-0000-0000-0000-000000000002',
             'code' => 'de',
             'name' => 'German',
             'created' => '2017-03-30 12:55:32',
-            'modified' => '2017-03-30 12:55:32'
+            'modified' => '2017-03-30 12:55:32',
         ],
         [
             'id' => '00000000-0000-0000-0000-000000000003',
             'code' => 'cn',
             'name' => 'Chinese',
             'created' => '2017-03-30 12:55:32',
-            'modified' => '2017-03-30 12:55:32'
+            'modified' => '2017-03-30 12:55:32',
         ],
         [
             'id' => '00000000-0000-0000-0000-000000000004',
@@ -69,7 +69,7 @@ class LanguagesFixture extends TestFixture
             'name' => 'Italian',
             'trashed' => '2017-03-30 15:00:00',
             'created' => '2017-03-30 12:55:32',
-            'modified' => '2017-03-30 12:55:32'
+            'modified' => '2017-03-30 12:55:32',
         ],
     ];
 }
