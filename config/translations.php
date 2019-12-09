@@ -4,7 +4,7 @@ return [
     'Translations' => [
         'api' => [
             'auth' => true,
-            'token' => null
+            'token' => null,
         ],
         'languages' => [
             'af' => 'Afrikaans',

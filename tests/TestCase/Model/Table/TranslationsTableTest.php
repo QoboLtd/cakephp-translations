@@ -168,7 +168,7 @@ class TranslationsTableTest extends TestCase
      */
     public function testInitialize(): void
     {
-        $this->assertInstanceOf(TranslationsTable::class, new TranslationsTable);
+        $this->assertInstanceOf(TranslationsTable::class, new TranslationsTable());
     }
 
     /**

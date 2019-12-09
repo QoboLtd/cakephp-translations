@@ -59,7 +59,7 @@ class TranslationsController extends AppController
     public function view(string $id = null)
     {
         $translation = $this->Translations->get($id, [
-            'contain' => ['Languages']
+            'contain' => ['Languages'],
         ]);
 
         $this->set('translation', $translation);
@@ -138,7 +138,7 @@ class TranslationsController extends AppController
     public function edit(string $id = null)
     {
         $translation = $this->Translations->get($id, [
-            'contain' => ['Languages']
+            'contain' => ['Languages'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = is_array($this->request->getData()) ? $this->request->getData() : [];

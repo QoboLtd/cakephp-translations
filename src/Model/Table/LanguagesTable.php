@@ -48,7 +48,7 @@ class LanguagesTable extends Table
 
         $this->hasMany('Translations', [
             'foreignKey' => 'language_id',
-            'className' => 'Translations.Translations'
+            'className' => 'Translations.Translations',
         ]);
     }
 
