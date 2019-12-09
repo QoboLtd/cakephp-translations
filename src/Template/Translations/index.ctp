@@ -43,7 +43,7 @@ echo $this->Html->scriptBlock(
                         <th><?= h('Field'); ?></th>
                         <th><?= h('Language') ?></th>
                         <th><?= h('Translation'); ?></th>
-                        <th class="actions"><?= __('Actions') ?></th>
+                        <th class="actions"><?= __d('Qobo/Translations', 'Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,13 +66,13 @@ echo $this->Html->scriptBlock(
                             <?= $this->Html->link(
                                 '<i class="fa fa-eye"></i>',
                                 ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'view', $translate->id],
-                                ['title' => __('View'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
+                                ['title' => __d('Qobo/Translations', 'View'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
                             ); ?>
                             <?php if (!$translate->deny_edit) : ?>
                                 <?= $this->Html->link(
                                     '<i class="fa fa-pencil"></i>',
                                     ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'edit', $translate->id],
-                                    ['title' => __('Edit'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
+                                    ['title' => __d('Qobo/Translations', 'Edit'), 'class' => 'btn btn-default btn-sm', 'escape' => false]
                                 ); ?>
                             <?php endif; ?>
                             <?php if (!$translate->deny_delete) : ?>
@@ -80,8 +80,8 @@ echo $this->Html->scriptBlock(
                                     '<i class="fa fa-trash"></i>',
                                     ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'delete', $translate->id],
                                     [
-                                        'confirm' => __('Are you sure you want to delete # {0}?', $translate->id),
-                                        'title' => __('Delete'),
+                                        'confirm' => __d('Qobo/Translations', 'Are you sure you want to delete # {0}?', $translate->id),
+                                        'title' => __d('Qobo/Translations', 'Delete'),
                                         'class' => 'btn btn-default btn-sm',
                                         'escape' => false
                                     ]

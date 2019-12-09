@@ -1,0 +1,103 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-12-06 14:28+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "The language has been saved."
+msgstr ""
+
+msgid "The language could not be saved. Please, try again."
+msgstr ""
+
+msgid "The language has been deleted."
+msgstr ""
+
+msgid "The language could not be deleted. Please, try again."
+msgstr ""
+
+msgid "The translation has been saved."
+msgstr ""
+
+msgid "The translation could not be saved. Please, try again."
+msgstr ""
+
+msgid "The translation has been deleted."
+msgstr ""
+
+msgid "The translation could not be deleted. Please, try again."
+msgstr ""
+
+msgid "Manage Translations"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Create {0}"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Are you sure you want to delete {0}?"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Edit {0}"
+msgstr ""
+
+msgid "Model"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+msgid "Translations"
+msgstr ""
+
+msgid "Translation"
+msgstr ""
+

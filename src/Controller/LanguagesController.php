@@ -44,11 +44,11 @@ class LanguagesController extends AppController
             $data = is_array($this->request->getData()) ? $this->request->getData() : [];
             $languageEntity = $this->Languages->addOrRestore($data);
             if (!empty($languageEntity)) {
-                $this->Flash->success((string)__('The language has been saved.'));
+                $this->Flash->success((string)__d('Qobo/Translations', 'The language has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error((string)__('The language could not be saved. Please, try again.'));
+            $this->Flash->error((string)__d('Qobo/Translations', 'The language could not be saved. Please, try again.'));
         }
         $languages = $this->Languages->getAvailable();
         $this->set(compact('language', 'languages'));
@@ -67,9 +67,9 @@ class LanguagesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $language = $this->Languages->get($id);
         if ($this->Languages->delete($language)) {
-            $this->Flash->success((string)__('The language has been deleted.'));
+            $this->Flash->success((string)__d('Qobo/Translations', 'The language has been deleted.'));
         } else {
-            $this->Flash->error((string)__('The language could not be deleted. Please, try again.'));
+            $this->Flash->error((string)__d('Qobo/Translations', 'The language could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

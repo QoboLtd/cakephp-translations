@@ -79,11 +79,11 @@ class TranslationsController extends AppController
             $translation = $this->Translations->patchEntity($translation, $data);
             $result = $this->Translations->save($translation);
             if ($result) {
-                $this->Flash->success((string)__('The translation has been saved.'));
+                $this->Flash->success((string)__d('Qobo/Translations', 'The translation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error((string)__('The translation could not be saved. Please, try again.'));
+            $this->Flash->error((string)__d('Qobo/Translations', 'The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('all', ['limit' => 200]);
         $this->set(compact('translation', 'languages'));
@@ -144,11 +144,11 @@ class TranslationsController extends AppController
             $data = is_array($this->request->getData()) ? $this->request->getData() : [];
             $translation = $this->Translations->patchEntity($translation, $data);
             if ($this->Translations->save($translation)) {
-                $this->Flash->success((string)__('The translation has been saved.'));
+                $this->Flash->success((string)__d('Qobo/Translations', 'The translation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error((string)__('The translation could not be saved. Please, try again.'));
+            $this->Flash->error((string)__d('Qobo/Translations', 'The translation could not be saved. Please, try again.'));
         }
         $languages = $this->Translations->Languages->find('list', ['limit' => 200]);
         $this->set(compact('translation', 'languages'));
@@ -167,9 +167,9 @@ class TranslationsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $translation = $this->Translations->get($id);
         if ($this->Translations->delete($translation)) {
-            $this->Flash->success((string)__('The translation has been deleted.'));
+            $this->Flash->success((string)__d('Qobo/Translations', 'The translation has been deleted.'));
         } else {
-            $this->Flash->error((string)__('The translation could not be deleted. Please, try again.'));
+            $this->Flash->error((string)__d('Qobo/Translations', 'The translation could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

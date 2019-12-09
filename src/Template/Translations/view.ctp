@@ -12,7 +12,7 @@
 ?>
 <section class="content-header">
     <h1><?= $this->Html->link(
-        __('Translations'),
+        __d('Qobo/Translations', 'Translations'),
         ['plugin' => 'Translations', 'controller' => 'Translations', 'action' => 'index']
     ) . ' &raquo; ' . h($translation->id) ?></h1>
 </section>
@@ -27,13 +27,13 @@
                 </div>
                 <div class="box-body">
                     <dl class="dl-horizontal">
-                        <dt><?= __('Model') ?></dt>
+                        <dt><?= __d('Qobo/Translations', 'Model') ?></dt>
                         <dd><?= h($translation->object_model) ?></dd>
-                        <dt><?= __('Field') ?></dt>
+                        <dt><?= __d('Qobo/Translations', 'Field') ?></dt>
                         <dd><?= h($translation->object_field) ?></dd>
-                        <dt><?= __('Language') ?></dt>
+                        <dt><?= __d('Qobo/Translations', 'Language') ?></dt>
                         <dd><?= h($translation->language->name ?: $translation->language->code); ?></dd>
-                        <dt><?= __('Translation') ?></dt>
+                        <dt><?= __d('Qobo/Translations', 'Translation') ?></dt>
                         <dd><?= h($translation->translation) ?></dd>
                     </dl>
                 </div>
