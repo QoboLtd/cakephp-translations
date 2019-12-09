@@ -15,7 +15,7 @@ class TranslationsControllerTest extends IntegrationTestCase
 {
     public $fixtures = [
         'plugin.translations.languages',
-        'plugin.translations.language_translations'
+        'plugin.translations.language_translations',
     ];
 
     public function setUp()
@@ -85,7 +85,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $url = [
             'plugin' => 'Translations',
             'controller' => 'Translations',
-            'action' => 'index'
+            'action' => 'index',
         ];
         $this->assertRedirect($url);
 
@@ -152,8 +152,8 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->configRequest([
             'headers' => [
                 // link: http://discourse.cakephp.org/t/solved-cakephp3-how-to-test-ajax-actions/948
-                'X-Requested-With' => 'XMLHttpRequest'
-            ]
+                'X-Requested-With' => 'XMLHttpRequest',
+            ],
         ]);
 
         $data = [
@@ -161,7 +161,7 @@ class TranslationsControllerTest extends IntegrationTestCase
             'object_field' => 'description',
             'translation' => 'Chinese translation.',
             'language_id' => '00000000-0000-0000-0000-000000000003',
-            'object_foreign_key' => '00000000-0000-0000-0000-100000000001'
+            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
         ];
 
         $this->post('/language-translations/translations/add-or-update', $data);
@@ -189,7 +189,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $url = [
             'plugin' => 'Translations',
             'controller' => 'Translations',
-            'action' => 'index'
+            'action' => 'index',
         ];
         $this->assertRedirect($url);
 
@@ -197,7 +197,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertEquals($data['translation'], $entity->get('translation'));
     }
 
-    public function testEditFail() : void
+    public function testEditFail(): void
     {
         $this->enableRetainFlashMessages();
 
@@ -231,7 +231,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertRedirect(['controller' => 'Translations', 'action' => 'index']);
     }
 
-    public function testDeleteFail() : void
+    public function testDeleteFail(): void
     {
         $this->enableRetainFlashMessages();
 

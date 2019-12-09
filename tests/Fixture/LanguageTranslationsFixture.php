@@ -49,7 +49,7 @@ class LanguageTranslationsFixture extends TestFixture
             'object_field' => 'description',
             'translation' => 'This is a test.',
             'created' => '2017-03-20 12:56:37',
-            'modified' => '2017-03-20 12:56:37'
+            'modified' => '2017-03-20 12:56:37',
         ],
         [
             'id' => '00000000-0000-0000-0000-000000000002',
@@ -59,7 +59,7 @@ class LanguageTranslationsFixture extends TestFixture
             'object_field' => 'code',
             'translation' => 'This is a test.',
             'created' => '2017-03-20 12:56:37',
-            'modified' => '2017-03-20 12:56:37'
+            'modified' => '2017-03-20 12:56:37',
         ],
         [
             'id' => '00000000-0000-0000-0000-000000000003',
@@ -69,7 +69,7 @@ class LanguageTranslationsFixture extends TestFixture
             'object_field' => 'description',
             'translation' => 'This is a test.',
             'created' => '2017-03-20 12:56:37',
-            'modified' => '2017-03-20 12:56:37'
+            'modified' => '2017-03-20 12:56:37',
         ],
         [
             'id' => '00000000-0000-0000-0000-000000000004',
@@ -79,7 +79,7 @@ class LanguageTranslationsFixture extends TestFixture
             'object_field' => 'title',
             'translation' => 'This is a test.',
             'created' => '2017-03-20 12:56:37',
-            'modified' => '2017-03-20 12:56:37'
+            'modified' => '2017-03-20 12:56:37',
         ],
     ];
 }

@@ -29,7 +29,7 @@ class LanguagesTableTest extends TestCase
      */
     public $fixtures = [
         'plugin.translations.languages',
-        'plugin.translations.language_translations'
+        'plugin.translations.language_translations',
     ];
 
     /**

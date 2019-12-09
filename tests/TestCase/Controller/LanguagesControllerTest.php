@@ -16,7 +16,7 @@ use Webmozart\Assert\Assert;
 class LanguagesControllerTest extends IntegrationTestCase
 {
     public $fixtures = [
-        'plugin.translations.languages'
+        'plugin.translations.languages',
     ];
 
     public function setUp()
@@ -85,7 +85,7 @@ class LanguagesControllerTest extends IntegrationTestCase
         $this->enableRetainFlashMessages();
 
         $data = [
-            'code' => 'ru' // already exists
+            'code' => 'ru', // already exists
         ];
         $this->post('/language-translations/languages/add', $data);
         $this->assertResponseCode(200);
@@ -105,7 +105,7 @@ class LanguagesControllerTest extends IntegrationTestCase
         $this->assertRedirect(['controller' => 'Languages', 'action' => 'index']);
     }
 
-    public function testDeleteFail() : void
+    public function testDeleteFail(): void
     {
         $this->enableRetainFlashMessages();
 
