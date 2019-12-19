@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-12-06 14:28+0000\n"
+"POT-Creation-Date: 2019-12-19 13:18+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -86,6 +86,9 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+msgid "Translation"
+msgstr ""
+
 msgid "View"
 msgstr ""
 
@@ -98,6 +101,6 @@ msgstr ""
 msgid "Translations"
 msgstr ""
 
-msgid "Translation"
+msgid "Details"
 msgstr ""
 
