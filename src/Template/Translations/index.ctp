@@ -39,10 +39,10 @@ echo $this->Html->scriptBlock(
             <table class="table table-hover table-condensed table-vertical-align table-datatable">
                 <thead>
                     <tr>
-                        <th><?= h('Model') ?></th>
-                        <th><?= h('Field'); ?></th>
-                        <th><?= h('Language') ?></th>
-                        <th><?= h('Translation'); ?></th>
+                        <th><?= _d('Qobo/Translations', 'Model') ?></th>
+                        <th><?= _d('Qobo/Translations', 'Field'); ?></th>
+                        <th><?= _d('Qobo/Translations', 'Language') ?></th>
+                        <th><?= _d('Qobo/Translations', 'Translation'); ?></th>
                         <th class="actions"><?= __d('Qobo/Translations', 'Actions') ?></th>
                     </tr>
                 </thead>

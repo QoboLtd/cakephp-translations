@@ -23,7 +23,7 @@
                 <div class="box-header with-border">
                     <i class="fa fa-globe"></i>
 
-                    <h3 class="box-title">Details</h3>
+                    <h3 class="box-title"><?= __('Qobo/Translations', 'Details') ?></h3>
                 </div>
                 <div class="box-body">
                     <dl class="dl-horizontal">
