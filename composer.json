@@ -31,6 +31,7 @@
         }
     ],
     "require": {
+        "cakephp/cakephp": "^3.5 <3.7"
     },
     "require-dev": {
         "qobo/cakephp-composer-dev": "^v1.0"
