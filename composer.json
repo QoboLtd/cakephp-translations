@@ -31,7 +31,8 @@
         }
     ],
     "require": {
-        "cakephp/cakephp": "^3.5 <3.7"
+        "cakephp/cakephp": "^3.5 <3.7",
+        "muffin/trash": "^2.1"
     },
     "require-dev": {
         "qobo/cakephp-composer-dev": "^v1.0"
