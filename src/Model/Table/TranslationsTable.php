@@ -60,23 +60,23 @@ class TranslationsTable extends Table
     {
         $validator
             ->uuid('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->requirePresence('object_model', 'create')
-            ->notEmpty('object_model');
+            ->notEmptyString('object_model');
 
         $validator
             ->requirePresence('object_foreign_key', 'create')
-            ->notEmpty('object_foreign_key');
+            ->notEmptyString('object_foreign_key');
 
         $validator
             ->requirePresence('object_field', 'create')
-            ->notEmpty('object_field');
+            ->notEmptyString('object_field');
 
         $validator
             ->requirePresence('translation', 'create')
-            ->notEmpty('translation');
+            ->notEmptyString('translation');
 
         return $validator;
     }
