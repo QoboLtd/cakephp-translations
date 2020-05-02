@@ -11,7 +11,6 @@
  */
 namespace Translations\Controller;
 
-use Translations\Controller\AppController;
 
 /**
  * Languages Controller
