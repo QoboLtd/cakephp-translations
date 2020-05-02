@@ -25,7 +25,7 @@
         }
     },
     "require": {
-        "cakephp/cakephp": "^3.6",
+        "cakephp/cakephp": "^3.8",
         "muffin/trash": "^2.1"
     },
     "require-dev": {
