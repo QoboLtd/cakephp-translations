@@ -14,8 +14,8 @@ use Cake\TestSuite\IntegrationTestCase;
 class TranslationsControllerTest extends IntegrationTestCase
 {
     public $fixtures = [
-        'plugin.translations.languages',
-        'plugin.translations.language_translations',
+        'plugin.Translations.Languages',
+        'plugin.Translations.LanguageTranslations',
     ];
 
     public function setUp()

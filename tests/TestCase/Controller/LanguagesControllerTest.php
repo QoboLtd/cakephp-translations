@@ -16,7 +16,7 @@ use Webmozart\Assert\Assert;
 class LanguagesControllerTest extends IntegrationTestCase
 {
     public $fixtures = [
-        'plugin.translations.languages',
+        'plugin.Translations.Languages',
     ];
 
     public function setUp()
