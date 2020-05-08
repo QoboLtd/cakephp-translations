@@ -192,7 +192,7 @@ class TranslationsTable extends Table
         }
 
         if (empty($entity->get("locale"))) {
-            $entity->set('locale', $this->getLanguageCode($entity->get("language_i")));
+            $entity->set('locale', $this->getLanguageCode($entity->get("language_id")));
         }
     }
 
