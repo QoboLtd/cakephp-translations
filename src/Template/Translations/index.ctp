@@ -50,16 +50,16 @@ echo $this->Html->scriptBlock(
                     <?php foreach ($translations as $translate) : ?>
                     <tr>
                         <td>
-                            <?= h($translate->object_model) ?>
+                            <?= h($translate->model) ?>
                         </td>
                         <td>
-                            <?= h($translate->object_field) ?>
+                            <?= h($translate->field) ?>
                         </td>
                         <td>
                             <?= h($translate->language->name ?: $translate->language->code); ?>
                         </td>
                         <td>
-                            <?= h($translate->translation) ?>
+                            <?= h($translate->content) ?>
                         </td>
                         <td class="actions">
                             <div class="btn-group btn-group-xs" role="group">

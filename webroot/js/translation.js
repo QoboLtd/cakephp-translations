@@ -11,10 +11,10 @@ var translation = translation || {};
 
         $('#orig_for_translate').val(field_value);
 
-        $.get('/language-translations/translations?object_foreign_key=' + record_id + '&object_model=' + model_name + '&object_field=' + field_name + '&json=1', function (data) {
+        $.get('/language-translations/translations?foreign_key=' + record_id + '&model=' + model_name + '&field=' + field_name + '&json=1', function (data) {
             if (data.length != 0) {
                 $.each(data, function (key, val) {
-                    $('#translation_' + val['language']['code']).val(val['translation']);
+                    $('#translation_' + val['language']['code']).val(val['content']);
                     $('#translation_id_' + val['language']['code']).val(val['id']);
                 });
             } else {
@@ -24,9 +24,9 @@ var translation = translation || {};
             }
         });
 
-        $('input[name=object_foreign_key]').val(record_id);
-        $('input[name=object_model]').val(model_name);
-        $('input[name=object_field]').val(field_name);
+        $('input[name=foreign_key]').val(record_id);
+        $('input[name=model]').val(model_name);
+        $('input[name=field]').val(field_name);
     });
 
     $('#translations_translate_id_modal').on('hidden.bs.modal', '.modal', function () {

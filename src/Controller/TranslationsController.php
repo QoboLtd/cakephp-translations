@@ -32,11 +32,11 @@ class TranslationsController extends AppController
 
         if (!empty($params['json']) && $params['json']) {
             $translations = $this->Translations->getTranslations(
-                $params['object_model'],
-                $params['object_foreign_key'],
+                $params['model'],
+                $params['foreign_key'],
                 [
                     'language' => $languageId,
-                    'field' => !empty($params['object_field']) ? $params['object_field'] : '',
+                    'field' => !empty($params['field']) ? $params['field'] : '',
                 ]
             );
             $body = (string)json_encode($translations, JSON_UNESCAPED_UNICODE);
@@ -106,12 +106,12 @@ class TranslationsController extends AppController
          * @var \Cake\Datasource\EntityInterface $translation
          */
         $translation = $this->Translations->getTranslations(
-            $params['object_model'],
-            $params['object_foreign_key'],
+            $params['model'],
+            $params['foreign_key'],
             [
                 'language' => $params['language_id'],
                 'toEntity' => true,
-                'field' => $params['object_field'],
+                'field' => $params['field'],
             ]
         );
         if (empty($translation)) {
