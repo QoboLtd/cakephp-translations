@@ -187,12 +187,12 @@ class TranslationsTable extends Table
      */
     public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options): void
     {
-        if (empty($entity->language_id)) {
-            $entity->set('language_id', $this->getLanguageId($entity->locale));
+        if (empty($entity->get("language_id"))) {
+            $entity->set('language_id', $this->getLanguageId($entity->get("locale")));
         }
 
-        if (empty($entity->locale)) {
-            $entity->set('locale', $this->getLanguageCode($entity->language_id));
+        if (empty($entity->get("locale"))) {
+            $entity->set('locale', $this->getLanguageCode($entity->get("language_i")));
         }
     }
 
@@ -235,6 +235,6 @@ class TranslationsTable extends Table
             throw new InvalidArgumentException("Unsupported language id [$id]");
         }
 
-        return $language->code;
+        return $language->get("code");
     }
 }
