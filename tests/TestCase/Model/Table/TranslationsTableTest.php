@@ -72,7 +72,7 @@ class TranslationsTableTest extends TestCase
         $this->assertInternalType('array', $result);
         if (is_array($result)) {
             $this->assertEquals(3, count($result));
-            $this->assertEquals($result[0]['object_model'], 'Leads');
+            $this->assertEquals($result[0]['model'], 'Leads');
         }
     }
 
@@ -125,19 +125,19 @@ class TranslationsTableTest extends TestCase
     public function testAddTranslation(): void
     {
         $params = [
-            'object_model' => 'Leads',
-            'object_field' => 'name',
-            'object_foreign_key' => '00000000-0000-0000-1000-000000000001',
+            'model' => 'Leads',
+            'field' => 'name',
+            'foreign_key' => '00000000-0000-0000-1000-000000000001',
             'language' => 'ru',
-            'translation' => 'Test',
+            'content' => 'Test',
         ];
 
         $result = $this->Translations->addTranslation(
-            $params['object_model'],
-            $params['object_foreign_key'],
-            $params['object_field'],
+            $params['model'],
+            $params['foreign_key'],
+            $params['field'],
             $params['language'],
-            $params['translation']
+            $params['content']
         );
 
         $this->assertTrue($result);

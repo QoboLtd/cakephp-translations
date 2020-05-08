@@ -11,7 +11,9 @@
  */
 namespace Translations\Model\Table;
 
-use Cake\ORM\Query;
+use ArrayObject;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -63,20 +65,20 @@ class TranslationsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('object_model', 'create')
-            ->notEmpty('object_model');
+            ->requirePresence('model', 'create')
+            ->notEmpty('model');
 
         $validator
-            ->requirePresence('object_foreign_key', 'create')
-            ->notEmpty('object_foreign_key');
+            ->requirePresence('foreign_key', 'create')
+            ->notEmpty('foreign_key');
 
         $validator
-            ->requirePresence('object_field', 'create')
-            ->notEmpty('object_field');
+            ->requirePresence('field', 'create')
+            ->notEmpty('field');
 
         $validator
-            ->requirePresence('translation', 'create')
-            ->notEmpty('translation');
+            ->requirePresence('content', 'create')
+            ->notEmpty('content');
 
         return $validator;
     }
@@ -109,25 +111,25 @@ class TranslationsTable extends Table
     public function getTranslations(string $modelName, string $recordId, array $options = [])
     {
         $conditions = [
-            'object_model' => $modelName,
-            'object_foreign_key' => $recordId,
+            'model' => $modelName,
+            'foreign_key' => $recordId,
         ];
 
         if (!empty($options['language'])) {
             $conditions['language_id'] = $options['language'];
         }
         if (!empty($options['field'])) {
-            $conditions['object_field'] = $options['field'];
+            $conditions['field'] = $options['field'];
         }
         $query = $this->find('all', [
             'conditions' => $conditions,
             'contain' => ['Languages'],
             'fields' => [
                 'Translations.id',
-                'Translations.translation',
-                'Translations.object_model',
-                'Translations.object_field',
-                'Translations.object_foreign_key',
+                'Translations.content',
+                'Translations.model',
+                'Translations.field',
+                'Translations.foreign_key',
                 'Languages.code',
             ],
         ]);
@@ -164,15 +166,34 @@ class TranslationsTable extends Table
          */
         $translationEntity = $this->newEntity();
 
-        $translationEntity->object_model = $modelName;
-        $translationEntity->object_field = $fieldName;
-        $translationEntity->object_foreign_key = $recordId;
+        $translationEntity->model = $modelName;
+        $translationEntity->field = $fieldName;
+        $translationEntity->foreign_key = $recordId;
         $translationEntity->language_id = $this->getLanguageId($language);
-        $translationEntity->translation = $translatedText;
+        $translationEntity->content = $translatedText;
 
         $result = $this->save($translationEntity);
 
         return !empty($result->id) ? true : false;
+    }
+
+    /**
+     * If the TranslationBehavior is in use, it updates the `language_id` or viceversa, the `locale`.
+     *
+     * @param Event $event Event
+     * @param EntityInterface $entity Entity
+     * @param ArrayObject $options Options
+     * @return void
+     */
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options): void
+    {
+        if (empty($entity->get("language_id"))) {
+            $entity->set('language_id', $this->getLanguageId($entity->get("locale")));
+        }
+
+        if (empty($entity->get("locale"))) {
+            $entity->set('locale', $this->getLanguageCode($entity->get("language_id")));
+        }
     }
 
     /**
@@ -194,5 +215,26 @@ class TranslationsTable extends Table
         }
 
         return $language->id;
+    }
+
+    /**
+     *  Retrive language ID by code
+     *
+     * @throws \InvalidArgumentException for unknown short code
+     * @param string $id language's uuid
+     * @return string language code i.e. ru, cn etc
+     */
+    public function getLanguageCode(string $id): string
+    {
+        $query = $this->Languages->find('all', [
+            'conditions' => ['Languages.id' => $id],
+        ]);
+        $language = $query->first();
+
+        if (empty($language->id)) {
+            throw new InvalidArgumentException("Unsupported language id [$id]");
+        }
+
+        return $language->get("code");
     }
 }

@@ -58,7 +58,7 @@ class TranslationsControllerTest extends IntegrationTestCase
 
     public function testIndexJson(): void
     {
-        $this->get('/language-translations/translations?json=1&object_model=Leads&object_foreign_key=00000000-0000-0000-0000-100000000001');
+        $this->get('/language-translations/translations?json=1&model=Leads&foreign_key=00000000-0000-0000-0000-100000000001');
         $this->assertResponseOk();
     }
 
@@ -74,10 +74,10 @@ class TranslationsControllerTest extends IntegrationTestCase
 
         $data = [
             'language_id' => '00000000-0000-0000-0000-000000000001',
-            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
-            'object_model' => 'Leads',
-            'object_field' => 'description',
-            'translation' => 'Russian translation.',
+            'foreign_key' => '00000000-0000-0000-0000-100000000001',
+            'model' => 'Leads',
+            'field' => 'description',
+            'content' => 'Russian translation.',
         ];
 
         $this->post('/language-translations/translations/add', $data);
@@ -98,10 +98,10 @@ class TranslationsControllerTest extends IntegrationTestCase
 
         $data = [
             'language_id' => '00000000-0000-0000-0000-000000000001',
-            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
-            'object_model' => 'Leads',
-            'object_field' => 'description',
-            // 'translation' => 'Russian translation.',
+            'foreign_key' => '00000000-0000-0000-0000-100000000001',
+            'model' => 'Leads',
+            'field' => 'description',
+            // 'content' => 'Russian translation.',
         ];
 
         $this->post('/language-translations/translations/add', $data);
@@ -118,10 +118,10 @@ class TranslationsControllerTest extends IntegrationTestCase
         $data = [
             // invalid lanuage id
             'language_id' => '00000000-0000-0000-0000-000000000999',
-            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
-            'object_model' => 'Leads',
-            'object_field' => 'description',
-            'translation' => 'Russian translation.',
+            'foreign_key' => '00000000-0000-0000-0000-100000000001',
+            'model' => 'Leads',
+            'field' => 'description',
+            'content' => 'Russian translation.',
         ];
 
         $this->post('/language-translations/translations/add', $data);
@@ -157,11 +157,11 @@ class TranslationsControllerTest extends IntegrationTestCase
         ]);
 
         $data = [
-            'object_model' => 'Leads',
-            'object_field' => 'description',
-            'translation' => 'Chinese translation.',
+            'model' => 'Leads',
+            'field' => 'description',
+            'content' => 'Chinese translation.',
             'language_id' => '00000000-0000-0000-0000-000000000003',
-            'object_foreign_key' => '00000000-0000-0000-0000-100000000001',
+            'foreign_key' => '00000000-0000-0000-0000-100000000001',
         ];
 
         $this->post('/language-translations/translations/add-or-update', $data);
@@ -181,7 +181,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $id = '00000000-0000-0000-0000-000000000001';
 
         $data = [
-            'translation' => 'Modify translation.',
+            'content' => 'Modify translation.',
         ];
 
         $this->put('/language-translations/translations/edit/' . $id, $data);
@@ -194,7 +194,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertRedirect($url);
 
         $entity = $this->Translations->get($id);
-        $this->assertEquals($data['translation'], $entity->get('translation'));
+        $this->assertEquals($data['content'], $entity->get('content'));
     }
 
     public function testEditFail(): void

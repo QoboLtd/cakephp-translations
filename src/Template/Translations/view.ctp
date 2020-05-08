@@ -28,13 +28,13 @@
                 <div class="box-body">
                     <dl class="dl-horizontal">
                         <dt><?= __d('Qobo/Translations', 'Model') ?></dt>
-                        <dd><?= h($translation->object_model) ?></dd>
+                        <dd><?= h($translation->model) ?></dd>
                         <dt><?= __d('Qobo/Translations', 'Field') ?></dt>
-                        <dd><?= h($translation->object_field) ?></dd>
+                        <dd><?= h($translation->field) ?></dd>
                         <dt><?= __d('Qobo/Translations', 'Language') ?></dt>
                         <dd><?= h($translation->language->name ?: $translation->language->code); ?></dd>
                         <dt><?= __d('Qobo/Translations', 'Translation') ?></dt>
-                        <dd><?= h($translation->translation) ?></dd>
+                        <dd><?= h($translation->content) ?></dd>
                     </dl>
                 </div>
             </div>
