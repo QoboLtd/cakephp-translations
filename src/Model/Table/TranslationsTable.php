@@ -187,6 +187,11 @@ class TranslationsTable extends Table
      */
     public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options): void
     {
+        // No need to update the fields if the entity already exist.
+        if (!$entity->isNew()) {
+            return;
+        }
+
         if (empty($entity->get("language_id"))) {
             $entity->set('language_id', $this->getLanguageId($entity->get("locale")));
         }
