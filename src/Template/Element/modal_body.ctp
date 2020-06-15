@@ -31,7 +31,7 @@ $table = TableRegistry::getTableLocator()->get('Translations.Languages');
         echo $this->Form->hidden('code', ['value' => $language->code]);
     ?>
     <div class="col-xs-12 col-md-12">
-        <?= $this->Form->control('content', ['label' => $language->name, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code, 'required' => false]); ?>
+        <?= $this->Form->control('content', ['type' => 'textarea', 'label' => $language->name, 'placeholder' => 'Translation', 'id' => 'translation_' . $language->code, 'required' => false]); ?>
     </div>
 </div>
 <div class="row">

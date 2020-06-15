@@ -76,10 +76,6 @@ class TranslationsTable extends Table
             ->requirePresence('field', 'create')
             ->notEmpty('field');
 
-        $validator
-            ->requirePresence('content', 'create')
-            ->notEmpty('content');
-
         return $validator;
     }
 
