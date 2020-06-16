@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-12-19 13:18+0000\n"
+"POT-Creation-Date: 2020-06-16 13:51+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,93 +14,135 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: Controller/LanguagesController.php:47
 msgid "The language has been saved."
 msgstr ""
 
+#: Controller/LanguagesController.php:51
 msgid "The language could not be saved. Please, try again."
 msgstr ""
 
+#: Controller/LanguagesController.php:70
 msgid "The language has been deleted."
 msgstr ""
 
+#: Controller/LanguagesController.php:72
 msgid "The language could not be deleted. Please, try again."
 msgstr ""
 
+#: Controller/TranslationsController.php:82;147
 msgid "The translation has been saved."
 msgstr ""
 
+#: Controller/TranslationsController.php:86;151
 msgid "The translation could not be saved. Please, try again."
 msgstr ""
 
+#: Controller/TranslationsController.php:170
 msgid "The translation has been deleted."
 msgstr ""
 
+#: Controller/TranslationsController.php:172
 msgid "The translation could not be deleted. Please, try again."
 msgstr ""
 
+#: Template/Element/modal_add.ctp:22
 msgid "Manage Translations"
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
-msgid "Create {0}"
-msgstr ""
-
-msgid "Submit"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Add"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Code"
-msgstr ""
-
-msgid "Direction"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "Are you sure you want to delete {0}?"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Edit {0}"
-msgstr ""
-
-msgid "Model"
-msgstr ""
-
-msgid "Field"
-msgstr ""
-
-msgid "Language"
-msgstr ""
-
+#: Template/Element/modal_body.ctp:34
+#: Template/Translations/index.ctp:45
+#: Template/Translations/view.ctp:36
 msgid "Translation"
 msgstr ""
 
+#: Template/Element/modal_body.ctp:44
+msgid "Save"
+msgstr ""
+
+#: Template/Languages/add.ctp:34
+msgid "Create {0}"
+msgstr ""
+
+#: Template/Languages/add.ctp:54
+#: Template/Translations/edit.ctp:39
+msgid "Submit"
+msgstr ""
+
+#: Template/Languages/add.ctp:56
+#: Template/Translations/edit.ctp:41
+msgid "Cancel"
+msgstr ""
+
+#: Template/Languages/index.ctp:38;40
+msgid "Add"
+msgstr ""
+
+#: Template/Languages/index.ctp:52
+msgid "Name"
+msgstr ""
+
+#: Template/Languages/index.ctp:53
+msgid "Code"
+msgstr ""
+
+#: Template/Languages/index.ctp:54
+msgid "Direction"
+msgstr ""
+
+#: Template/Languages/index.ctp:55
+#: Template/Translations/index.ctp:46
+msgid "Actions"
+msgstr ""
+
+#: Template/Languages/index.ctp:77
+msgid "Are you sure you want to delete {0}?"
+msgstr ""
+
+#: Template/Languages/index.ctp:78
+#: Template/Translations/index.ctp:84
+msgid "Delete"
+msgstr ""
+
+#: Template/Translations/edit.ctp:14
+msgid "Edit {0}"
+msgstr ""
+
+#: Template/Translations/edit.ctp:25
+#: Template/Translations/index.ctp:42
+#: Template/Translations/view.ctp:30
+msgid "Model"
+msgstr ""
+
+#: Template/Translations/edit.ctp:27
+#: Template/Translations/index.ctp:43
+#: Template/Translations/view.ctp:32
+msgid "Field"
+msgstr ""
+
+#: Template/Translations/edit.ctp:29
+#: Template/Translations/index.ctp:44
+#: Template/Translations/view.ctp:34
+msgid "Language"
+msgstr ""
+
+#: Template/Translations/index.ctp:69
 msgid "View"
 msgstr ""
 
+#: Template/Translations/index.ctp:75
 msgid "Edit"
 msgstr ""
 
+#: Template/Translations/index.ctp:83
 msgid "Are you sure you want to delete # {0}?"
 msgstr ""
 
+#: Template/Translations/view.ctp:15
 msgid "Translations"
 msgstr ""
 
+#: Template/Translations/view.ctp:26
 msgid "Details"
 msgstr ""
 
