@@ -92,25 +92,6 @@ class TranslationsControllerTest extends IntegrationTestCase
         $this->assertEquals($expected, $this->Translations->find('all')->count());
     }
 
-    public function testAddMissingData(): void
-    {
-        $expected = $this->Translations->find('all')->count();
-
-        $data = [
-            'language_id' => '00000000-0000-0000-0000-000000000001',
-            'foreign_key' => '00000000-0000-0000-0000-100000000001',
-            'model' => 'Leads',
-            'field' => 'description',
-            // 'content' => 'Russian translation.',
-        ];
-
-        $this->post('/language-translations/translations/add', $data);
-        $this->assertResponseOk();
-
-        $this->assertEquals($expected, $this->Translations->find('all')->count());
-        $this->assertSession('The translation could not be saved. Please, try again.', 'Flash.flash.0.message');
-    }
-
     public function testAddInvalidData(): void
     {
         $expected = $this->Translations->find('all')->count();
