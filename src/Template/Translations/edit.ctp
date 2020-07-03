@@ -23,15 +23,15 @@
                         <div class="col-md-4">
                             <dl class="dl">
                                 <dt><?= __d('Qobo/Translations', 'Model') ?></dt>
-                                <dd><?= h($translation->object_model) ?></dd>
+                                <dd><?= h($translation->model) ?></dd>
                                 <dt><?= __d('Qobo/Translations', 'Field') ?></dt>
-                                <dd><?= h($translation->object_field) ?></dd>
+                                <dd><?= h($translation->field) ?></dd>
                                 <dt><?= __d('Qobo/Translations', 'Language') ?></dt>
                                 <dd><?= h($translation->language->name ?: $translation->language->code); ?></dd>
                             </dl>
                         </div>
                         <div class="col-md-8">
-                            <?= $this->Form->control('translation'); ?>
+                            <?= $this->Form->control('content'); ?>
                         </div>
                     </div>
                 </div>
