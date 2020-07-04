@@ -13,6 +13,7 @@ class PrefixTranslationsTable extends AbstractMigration
     public function change()
     {
         $this->table('language_translations')
-            ->rename('qobo_translations_translations');
+            ->rename('qobo_translations_translations')
+            ->save();
     }
 }
