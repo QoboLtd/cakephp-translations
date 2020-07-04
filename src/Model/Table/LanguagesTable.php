@@ -61,7 +61,7 @@ class LanguagesTable extends Table
     {
         $validator
             ->uuid('id')
-            ->allowEmptyString('id', null,'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->requirePresence('code', 'create')

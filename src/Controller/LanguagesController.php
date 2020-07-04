@@ -11,7 +11,6 @@
  */
 namespace Translations\Controller;
 
-
 /**
  * Languages Controller
  *
