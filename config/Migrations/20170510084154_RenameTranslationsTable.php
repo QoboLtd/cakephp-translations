@@ -19,7 +19,7 @@ class RenameTranslationsTable extends AbstractMigration
             $table = $this->table($tableName);
 
             if ($table->hasColumn($columnName)) {
-                $table->rename('language_translations');
+                $table->rename('language_translations')->save();
             }
         }
     }

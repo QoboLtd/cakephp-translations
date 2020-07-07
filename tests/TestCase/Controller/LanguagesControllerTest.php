@@ -4,8 +4,8 @@ namespace Translations\Test\TestCase\Controller;
 use Cake\Core\Configure;
 use Cake\Event\EventManager;
 use Cake\ORM\TableRegistry;
-use Cake\TestSuite\IntegrationTestCase;
-use Translations\Controller\LanguagesController;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 use Webmozart\Assert\Assert;
 
 /**
@@ -13,10 +13,12 @@ use Webmozart\Assert\Assert;
  *
  * @property \Translations\Model\Table\LanguagesTable $Languages
  */
-class LanguagesControllerTest extends IntegrationTestCase
+class LanguagesControllerTest extends TestCase
 {
+    use IntegrationTestTrait;
+
     public $fixtures = [
-        'plugin.translations.languages',
+        'plugin.Translations.Languages',
     ];
 
     public function setUp()
@@ -26,7 +28,7 @@ class LanguagesControllerTest extends IntegrationTestCase
         /**
          * @var \Translations\Model\Table\LanguagesTable $table
          */
-        $table = TableRegistry::get('Translations.Languages');
+        $table = TableRegistry::getTableLocator()->get('Translations.Languages');
         $this->Languages = $table;
 
         // Run all tests as authenticated user

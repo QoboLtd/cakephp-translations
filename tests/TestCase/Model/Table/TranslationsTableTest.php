@@ -27,8 +27,8 @@ class TranslationsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.translations.languages',
-        'plugin.translations.language_translations',
+        'plugin.Translations.Languages',
+        'plugin.Translations.LanguageTranslations',
     ];
 
     /**
@@ -39,11 +39,11 @@ class TranslationsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Translations') ? [] : ['className' => 'Translations\Model\Table\TranslationsTable'];
+        $config = TableRegistry::getTableLocator()->exists('Translations') ? [] : ['className' => 'Translations\Model\Table\TranslationsTable'];
         /**
          * @var \Translations\Model\Table\TranslationsTable $table
          */
-        $table = TableRegistry::get('Translations', $config);
+        $table = TableRegistry::getTableLocator()->get('Translations', $config);
         $this->Translations = $table;
     }
 

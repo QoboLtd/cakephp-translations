@@ -13,6 +13,7 @@ class RenameLanguagesTable extends AbstractMigration
     public function change()
     {
         $this->table('languages')
-            ->rename('qobo_translations_languages');
+            ->rename('qobo_translations_languages')
+            ->save();
     }
 }

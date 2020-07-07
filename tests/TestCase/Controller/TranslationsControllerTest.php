@@ -4,18 +4,21 @@ namespace Translations\Test\TestCase\Controller;
 use Cake\Core\Configure;
 use Cake\Event\EventManager;
 use Cake\ORM\TableRegistry;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * Translations\Controller\TranslationsController Test Case
  *
  * @property \Translations\Model\Table\TranslationsTable $Translations
  */
-class TranslationsControllerTest extends IntegrationTestCase
+class TranslationsControllerTest extends TestCase
 {
+    use IntegrationTestTrait;
+
     public $fixtures = [
-        'plugin.translations.languages',
-        'plugin.translations.language_translations',
+        'plugin.Translations.Languages',
+        'plugin.Translations.LanguageTranslations',
     ];
 
     public function setUp()
@@ -25,7 +28,7 @@ class TranslationsControllerTest extends IntegrationTestCase
         /**
          * @var \Translations\Model\Table\TranslationsTable $table
          */
-        $table = TableRegistry::get('Translations.Translations');
+        $table = TableRegistry::getTableLocator()->get('Translations.Translations');
         $this->Translations = $table;
 
         // Run all tests as authenticated user
