@@ -23,26 +23,68 @@ echo $this->Html->script(
 );
 
 echo $this->Html->scriptBlock(
-    '$(".table-datatable").DataTable({
-        stateSave: true,
-        stateDuration: ' . (int)(Configure::read('Session.timeout') * 60) . '
-    });',
+    "$('.table-datatable').DataTable({
+        stateSave:true,
+        paging:true,
+        searching:false,
+        sDom:
+        '<\"row view-filter\"<\"col-sm-12\"<\"pull-left\"l><\"pull-right\"f><\"clearfix\">>>t<\"row view-pager\"<\"col-sm-12\"<\"text-center\"p>>>',
+        oLanguage: {
+            oPaginate: {
+            sFirst: 'First page', 
+            sPrevious:
+            '<i aria-hidden=\"true\" class=\"qobrix-icon qobo-angle-left font-size-10\"></i>', 
+            sNext:
+            '<i aria-hidden=\"true\" class=\"qobrix-icon qobo-angle-right font-size-10\"></i>', 
+            sLast: 'Last page', 
+            },
+        },
+        columnDefs: [
+            { targets: 'no-sort', orderable: false }
+        ],
+        fnDrawCallback: function (oSettings) {
+            if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+                $(oSettings.nTableWrapper).find('.dataTables_paginate').hide();
+            } else {
+                $(oSettings.nTableWrapper).find('.dataTables_paginate').show();
+            }
+        },  
+        createdRow: function (row, data, index, cells) {
+            var topRow = $(this).find('>thead>tr,>tr').eq(0);
+            $.each($('td', row), function (colIndex) {
+                var label = topRow.find('>td,>th').eq(colIndex).html().trim();
+                $(this).prepend(
+                    '<div class=\"key\">'+ label +'</div>'
+                );
+            });
+        },
+      
+    });",
     ['block' => 'scriptBottom']
 );
+
 ?>
-<section class="content-header">
-    <h1>Languages
-        <div class="pull-right">
-            <div class="btn-group btn-group-sm" role="group">
-            <?= $this->Html->link(
-                '<i class="fa fa-plus"></i> ' . __d('Qobo/Translations', 'Add'),
-                ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'add'],
-                ['escape' => false, 'title' => __d('Qobo/Translations', 'Add'), 'class' => 'btn btn-default']
-            ); ?>
+<section class="content-header right-top-action-buttons">
+    <div class="row no-gutters">
+        <div class="col-md-6">
+            <h4>Languages</h4>
+        </div> 
+        <div class="col-md-6">
+            <div class="top-action-buttons custom-actions-box">
+                <div role="group" class="btn-group btn-group-sm">
+                    <div class="btn-group btn-group-sm">
+                        <?= $this->Html->link(
+                            '<i class="qobrix-icon qobo-plus"></i> ' . __d('Qobo/Translations', 'Add'),
+                            ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'add'],
+                            ['escape' => false, 'title' => __d('Qobo/Translations', 'Add'), 'class' => 'btn btn-primary']
+                        ); ?>
+                    </div>
+                </div>
             </div>
         </div>
-    </h1>
+    </div>
 </section>
+
 <section class="content">
     <div class="box box-primary">
         <div class="box-body">
@@ -52,35 +94,37 @@ echo $this->Html->scriptBlock(
                         <th><?= __d('Qobo/Translations', 'Name') ?></th>
                         <th><?= __d('Qobo/Translations', 'Code') ?></th>
                         <th><?= __d('Qobo/Translations', 'Direction'); ?></th>
-                        <th class="actions"><?= __d('Qobo/Translations', 'Actions') ?></th>
+                        <th class="actions no-sort"><?= __d('Qobo/Translations', 'Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($languages as $language) : ?>
                     <tr>
                         <td>
-                            <?= h($language->name); ?>
+                            <div class="val"><?= h($language->name); ?></div>
                         </td>
                         <td>
-                            <?= h($language->code) ?>
+                            <div class="val"><?= h($language->code) ?></div>
                         </td>
                         <td>
-                            <?= h($language->is_rtl ? 'Right-to-left' : 'Left-to-right'); ?>
+                            <div class="val"><?= h($language->is_rtl ? 'Right-to-left' : 'Left-to-right'); ?></div>
                         </td>
-                        <td class="actions">
-                            <div class="btn-group btn-group-xs" role="group">
-                            <?php if (!$language->deny_delete) : ?>
-                                <?= $this->Form->postLink(
-                                    '<i class="fa fa-trash"></i>',
-                                    ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'delete', $language->id],
-                                    [
-                                        'confirm' => __d('Qobo/Translations', 'Are you sure you want to delete {0}?', $language->name),
-                                        'title' => __d('Qobo/Translations', 'Delete'),
-                                        'class' => 'btn btn-default btn-sm',
-                                        'escape' => false
-                                    ]
-                                ) ?>
-                            <?php endif; ?>
+                        <td class="actions actions_area">
+                            <div class="val">
+                                <div class="action_area_dropdown">
+                                    <?php if (!$language->deny_delete) : ?>
+                                        <?= $this->Form->postLink(
+                                            '<i aria-hidden="true" class="qobrix-icon qobo-delete"></i>',
+                                            ['plugin' => 'Translations', 'controller' => 'Languages', 'action' => 'delete', $language->id],
+                                            [
+                                                'confirm' => __d('Qobo/Translations', 'Are you sure you want to delete {0}?', $language->name),
+                                                'title' => __d('Qobo/Translations', 'Delete'),
+                                                'class' => 'btn btn-default table_actions',
+                                                'escape' => false
+                                            ]
+                                        ) ?>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </td>
                     </tr>
