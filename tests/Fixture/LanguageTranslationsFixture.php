@@ -44,6 +44,7 @@ class LanguageTranslationsFixture extends TestFixture
         [
             'id' => '00000000-0000-0000-0000-000000000001',
             'language_id' => '00000000-0000-0000-0000-000000000001',
+            'locale' => 'ru',
             'foreign_key' => '00000000-0000-0000-0000-100000000001',
             'model' => 'Leads',
             'field' => 'description',
@@ -54,6 +55,7 @@ class LanguageTranslationsFixture extends TestFixture
         [
             'id' => '00000000-0000-0000-0000-000000000002',
             'language_id' => '00000000-0000-0000-0000-000000000001',
+            'locale' => 'ru',
             'foreign_key' => '00000000-0000-0000-0000-100000000001',
             'model' => 'Leads',
             'field' => 'code',
@@ -64,6 +66,7 @@ class LanguageTranslationsFixture extends TestFixture
         [
             'id' => '00000000-0000-0000-0000-000000000003',
             'language_id' => '00000000-0000-0000-0000-000000000002',
+            'locale' => 'de',
             'foreign_key' => '00000000-0000-0000-0000-100000000001',
             'model' => 'Leads',
             'field' => 'description',
@@ -74,6 +77,7 @@ class LanguageTranslationsFixture extends TestFixture
         [
             'id' => '00000000-0000-0000-0000-000000000004',
             'language_id' => '00000000-0000-0000-0000-000000000002',
+            'locale' => 'de',
             'foreign_key' => '00000000-0000-0000-0000-100000000002',
             'model' => 'Leads',
             'field' => 'title',
